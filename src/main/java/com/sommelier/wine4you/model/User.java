@@ -1,6 +1,7 @@
 package com.sommelier.wine4you.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -22,27 +23,27 @@ import lombok.Setter;
 @Getter
 @Entity
 @Table(name = "users",
-uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"login" , "email"})
-})
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"phone", "email"})
+        })
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
-    private String login;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 20)
     private String firstName;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 40)
     private String lastName;
     @Column(nullable = false)
     private String email;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 30)
     private String password;
     private LocalDate birthday;
     @Column(nullable = false)
     private String phone;
+    @Column(length = 40)
     private String address;
+    @Column(length = 40)
     private String city;
 
     @ManyToMany(fetch = FetchType.EAGER,
@@ -51,6 +52,8 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private Set<Role> roles;
+    @Column(name = "registration_date")
+    private LocalDateTime registrationDate;
 
     @Override
     public boolean equals(Object o) {
@@ -64,9 +67,6 @@ public class User {
         User user = (User) o;
 
         if (!Objects.equals(id, user.id)) {
-            return false;
-        }
-        if (!Objects.equals(login, user.login)) {
             return false;
         }
         if (!Objects.equals(firstName, user.firstName)) {
@@ -93,13 +93,15 @@ public class User {
         if (!Objects.equals(city, user.city)) {
             return false;
         }
+        if (!Objects.equals(registrationDate, user.registrationDate)) {
+            return false;
+        }
         return Objects.equals(roles, user.roles);
     }
 
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (login != null ? login.hashCode() : 0);
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
@@ -109,6 +111,7 @@ public class User {
         result = 31 * result + (address != null ? address.hashCode() : 0);
         result = 31 * result + (city != null ? city.hashCode() : 0);
         result = 31 * result + (roles != null ? roles.hashCode() : 0);
+        result = 31 * result + (registrationDate != null ? registrationDate.hashCode() : 0);
         return result;
     }
 
@@ -116,7 +119,6 @@ public class User {
     public String toString() {
         return "User{"
                 + "id=" + id
-                + ", login='" + login + '\''
                 + ", firstName='" + firstName + '\''
                 + ", lastName='" + lastName + '\''
                 + ", email='" + email + '\''
@@ -126,6 +128,7 @@ public class User {
                 + ", address='" + address + '\''
                 + ", city='" + city + '\''
                 + ", roles=" + roles
+                + ", registrationDate=" + registrationDate
                 + '}';
     }
 }
