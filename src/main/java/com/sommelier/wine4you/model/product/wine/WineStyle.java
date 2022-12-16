@@ -11,7 +11,13 @@ public enum WineStyle {
     DRY("Dry"),
     SEMI_SWEET("Semi sweet"),
     SWEET("Sweet"),
-    CONCENTRATED("Concentrated");
+    CONCENTRATED("Concentrated"),
+    ELEGANT("Elegant"),
+    INTENSE("Intense"),
+    CRISP("Crisp"),
+    OFF_DRY("Off-dry"),
+    FRESH("Fresh"),
+    FRUITY("Fruity");
 
     private final String style;
 }
