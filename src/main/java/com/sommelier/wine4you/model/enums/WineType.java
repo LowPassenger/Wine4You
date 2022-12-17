@@ -1,4 +1,4 @@
-package com.sommelier.wine4you.model;
+package com.sommelier.wine4you.model.enums;
 
 public enum WineType {
     WHITE("White"),
@@ -6,13 +6,13 @@ public enum WineType {
     CHAMPAGNE_SPARKLING("Champagne sparkling"),
     ROSE("Rose");
 
-    private String value;
+    private String type;
 
     WineType(String value) {
-        this.value = value;
+        this.type = value;
     }
 
-    public String getValue() {
-        return value;
+    public String getType() {
+        return type;
     }
 }

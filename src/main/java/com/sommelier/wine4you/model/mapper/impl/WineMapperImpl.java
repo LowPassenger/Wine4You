@@ -12,13 +12,24 @@ public class WineMapperImpl implements GenericMapper<WineResponseDto, Wine, Wine
     public WineResponseDto toDto(Wine wine) {
         WineResponseDto wineResponseDto = new WineResponseDto();
         wineResponseDto.setBrand(wine.getBrand());
-        wineResponseDto.setName(wine.getName());
+        wineResponseDto.setCountry(wine.getCountry());
         wineResponseDto.setPrice(wine.getPrice());
+        wineResponseDto.setTitle(wine.getTitle());
+        wineResponseDto.setInStock(wine.getInStock());
+        wineResponseDto.setName(wine.getName());
+        wineResponseDto.setWineStyle(wine.getWineStyle());
+        wineResponseDto.setWineType(wine.getWineType());
+        wineResponseDto.setWineTaste(wine.getWineTaste());
+        wineResponseDto.setCapasity(wine.getCapasity());
+        wineResponseDto.setEvent(wine.getEvent());
+        wineResponseDto.setImageUrl(wine.getImageUrl());
+        wineResponseDto.setDescription(wine.getDescription());
         return wineResponseDto;
     }
 
     @Override
     public Wine toModel(WineRequestDto wineRequestDto) {
-        return null;
+        Wine wine = new Wine();
+        return wine;
     }
 }
