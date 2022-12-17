@@ -51,7 +51,13 @@ public enum WineTaste {
     BERRY("Berry"),
     FRUITY("Fruity"),
     RASPBERRY("Raspberry"),
-    CASSIS("Cassis");
+    CASSIS("Cassis"),
+    EARTH("Earth"),
+    COCONUT("Coconut"),
+    CINNAMON("Cinnamon"),
+    PEPPER("Pepper"),
+    MULBERRY("Mulberry"),
+    TOBACCO("Tobacco");
 
     private final String taste;
 }
