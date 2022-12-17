@@ -5,10 +5,10 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 public abstract class Alcohol extends Drink {
-    protected byte alcoholPercent;
+    protected float alcoholPercent;
 
     public Alcohol(String country, String brand, BigDecimal price, boolean inStock,
-                   float bottleSizeL, byte alcoholPercent) {
+                   float bottleSizeL, float alcoholPercent) {
         super(country, brand, price, inStock, bottleSizeL);
         this.alcoholPercent = alcoholPercent;
     }
