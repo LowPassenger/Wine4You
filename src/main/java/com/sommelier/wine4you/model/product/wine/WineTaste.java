@@ -63,7 +63,8 @@ public enum WineTaste {
     ANISE("Anise"),
     WHITE_FLOWER("White Flower"),
     PINEAPPLE("Pineapple"),
-    BISCUIT("Biscuit");
+    BISCUIT("Biscuit"),
+    GOLDEN_APPLE("Golden Apple");
 
     private final String taste;
 }
