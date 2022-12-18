@@ -51,37 +51,35 @@ public class DataInitializer {
                 "+30501321212",
                 "Street",
                 "Cv",
-                Collections.singleton(roleAdmin),
-                LocalDateTime.now());
+                Collections.singleton(roleAdmin));
         User dmt = getUser(
                 "Dmt",
                 "Lem",
                 "123@gmail.com",
-                "1561253652",
+                "1523652145",
                 LocalDate.now(),
                 "+30501595959",
                 "Street",
                 "Od",
-                Collections.singleton(roleUser),
-                LocalDateTime.now());
+                Collections.singleton(roleUser));
         userRepository.saveAll(List.of(den, dmt));
     }
 
     private User getUser(String firstName, String lastName, String email,
                          String password, LocalDate birthday,
                          String phone, String address, String city,
-                         Set<Role> roles, LocalDateTime registrationDate) {
+                         Set<Role> roles) {
         User user = new User();
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setEmail(email);
-        user.setPassword(password);
+        user.setPassword(passwordEncoder.encode(password));
         user.setBirthday(birthday);
         user.setPhone(phone);
         user.setAddress(address);
         user.setCity(city);
         user.setRoles(roles);
-        user.setRegistrationDate(registrationDate);
+        user.setRegistrationDate(LocalDateTime.now());
         return user;
     }
 

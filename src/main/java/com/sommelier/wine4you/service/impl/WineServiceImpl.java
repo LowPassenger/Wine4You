@@ -14,6 +14,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+@Log4j2
 @Service
 public class WineServiceImpl implements WineService {
     private final WineRepository wineRepository;
@@ -21,6 +22,22 @@ public class WineServiceImpl implements WineService {
     @Autowired
     public WineServiceImpl(WineRepository wineRepository) {
         this.wineRepository = wineRepository;
+    }
+
+    @Override
+    public Wine findById(Long id) {
+        return wineRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Wine", "id", String.valueOf(id))
+        );
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        Wine wine = wineRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Wine", "id", String.valueOf(id))
+        );
+        wineRepository.delete(wine);
+        log.info("Successfully, delete wine by id {}", id);
     }
 
     @Override
@@ -34,7 +51,7 @@ public class WineServiceImpl implements WineService {
         if (!wines.isEmpty()) {
             return wineRepository.findByBrand(brand);
         }
-        throw new ResourceNotFoundException("Wine","Brand",brand);
+        throw new ResourceNotFoundException("Wine", "Brand", brand);
     }
 
     @Override

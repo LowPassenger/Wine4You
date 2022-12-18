@@ -4,10 +4,13 @@ import com.sommelier.wine4you.model.enums.Event;
 import com.sommelier.wine4you.model.enums.WineStyle;
 import com.sommelier.wine4you.model.enums.WineTaste;
 import com.sommelier.wine4you.model.enums.WineType;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -36,7 +39,8 @@ public class Wine extends Product {
     private double capasity;
     private Event event;
 
-    @Column(name = "image_url")
-    private String imageUrl;
+    @OneToOne(mappedBy = "wine", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private WineImage image;
     private String description;
 }

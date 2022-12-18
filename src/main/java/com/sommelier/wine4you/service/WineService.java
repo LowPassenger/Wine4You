@@ -7,6 +7,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface WineService {
+    Wine findById(Long id);
+
+    void deleteById(Long id);
+
     List<Wine> getAll();
 
     List<Wine> getAllByBrand(String brand);

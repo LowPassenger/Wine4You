@@ -1,9 +1,11 @@
 package com.sommelier.wine4you.model.dto;
 
+import com.sommelier.wine4you.model.WineImage;
 import com.sommelier.wine4you.model.enums.Event;
 import com.sommelier.wine4you.model.enums.WineStyle;
 import com.sommelier.wine4you.model.enums.WineTaste;
 import com.sommelier.wine4you.model.enums.WineType;
+import java.math.BigDecimal;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -17,18 +19,16 @@ public class WineRequestDto {
     @NotEmpty
     private String country;
     @NotEmpty
-    private Double price;
+    private BigDecimal price;
     private String title;
     private Boolean inStock;
     @NotEmpty
     private String name;
-    @NotEmpty
     private WineStyle wineStyle;
     private WineTaste wineTaste;
     private Event event;
-    @NotEmpty
     private WineType wineType;
     private double capasity;
-    private String imageUrl;
+    private WineImage image;
     private String description;
 }

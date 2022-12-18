@@ -30,20 +30,21 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false)
     private String firstName;
-    @Column(nullable = false, length = 40)
+    @Column(nullable = false)
     private String lastName;
     @Column(nullable = false)
     private String email;
-    @Column(nullable = false, length = 30)
+    @Column(nullable = false)
     private String password;
+    @Column(nullable = false)
     private LocalDate birthday;
     @Column(nullable = false)
     private String phone;
-    @Column(length = 40)
+    @Column(nullable = false)
     private String address;
-    @Column(length = 40)
+    @Column(nullable = false)
     private String city;
 
     @ManyToMany(fetch = FetchType.EAGER,
