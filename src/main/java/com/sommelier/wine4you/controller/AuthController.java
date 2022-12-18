@@ -35,7 +35,7 @@ public class AuthController {
     }
 
     @PostMapping("signup")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody UserSignUpDto signUpDto) {
+    public ResponseEntity<String> registerUser(@Valid @RequestBody UserSignUpDto signUpDto) {
         if (userRepository.existsByPhone(signUpDto.getPhone())) {
             return new ResponseEntity<>("Phone is ready taken!", HttpStatus.BAD_REQUEST);
         }

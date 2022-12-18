@@ -4,6 +4,7 @@ import com.sommelier.wine4you.model.enums.Event;
 import com.sommelier.wine4you.model.enums.WineStyle;
 import com.sommelier.wine4you.model.enums.WineTaste;
 import com.sommelier.wine4you.model.enums.WineType;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -43,4 +44,69 @@ public class Wine extends Product {
     @PrimaryKeyJoinColumn
     private WineImage image;
     private String description;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Wine wine = (Wine) o;
+
+        if (Double.compare(wine.capasity, capasity) != 0) {
+            return false;
+        }
+        if (!Objects.equals(name, wine.name)) {
+            return false;
+        }
+        if (wineStyle != wine.wineStyle) {
+            return false;
+        }
+        if (wineType != wine.wineType) {
+            return false;
+        }
+        if (wineTaste != wine.wineTaste) {
+            return false;
+        }
+        if (event != wine.event) {
+            return false;
+        }
+        if (!Objects.equals(image, wine.image)) {
+            return false;
+        }
+        return Objects.equals(description, wine.description);
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (wineStyle != null ? wineStyle.hashCode() : 0);
+        result = 31 * result + (wineType != null ? wineType.hashCode() : 0);
+        result = 31 * result + (wineTaste != null ? wineTaste.hashCode() : 0);
+        temp = Double.doubleToLongBits(capasity);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (event != null ? event.hashCode() : 0);
+        result = 31 * result + (image != null ? image.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Wine{"
+                + "name='" + name + '\''
+                + ", wineStyle=" + wineStyle
+                + ", wineType=" + wineType
+                + ", wineTaste=" + wineTaste
+                + ", capasity=" + capasity
+                + ", event=" + event
+                + ", image=" + image
+                + ", description='" + description + '\''
+                + '}';
+    }
 }
