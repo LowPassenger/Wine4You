@@ -2,13 +2,16 @@ package com.sommelier.wine4you.controller;
 
 import com.sommelier.wine4you.model.dto.WineResponseDto;
 import com.sommelier.wine4you.model.mapper.impl.WineMapperImpl;
+import com.sommelier.wine4you.repository.WineRepository;
 import com.sommelier.wine4you.service.WineService;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,9 +23,21 @@ public class WineController {
     private final WineMapperImpl wineMapper;
 
     @Autowired
-    public WineController(WineService wineService, WineMapperImpl wineMapper) {
+    public WineController(WineService wineService, WineMapperImpl wineMapper,
+                          WineRepository wineRepository) {
         this.wineService = wineService;
         this.wineMapper = wineMapper;
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<WineResponseDto> getWineById(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(wineMapper.toDto(wineService.getById(id)));
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteById(@PathVariable("id") Long id) {
+        wineService.deleteById(id);
+        return ResponseEntity.ok("Success, deleted wine by id " + id);
     }
 
     @GetMapping()

@@ -2,6 +2,7 @@ package com.sommelier.wine4you.config;
 
 import com.sommelier.wine4you.model.Role;
 import com.sommelier.wine4you.model.User;
+import com.sommelier.wine4you.model.Wine;
 import com.sommelier.wine4you.repository.RoleRepository;
 import com.sommelier.wine4you.repository.UserRepository;
 import com.sommelier.wine4you.repository.WineRepository;
@@ -63,6 +64,11 @@ public class DataInitializer {
                 "Od",
                 Collections.singleton(roleUser));
         userRepository.saveAll(List.of(den, dmt));
+    }
+
+    private Wine getWine() {
+        Wine wine = new Wine();
+        return wine;
     }
 
     private User getUser(String firstName, String lastName, String email,

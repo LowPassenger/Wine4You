@@ -25,7 +25,7 @@ public class WineServiceImpl implements WineService {
     }
 
     @Override
-    public Wine findById(Long id) {
+    public Wine getById(Long id) {
         return wineRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Wine", "id", String.valueOf(id))
         );
