@@ -36,10 +36,12 @@ public class Wine extends Product {
     @Enumerated(EnumType.STRING)
     private WineTaste wineTaste;
 
-    @Column(name = "capasity")
-    private double capasity;
+    @Column(name = "event")
+    @Enumerated(EnumType.STRING)
     private Event event;
 
+    @Column(name = "capasity")
+    private double capasity;
     @OneToOne(mappedBy = "wine", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private WineImage image;
@@ -83,11 +85,11 @@ public class Wine extends Product {
     @Override
     public int hashCode() {
         int result;
-        long temp;
         result = name != null ? name.hashCode() : 0;
         result = 31 * result + (wineStyle != null ? wineStyle.hashCode() : 0);
         result = 31 * result + (wineType != null ? wineType.hashCode() : 0);
         result = 31 * result + (wineTaste != null ? wineTaste.hashCode() : 0);
+        long temp;
         temp = Double.doubleToLongBits(capasity);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (event != null ? event.hashCode() : 0);

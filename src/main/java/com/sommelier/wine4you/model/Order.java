@@ -1,5 +1,6 @@
 package com.sommelier.wine4you.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -30,6 +31,7 @@ public class Order {
             inverseJoinColumns = @JoinColumn(name = "wine_id"))
     private List<Wine> wines;
     @Column(name = "order_time")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss.SSS")
     private LocalDateTime orderTime;
     @ManyToOne
     @JoinColumn(name = "user_id")
