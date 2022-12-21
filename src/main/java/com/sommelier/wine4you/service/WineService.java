@@ -1,17 +1,24 @@
 package com.sommelier.wine4you.service;
 
 import com.sommelier.wine4you.model.Wine;
+import com.sommelier.wine4you.model.WineResponse;
+import com.sommelier.wine4you.model.dto.WineRequestDto;
+import org.springframework.stereotype.Service;
+
 import java.math.BigDecimal;
 import java.util.List;
-import org.springframework.stereotype.Service;
 
 @Service
 public interface WineService {
+    Wine create(Wine wine);
+
     Wine getById(Long id);
+
+    Wine update(Long id, Wine wine);
 
     void deleteById(Long id);
 
-    List<Wine> getAll();
+    WineResponse getAll(int pageNo, int pageSize, String sortBy, String sortDir);
 
     List<Wine> getAllByBrand(String brand);
 
@@ -19,13 +26,13 @@ public interface WineService {
 
     List<Wine> getWinesByPriceBetween(BigDecimal priceMin, BigDecimal priceMax);
 
-    List<Wine> findByCountry(String country);
+    List<Wine> getByCountry(String country);
 
-    List<Wine> findByEvent(String event);
+    List<Wine> getByEvent(String event);
 
-    List<Wine> findByWineStyle(String style);
+    List<Wine> getByWineStyle(String style);
 
-    List<Wine> findByWineType(String type);
+    List<Wine> getByWineType(String type);
 
-    List<Wine> findByWineTaste(String taste);
+    List<Wine> getByWineTaste(String taste);
 }

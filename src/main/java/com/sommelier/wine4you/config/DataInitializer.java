@@ -12,10 +12,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import javax.annotation.PostConstruct;
+
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+@Log4j2
 @Component
 public class DataInitializer {
     private static final String PREFIX = "ROLE_";
@@ -64,6 +67,7 @@ public class DataInitializer {
                 "Od",
                 Collections.singleton(roleUser));
         userRepository.saveAll(List.of(den, dmt));
+        log.info("Successfully, create admin");
     }
 
     private Wine getWine() {

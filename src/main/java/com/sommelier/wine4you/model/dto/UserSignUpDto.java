@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.sommelier.wine4you.utils.Phone;
 import lombok.Data;
 
 @Data
@@ -24,10 +27,14 @@ public class UserSignUpDto {
     @NotBlank(message = "Password is mandatory")
     @Size(min = 8, message = "Password should have at least 8 characters")
     @Size(max = 30, message = "The password must contain no more than 30 characters")
+
     private String password;
-    @NotBlank(message = "Birthday is mandatory")
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate birthday;
+
     @NotBlank(message = "Phone is mandatory")
+    @Phone(message = "The phone must match the mask +XX-XXX-XXX-XXXX")
     private String phone;
     @NotBlank(message = "Address is mandatory")
     @Size(max = 40, message = "The address must contain no more than 40 characters")
