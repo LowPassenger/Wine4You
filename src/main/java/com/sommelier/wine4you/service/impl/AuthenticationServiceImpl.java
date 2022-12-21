@@ -8,6 +8,7 @@ import com.sommelier.wine4you.repository.RoleRepository;
 import com.sommelier.wine4you.repository.UserRepository;
 import com.sommelier.wine4you.security.jwt.JwtTokenProvider;
 import com.sommelier.wine4you.service.AuthenticationService;
+import com.sommelier.wine4you.service.ShoppingCartService;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,17 +22,20 @@ import org.springframework.stereotype.Service;
 public class AuthenticationServiceImpl implements AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final UserRepository userRepository;
+    private final ShoppingCartService shoppingCartService;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider tokenProvider;
 
     public AuthenticationServiceImpl(AuthenticationManager authenticationManager,
                                      UserRepository userRepository,
+                                     ShoppingCartService shoppingCartService,
                                      RoleRepository roleRepository,
                                      PasswordEncoder passwordEncoder,
                                      JwtTokenProvider tokenProvider) {
         this.authenticationManager = authenticationManager;
         this.userRepository = userRepository;
+        this.shoppingCartService = shoppingCartService;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
         this.tokenProvider = tokenProvider;
@@ -65,6 +69,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         user.setRoles(Collections.singleton(roles));
         user.setRegistrationDate(LocalDateTime.now());
         userRepository.save(user);
+        shoppingCartService.registerNewShoppingCart(user);
         return user;
     }
 }

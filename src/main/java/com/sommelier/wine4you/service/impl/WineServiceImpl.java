@@ -2,9 +2,6 @@ package com.sommelier.wine4you.service.impl;
 
 import com.sommelier.wine4you.exception.ResourceNotFoundException;
 import com.sommelier.wine4you.model.Wine;
-import com.sommelier.wine4you.model.enums.Event;
-import com.sommelier.wine4you.model.enums.WineStyle;
-import com.sommelier.wine4you.model.enums.WineTaste;
 import com.sommelier.wine4you.model.enums.WineType;
 import com.sommelier.wine4you.repository.WineRepository;
 import com.sommelier.wine4you.service.WineService;
@@ -71,12 +68,12 @@ public class WineServiceImpl implements WineService {
 
     @Override
     public List<Wine> findByEvent(String event) {
-        return wineRepository.findByEvent(Event.valueOf(event));
+        return null;
     }
 
     @Override
     public List<Wine> findByWineStyle(String style) {
-        return wineRepository.findByWineStyle(WineStyle.valueOf(style));
+        return null;
     }
 
     @Override
@@ -86,6 +83,6 @@ public class WineServiceImpl implements WineService {
 
     @Override
     public List<Wine> findByWineTaste(String taste) {
-        return wineRepository.findByWineTaste(WineTaste.valueOf(taste));
+        return null;
     }
 }

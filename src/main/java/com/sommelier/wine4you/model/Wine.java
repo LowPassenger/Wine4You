@@ -1,8 +1,5 @@
 package com.sommelier.wine4you.model;
 
-import com.sommelier.wine4you.model.enums.Event;
-import com.sommelier.wine4you.model.enums.WineStyle;
-import com.sommelier.wine4you.model.enums.WineTaste;
 import com.sommelier.wine4you.model.enums.WineType;
 import java.util.Objects;
 import javax.persistence.CascadeType;
@@ -10,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -24,20 +22,19 @@ public class Wine extends Product {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "wine_style")
-    @Enumerated(EnumType.STRING)
-    private WineStyle wineStyle;
-
     @Column(name = "wine_type")
     @Enumerated(EnumType.STRING)
     private WineType wineType;
+    @OneToOne
+    @MapsId
+    private WineStyle wineStyle;
 
-    @Column(name = "wine_taste")
-    @Enumerated(EnumType.STRING)
+    @OneToOne
+    @MapsId
     private WineTaste wineTaste;
 
-    @Column(name = "event")
-    @Enumerated(EnumType.STRING)
+    @OneToOne
+    @MapsId
     private Event event;
 
     @Column(name = "capasity")

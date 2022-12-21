@@ -1,9 +1,9 @@
 package com.sommelier.wine4you.model.dto;
 
+import com.sommelier.wine4you.model.Event;
 import com.sommelier.wine4you.model.WineImage;
-import com.sommelier.wine4you.model.enums.Event;
-import com.sommelier.wine4you.model.enums.WineStyle;
-import com.sommelier.wine4you.model.enums.WineTaste;
+import com.sommelier.wine4you.model.WineStyle;
+import com.sommelier.wine4you.model.WineTaste;
 import com.sommelier.wine4you.model.enums.WineType;
 import java.math.BigDecimal;
 import javax.validation.constraints.NotBlank;
