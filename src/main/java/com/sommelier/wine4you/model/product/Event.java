@@ -11,5 +11,5 @@ public enum Event {
     BIRTHDAY("Birthday"),
     CORPORATE_EVENT("Corporate event");
 
-   private String event;
+   private final String event;
 }

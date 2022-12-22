@@ -25,5 +25,4 @@ public class Graphics {
     private Wine wine;
     private String minUrl;
     private String maxUrl;
-    private String maximaxUrl;
 }

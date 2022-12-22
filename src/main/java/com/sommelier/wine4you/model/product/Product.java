@@ -1,6 +1,6 @@
 package com.sommelier.wine4you.model.product;
 
-import java.math.BigDecimal;
+import com.sommelier.wine4you.model.product.wine.Price;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 public abstract class Product {
     protected String country;
     protected String brand;
-    protected BigDecimal price;
+    protected Price price;
     protected boolean inStock;
 }
