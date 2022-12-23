@@ -7,8 +7,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 @Entity
 @Table(name = "styles")
 public class WineStyle {
@@ -17,4 +19,8 @@ public class WineStyle {
     private Long id;
     @Column(name = "name_style")
     private String nameStyle;
+
+    public WineStyle(String nameStyle) {
+        this.nameStyle = nameStyle;
+    }
 }
