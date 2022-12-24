@@ -10,6 +10,7 @@ import lombok.Data;
 
 @Data
 public class WineResponseDto {
+    private Long id;
     private String brand;
     private String country;
     private BigDecimal price;

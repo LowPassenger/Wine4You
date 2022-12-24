@@ -1,18 +1,31 @@
 package com.sommelier.wine4you.config;
 
-import com.sommelier.wine4you.model.*;
-import com.sommelier.wine4you.repository.*;
-import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
-
-import javax.annotation.PostConstruct;
+import com.sommelier.wine4you.exception.ResourceNotFoundException;
+import com.sommelier.wine4you.model.Event;
+import com.sommelier.wine4you.model.Role;
+import com.sommelier.wine4you.model.User;
+import com.sommelier.wine4you.model.Wine;
+import com.sommelier.wine4you.model.WineImage;
+import com.sommelier.wine4you.model.WineStyle;
+import com.sommelier.wine4you.model.WineTaste;
+import com.sommelier.wine4you.model.enums.WineType;
+import com.sommelier.wine4you.repository.EventRepository;
+import com.sommelier.wine4you.repository.RoleRepository;
+import com.sommelier.wine4you.repository.UserRepository;
+import com.sommelier.wine4you.repository.WineRepository;
+import com.sommelier.wine4you.repository.WineStyleRepository;
+import com.sommelier.wine4you.repository.WineTasteRepository;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import javax.annotation.PostConstruct;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 
 @Log4j2
 @Component
@@ -49,6 +62,47 @@ public class DataInitializer {
         createEvent();
         createWineStyle();
         createWineTaste();
+        WineStyle wineStyleFind = styleRepository.findById(1L).orElseThrow(
+                () -> new ResourceNotFoundException("asd","asd","1")
+        );
+        WineTaste wineTasteFind = tasteRepository.findById(1L).orElseThrow(
+                () -> new ResourceNotFoundException("asd","asd","1")
+        );
+        Event eventFind = eventRepository.findById(1L).orElseThrow(
+                () -> new ResourceNotFoundException("asd","asd","1")
+        );
+
+        wineRepository.saveAll(
+                List.of(
+                        getWine("ASdadas",
+                                "Italy",
+                                "sahgdfjsaghdfkjag",
+                                BigDecimal.valueOf(123.23),
+                                true,
+                                "AGF",
+                                WineType.RED,
+                                wineStyleFind,
+                                wineTasteFind,
+                                eventFind,
+                                0.75,
+                                null,
+                                "jhgsakdfjgsadf gsdkfh gjksdfhgsdhf"),
+                        getWine("AGFDGAFD",
+                                "Italy",
+                                "sahgdfjsaghdfkjag",
+                                BigDecimal.valueOf(1353.23),
+                                true,
+                                "AGF",
+                                WineType.RED,
+                                wineStyleFind,
+                                wineTasteFind,
+                                eventFind,
+                                1.5,
+                                null,
+                                "jhgsakdfjgsadf gsdkfh gjksdfhgsdhf")
+
+                )
+        );
     }
 
     private void createAdminUser() {
@@ -82,9 +136,33 @@ public class DataInitializer {
         log.info("Successfully, create admin");
     }
 
-    private Wine getWine() {
+    private Wine getWine(String brand,
+                         String country,
+                         String title,
+                         BigDecimal price,
+                         Boolean inStock,
+                         String name,
+                         WineType wineType,
+                         WineStyle wineStyle,
+                         WineTaste wineTaste,
+                         Event event,
+                         double capacity,
+                         WineImage image,
+                         String description) {
         Wine wine = new Wine();
-//        wine.set
+        wine.setBrand(brand);
+        wine.setCountry(country);
+        wine.setTitle(title);
+        wine.setPrice(price);
+        wine.setInStock(inStock);
+        wine.setName(name);
+        wine.setWineType(wineType);
+        wine.setWineStyle(wineStyle);
+        wine.setWineTaste(wineTaste);
+        wine.setEvent(event);
+        wine.setCapacity(capacity);
+        wine.setImage(image);
+        wine.setDescription(description);
         return wine;
     }
 
