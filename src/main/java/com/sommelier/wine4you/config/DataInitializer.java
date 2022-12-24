@@ -16,6 +16,7 @@ import com.sommelier.wine4you.repository.WineImageRepository;
 import com.sommelier.wine4you.repository.WineRepository;
 import com.sommelier.wine4you.repository.WineStyleRepository;
 import com.sommelier.wine4you.repository.WineTasteRepository;
+import com.sommelier.wine4you.service.WineService;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -40,6 +41,7 @@ public class DataInitializer {
     private final WineStyleRepository styleRepository;
     private final WineTasteRepository tasteRepository;
     private final WineImageRepository wineImageRepository;
+    private final WineService wineService;
 
     @Autowired
     public DataInitializer(UserRepository userRepository,
@@ -49,7 +51,7 @@ public class DataInitializer {
                            EventRepository eventRepository,
                            WineStyleRepository styleRepository,
                            WineTasteRepository tasteRepository,
-                           WineImageRepository wineImageRepository) {
+                           WineImageRepository wineImageRepository, WineService wineService) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.wineRepository = wineRepository;
@@ -58,6 +60,7 @@ public class DataInitializer {
         this.styleRepository = styleRepository;
         this.tasteRepository = tasteRepository;
         this.wineImageRepository = wineImageRepository;
+        this.wineService = wineService;
     }
 
     @PostConstruct
@@ -398,25 +401,25 @@ public class DataInitializer {
     private void createImage() {
         wineImageRepository.saveAll(List.of(
                 new WineImage("redwine/1/min.jpg", "redwine/1/max.jpg",
-                        "redwine/1/maximax.jpg"),
+                        "redwine/1/maximax.jpg", wineService.getById(1L)),
                 new WineImage("redwine/2/min.jpg", "redwine/2/max.jpg",
-                        "redwine/2/maximax.jpg"),
+                        "redwine/2/maximax.jpg", wineService.getById(2L)),
                 new WineImage("redwine/3/min.jpg", "redwine/3/max.jpg",
-                        "redwine/3/maximax.jpg"),
+                        "redwine/3/maximax.jpg", wineService.getById(3L)),
                 new WineImage("redwine/4/min.jpg", "redwine/4/max.jpg",
-                        "redwine/4/maximax.jpg"),
+                        "redwine/4/maximax.jpg", wineService.getById(4L)),
                 new WineImage("redwine/5/min.jpg", "redwine/5/max.jpg",
-                "redwine/5/maximax.jpg"),
+                "redwine/5/maximax.jpg", wineService.getById(5L)),
                 new WineImage("champagne/1/min.jpg", "champagne/1/max.jpg",
-                        "champagne/1/maximax.jpg"),
+                        "champagne/1/maximax.jpg", wineService.getById(6L)),
                 new WineImage("champagne/2/min.jpg", "champagne/2/max.jpg",
-                        "champagne/2/maximax.jpg"),
+                        "champagne/2/maximax.jpg", wineService.getById(7L)),
                 new WineImage("champagne/3/min.jpg", "champagne/3/max.jpg",
-                        "champagne/3/maximax.jpg"),
+                        "champagne/3/maximax.jpg", wineService.getById(8L)),
                 new WineImage("champagne/4/min.jpg", "champagne/4/max.jpg",
-                        "champagne/4/maximax.jpg"),
+                        "champagne/4/maximax.jpg", wineService.getById(9L)),
                 new WineImage("champagne/5/min.jpg", "redwine/5/max.jpg",
-                        "redwine/5/maximax.jpg")));
+                        "redwine/5/maximax.jpg", wineService.getById(10L))));
     }
 
     private User getUser(String firstName, String lastName, String email,

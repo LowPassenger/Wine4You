@@ -6,16 +6,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Setter
 @Getter
 @Entity
 @Table(name = "wine_images")
+@NoArgsConstructor
 public class WineImage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,14 +25,14 @@ public class WineImage {
     private String middleImage;
     private String maxImage;
     @OneToOne
-    @MapsId
     @JoinColumn(name = "wine_id")
     private Wine wine;
 
-    public WineImage(String minImage, String middleImage, String maxImage) {
+    public WineImage(String minImage, String middleImage, String maxImage, Wine wine) {
         this.minImage = minImage;
         this.middleImage = middleImage;
         this.maxImage = maxImage;
+        this.wine = wine;
     }
 
     @Override
