@@ -28,7 +28,7 @@ public class WineRequestDto {
     private WineTaste wineTaste;
     private Event event;
     private WineType wineType;
-    private double capasity;
+    private double capacity;
     private WineImage image;
     private String description;
 }

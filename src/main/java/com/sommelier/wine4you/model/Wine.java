@@ -42,8 +42,8 @@ public class Wine extends Product {
     @MapsId
     private Event event;
 
-    @Column(name = "capasity")
-    private double capasity;
+    @Column(name = "capacity")
+    private double capacity;
     @OneToOne(mappedBy = "wine", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private WineImage image;
@@ -60,7 +60,7 @@ public class Wine extends Product {
 
         Wine wine = (Wine) o;
 
-        if (Double.compare(wine.capasity, capasity) != 0) {
+        if (Double.compare(wine.capacity, capacity) != 0) {
             return false;
         }
         if (!Objects.equals(name, wine.name)) {
@@ -92,7 +92,7 @@ public class Wine extends Product {
         result = 31 * result + (wineType != null ? wineType.hashCode() : 0);
         result = 31 * result + (wineTaste != null ? wineTaste.hashCode() : 0);
         long temp;
-        temp = Double.doubleToLongBits(capasity);
+        temp = Double.doubleToLongBits(capacity);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (event != null ? event.hashCode() : 0);
         result = 31 * result + (image != null ? image.hashCode() : 0);
@@ -107,7 +107,7 @@ public class Wine extends Product {
                 + ", wineStyle=" + wineStyle
                 + ", wineType=" + wineType
                 + ", wineTaste=" + wineTaste
-                + ", capasity=" + capasity
+                + ", capacity=" + capacity
                 + ", event=" + event
                 + ", image=" + image
                 + ", description='" + description + '\''

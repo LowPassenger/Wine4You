@@ -20,7 +20,7 @@ public class WineResponseDto {
     private WineType wineType;
     private WineTaste wineTaste;
     private Event event;
-    private double capasity;
+    private double capacity;
     private WineImage image;
     private String description;
 }
