@@ -48,7 +48,8 @@ public class DataInitializer {
                            PasswordEncoder passwordEncoder,
                            EventRepository eventRepository,
                            WineStyleRepository styleRepository,
-                           WineTasteRepository tasteRepository, WineImageRepository wineImageRepository) {
+                           WineTasteRepository tasteRepository,
+                           WineImageRepository wineImageRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.wineRepository = wineRepository;
@@ -65,6 +66,7 @@ public class DataInitializer {
         createEvent();
         createWineStyle();
         createWineTaste();
+        createImage();
         WineStyle wineStyleFind = styleRepository.findById(1L).orElseThrow(
                 () -> new ResourceNotFoundException("WineStyle","id","1")
         );
@@ -89,8 +91,8 @@ public class DataInitializer {
                                 eventRepository.findById(2L).get(),
                                 0.75,
                                 wineImageRepository.findById(1L).get(),
-                                "jJames Suckling-Mendoza, Argentina - " +
-                                        "\"Savory sweet tobacco, blackcurrants and some thyme"
+                                "jJames Suckling-Mendoza, Argentina - "
+                                        + "\"Savory sweet tobacco, blackcurrants and some thyme"
                                         + " and white pepper on the nose. The chunk of powdery"
                                         + " tannins really grabs your palate, wrapping the fruit"
                                         + " tightly before a long, savory finish.\""),
@@ -175,8 +177,9 @@ public class DataInitializer {
                                 0.75,
                                 wineImageRepository.findById(6L).get(),
                                 "Asti, Piedmont, Italy - A fruit-driven people pleaser."
-                                        + " Hints of peach blossoms and fresh citrus make it a natural"
-                                        + " to pair with a fruit plate. Or sip on the porch after dinner."),
+                                        + " Hints of peach blossoms and fresh citrus make it"
+                                        + " a natural to pair with a fruit plate. Or sip on the"
+                                        + " porch after dinner."),
                         getWine("Louis Bouillot",
                                 "France",
                                 "Louis Bouillot Perle de Vigne Brut",
@@ -207,9 +210,10 @@ public class DataInitializer {
                                 eventRepository.findById(4L).get(),
                                 0.75,
                                 wineImageRepository.findById(8L).get(),
-                                "Asti, Piedmont, Italy - A fruit-driven people pleaser."
-                                        + " Hints of peach blossoms and fresh citrus make it a natural"
-                                        + " to pair with a fruit plate. Or sip on the porch after dinner."),
+                                "An easy-drinking sparkling wine that has nice pear notes."
+                                        + " All the acidity and smooth texture serves to"
+                                        + " brighten it. Easy and light, the bubbles are nice"
+                                        + " and peppy, giving this wine energy."),
                         getWine("Albino Armani",
                                 "Italy",
                                 "Armani Prosecco",
@@ -222,9 +226,11 @@ public class DataInitializer {
                                 eventRepository.findById(2L).get(),
                                 0.75,
                                 wineImageRepository.findById(9L).get(),
-                                "Asti, Piedmont, Italy - A fruit-driven people pleaser."
-                                        + " Hints of peach blossoms and fresh citrus make it a natural"
-                                        + " to pair with a fruit plate. Or sip on the porch after dinner."),
+                                "Beverage Dynamics-Valdadige, Italy- \"A plush and refreshing"
+                                        + " Prosecco with an expressive mix of apple blossom,"
+                                        + " and lemon zest. Ripe and bold fruit combine with"
+                                        + " savory acidity to give the wine balance, texture"
+                                        + " and depth.\"."),
                         getWine("La Vostra",
                                 "Italy",
                                 "La Vostra Prosecco Rose",

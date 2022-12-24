@@ -8,16 +8,23 @@ import com.sommelier.wine4you.service.WineService;
 import com.sommelier.wine4you.utils.AppConstants;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.stream.Collectors;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
-import java.math.BigDecimal;
-import java.util.List;
-import java.util.stream.Collectors;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @Api(value = "Rest APIs for Wines resources")
 @RestController
@@ -36,7 +43,8 @@ public class WineController {
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<WineResponseDto> create(WineRequestDto wineRequestDto) {
-        return new ResponseEntity<>(wineMapper.toDto(wineService.create(wineMapper.toModel(wineRequestDto))), HttpStatus.CREATED);
+        return new ResponseEntity<>(wineMapper.toDto(wineService
+                .create(wineMapper.toModel(wineRequestDto))), HttpStatus.CREATED);
     }
 
     @ApiOperation(value = "Get All Wines REST API")
@@ -70,8 +78,10 @@ public class WineController {
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<WineResponseDto> update(@PathVariable("id") Long id,
-                                                  @Valid @RequestBody WineRequestDto wineRequestDto) {
-        return ResponseEntity.ok(wineMapper.toDto(wineService.update(id, wineMapper.toModel(wineRequestDto))));
+                                                  @Valid @RequestBody
+                                                  WineRequestDto wineRequestDto) {
+        return ResponseEntity.ok(wineMapper.toDto(wineService.update(id,
+                wineMapper.toModel(wineRequestDto))));
     }
 
     @ApiOperation(value = "Delete Wine by 'Id' REST API")

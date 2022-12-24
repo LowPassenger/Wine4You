@@ -21,7 +21,7 @@ public class WineTasteServiceImpl implements WineTasteService {
     }
 
     @Override
-    public WineTaste findById(Long id) {
+    public WineTaste getById(Long id) {
         return wineTasteRepository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("WineTaste", "id", String.valueOf(id)));
     }
