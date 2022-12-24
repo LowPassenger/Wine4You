@@ -12,6 +12,7 @@ import com.sommelier.wine4you.model.enums.WineType;
 import com.sommelier.wine4you.repository.EventRepository;
 import com.sommelier.wine4you.repository.RoleRepository;
 import com.sommelier.wine4you.repository.UserRepository;
+import com.sommelier.wine4you.repository.WineImageRepository;
 import com.sommelier.wine4you.repository.WineRepository;
 import com.sommelier.wine4you.repository.WineStyleRepository;
 import com.sommelier.wine4you.repository.WineTasteRepository;
@@ -38,6 +39,7 @@ public class DataInitializer {
     private final EventRepository eventRepository;
     private final WineStyleRepository styleRepository;
     private final WineTasteRepository tasteRepository;
+    private final WineImageRepository wineImageRepository;
 
     @Autowired
     public DataInitializer(UserRepository userRepository,
@@ -46,7 +48,7 @@ public class DataInitializer {
                            PasswordEncoder passwordEncoder,
                            EventRepository eventRepository,
                            WineStyleRepository styleRepository,
-                           WineTasteRepository tasteRepository) {
+                           WineTasteRepository tasteRepository, WineImageRepository wineImageRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.wineRepository = wineRepository;
@@ -54,6 +56,7 @@ public class DataInitializer {
         this.eventRepository = eventRepository;
         this.styleRepository = styleRepository;
         this.tasteRepository = tasteRepository;
+        this.wineImageRepository = wineImageRepository;
     }
 
     @PostConstruct
@@ -63,43 +66,181 @@ public class DataInitializer {
         createWineStyle();
         createWineTaste();
         WineStyle wineStyleFind = styleRepository.findById(1L).orElseThrow(
-                () -> new ResourceNotFoundException("asd","asd","1")
+                () -> new ResourceNotFoundException("WineStyle","id","1")
         );
         WineTaste wineTasteFind = tasteRepository.findById(1L).orElseThrow(
-                () -> new ResourceNotFoundException("asd","asd","1")
+                () -> new ResourceNotFoundException("WineTaste","id","1")
         );
         Event eventFind = eventRepository.findById(1L).orElseThrow(
-                () -> new ResourceNotFoundException("asd","asd","1")
+                () -> new ResourceNotFoundException("Event","id","1")
         );
 
         wineRepository.saveAll(
                 List.of(
-                        getWine("ASdadas",
-                                "Italy",
-                                "sahgdfjsaghdfkjag",
-                                BigDecimal.valueOf(123.23),
+                        getWine("Ed Edmundo",
+                                "Argentina",
+                                "Ed Edmundo Cabernet Sauvignon, 2021",
+                                BigDecimal.valueOf(710.23),
                                 true,
-                                "AGF",
+                                "Cabernet Sauvignon",
                                 WineType.RED,
-                                wineStyleFind,
-                                wineTasteFind,
-                                eventFind,
+                                styleRepository.findById(6L).get(),
+                                tasteRepository.findById(5L).get(),
+                                eventRepository.findById(1L).get(),
                                 0.75,
-                                null,
-                                "jhgsakdfjgsadf gsdkfh gjksdfhgsdhf"),
-                        getWine("AGFDGAFD",
+                                wineImageRepository.findById(0L).get(),
+                                "jJames Suckling-Mendoza, Argentina - " +
+                                        "\"Savory sweet tobacco, blackcurrants and some thyme"
+                                        + " and white pepper on the nose. The chunk of powdery"
+                                        + " tannins really grabs your palate, wrapping the fruit"
+                                        + " tightly before a long, savory finish.\""),
+                        getWine("Pietramerana",
                                 "Italy",
-                                "sahgdfjsaghdfkjag",
-                                BigDecimal.valueOf(1353.23),
+                                "Pietramerana Sangiovese Toscana IGT, 2019",
+                                BigDecimal.valueOf(622.74),
                                 true,
-                                "AGF",
+                                "Sangiovese Toscana IGT",
                                 WineType.RED,
-                                wineStyleFind,
-                                wineTasteFind,
-                                eventFind,
-                                1.5,
-                                null,
-                                "jhgsakdfjgsadf gsdkfh gjksdfhgsdhf")
+                                styleRepository.findById(5L).get(),
+                                tasteRepository.findById(22L).get(),
+                                eventRepository.findById(0L).get(),
+                                0.75,
+                                wineImageRepository.findById(1L).get(),
+                                "James Suckling-Italy - Tuscany - Toscana -"
+                                        + " \"This has aromas of raspberries, redcurrants, "
+                                        + "lavender and dried herbs. Some cinnamon and anise,"
+                                        + " too. Medium-bodied with fine, firm tannins. Fragrant"
+                                        + " and spicy finish. \""),
+                        getWine("URO",
+                                "Spain",
+                                "Uro Toro La Enfermera Tempranillo, 2020",
+                                BigDecimal.valueOf(488.02),
+                                true,
+                                "Toro La Enfermera Tempranillo",
+                                WineType.RED,
+                                styleRepository.findById(6L).get(),
+                                tasteRepository.findById(16L).get(),
+                                eventRepository.findById(3L).get(),
+                                0.75,
+                                wineImageRepository.findById(2L).get(),
+                                "James Suckling-Toro, Spain - \"Aromas of smoke,"
+                                        + " berry and cracked pepper. Medium to full body, "
+                                        + "round and juicy tannins and a delicious, fruity finish."
+                                        + " It's a bigger wine, but the tannins show focus and"
+                                        + " softness. 100% tinta de toro.\""),
+                        getWine("Meleto",
+                                "Italy",
+                                "Castello Meleto Borgaio Rosso di Toscana, 2019",
+                                BigDecimal.valueOf(1310.77),
+                                false,
+                                "Borgaio Rosso di Toscana",
+                                WineType.RED,
+                                styleRepository.findById(5L).get(),
+                                tasteRepository.findById(22L).get(),
+                                eventRepository.findById(0L).get(),
+                                0.75,
+                                wineImageRepository.findById(3L).get(),
+                                "James Suckling-Toscana IGT, Tuscany, Italy -"
+                                        + " \"A fruity red with plenty of dried-berry, walnut"
+                                        + " and wet-earth character. Medium body, ripe tannins"
+                                        + " and a flavorful finish.\" Perfect to accompany first"
+                                        + " courses and grilled red meats and cheeses."),
+                        getWine("Altaland",
+                                "Argentina",
+                                "Altaland Malbec Mendoza, 2020",
+                                BigDecimal.valueOf(219.99),
+                                true,
+                                "Malbec Mendoza",
+                                WineType.RED,
+                                styleRepository.findById(6L).get(),
+                                tasteRepository.findById(14L).get(),
+                                eventRepository.findById(1L).get(),
+                                0.75,
+                                wineImageRepository.findById(4L).get(),
+                                "James Suckling-Italy - Tuscany - Toscana -"
+                                        + " \"This has aromas of raspberries, redcurrants, "
+                                        + "lavender and dried herbs. Some cinnamon and anise,"
+                                        + " too. Medium-bodied with fine, firm tannins. Fragrant"
+                                        + " and spicy finish. \""),
+                        getWine("Marchese dell'Elsa",
+                                "Italy",
+                                "Marchese dell'Elsa Moscato d'Asti",
+                                BigDecimal.valueOf(854.73),
+                                true,
+                                "Moscato d'Asti",
+                                WineType.CHAMPAGNE_SPARKLING,
+                                styleRepository.findById(4L).get(),
+                                tasteRepository.findById(27L).get(),
+                                eventRepository.findById(0L).get(),
+                                0.75,
+                                wineImageRepository.findById(5L).get(),
+                                "Asti, Piedmont, Italy - A fruit-driven people pleaser."
+                                        + " Hints of peach blossoms and fresh citrus make it a natural"
+                                        + " to pair with a fruit plate. Or sip on the porch after dinner."),
+                        getWine("Louis Bouillot",
+                                "France",
+                                "Louis Bouillot Perle de Vigne Brut",
+                                BigDecimal.valueOf(772.83),
+                                true,
+                                "Perle de Vigne",
+                                WineType.CHAMPAGNE_SPARKLING,
+                                styleRepository.findById(6L).get(),
+                                tasteRepository.findById(30L).get(),
+                                eventRepository.findById(0L).get(),
+                                0.375,
+                                wineImageRepository.findById(6L).get(),
+                                "Wine & Spirits-Burgundy, France - This is a blend"
+                                        + " of Chardonnay, Pinot Noir, Aligote and Gamay, aged 12"
+                                        + " months on lees in bottle. It's fragrant with notes of"
+                                        + " toasty lees and chalk, a simple sparkler that feels"
+                                        + " focused and clean. The bubbles are ready to take on any"
+                                        + " raw shellfish."),
+                        getWine("Cruse",
+                                "France",
+                                "Cruse Brut",
+                                BigDecimal.valueOf(312.93),
+                                true,
+                                "Brut",
+                                WineType.CHAMPAGNE_SPARKLING,
+                                styleRepository.findById(2L).get(),
+                                tasteRepository.findById(30L).get(),
+                                eventRepository.findById(3L).get(),
+                                0.75,
+                                wineImageRepository.findById(7L).get(),
+                                "Asti, Piedmont, Italy - A fruit-driven people pleaser."
+                                        + " Hints of peach blossoms and fresh citrus make it a natural"
+                                        + " to pair with a fruit plate. Or sip on the porch after dinner."),
+                        getWine("Albino Armani",
+                                "Italy",
+                                "Armani Prosecco",
+                                BigDecimal.valueOf(902.37),
+                                true,
+                                "Prosecco",
+                                WineType.CHAMPAGNE_SPARKLING,
+                                styleRepository.findById(6L).get(),
+                                tasteRepository.findById(25L).get(),
+                                eventRepository.findById(1L).get(),
+                                0.75,
+                                wineImageRepository.findById(8L).get(),
+                                "Asti, Piedmont, Italy - A fruit-driven people pleaser."
+                                        + " Hints of peach blossoms and fresh citrus make it a natural"
+                                        + " to pair with a fruit plate. Or sip on the porch after dinner."),
+                        getWine("La Vostra",
+                                "Italy",
+                                "La Vostra Prosecco Rose",
+                                BigDecimal.valueOf(920.23),
+                                true,
+                                "Prosecco Rose",
+                                WineType.CHAMPAGNE_SPARKLING,
+                                styleRepository.findById(10L).get(),
+                                tasteRepository.findById(7L).get(),
+                                eventRepository.findById(2L).get(),
+                                0.75,
+                                wineImageRepository.findById(9L).get(),
+                                "Beverage Dynamics-Italy - \"Slight cherry"
+                                        + " and strawberry notes on the nose and palate drive"
+                                        + " this plush sparkler. Sweet, ripe peach flavor and a"
+                                        + " zesty character give this wine structure and fun.\"")
 
                 )
         );
@@ -246,6 +387,30 @@ public class DataInitializer {
                 new WineTaste("Mulberry"),
                 new WineTaste("Tobacco")
         ));
+    }
+
+    private void createImage() {
+        wineImageRepository.saveAll(List.of(
+                new WineImage("redwine/1/min.jpg", "redwine/1/max.jpg",
+                        "redwine/1/maximax.jpg"),
+                new WineImage("redwine/2/min.jpg", "redwine/2/max.jpg",
+                        "redwine/2/maximax.jpg"),
+                new WineImage("redwine/3/min.jpg", "redwine/3/max.jpg",
+                        "redwine/3/maximax.jpg"),
+                new WineImage("redwine/4/min.jpg", "redwine/4/max.jpg",
+                        "redwine/4/maximax.jpg"),
+                new WineImage("redwine/5/min.jpg", "redwine/5/max.jpg",
+                "redwine/5/maximax.jpg"),
+                new WineImage("champagne/1/min.jpg", "champagne/1/max.jpg",
+                        "champagne/1/maximax.jpg"),
+                new WineImage("champagne/2/min.jpg", "champagne/2/max.jpg",
+                        "champagne/2/maximax.jpg"),
+                new WineImage("champagne/3/min.jpg", "champagne/3/max.jpg",
+                        "champagne/3/maximax.jpg"),
+                new WineImage("champagne/4/min.jpg", "champagne/4/max.jpg",
+                        "champagne/4/maximax.jpg"),
+                new WineImage("champagne/5/min.jpg", "redwine/5/max.jpg",
+                        "redwine/5/maximax.jpg")));
     }
 
     private User getUser(String firstName, String lastName, String email,

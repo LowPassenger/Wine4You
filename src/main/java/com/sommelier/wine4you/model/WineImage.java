@@ -28,6 +28,12 @@ public class WineImage {
     @JoinColumn(name = "wine_id")
     private Wine wine;
 
+    public WineImage(String minImage, String middleImage, String maxImage) {
+        this.minImage = minImage;
+        this.middleImage = middleImage;
+        this.maxImage = maxImage;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
