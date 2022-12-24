@@ -1,7 +1,7 @@
 package com.sommelier.wine4you.model.dto;
 
+import com.sommelier.wine4you.utils.Email;
 import java.time.LocalDate;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -24,10 +24,10 @@ public class UserSignUpDto {
     @Email
     @Size(min = 5, message = "Email should have at least 5 characters")
     private String email;
+
     @NotBlank(message = "Password is mandatory")
     @Size(min = 8, message = "Password should have at least 8 characters")
     @Size(max = 30, message = "The password must contain no more than 30 characters")
-
     private String password;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")

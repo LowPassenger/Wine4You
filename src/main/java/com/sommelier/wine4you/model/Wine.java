@@ -31,15 +31,12 @@ public class Wine extends Product {
     @Enumerated(EnumType.STRING)
     private WineType wineType;
     @OneToOne
-    @MapsId
     private WineStyle wineStyle;
 
     @OneToOne
-    @MapsId
     private WineTaste wineTaste;
 
     @OneToOne
-    @MapsId
     private Event event;
 
     @Column(name = "capacity")
@@ -48,6 +45,7 @@ public class Wine extends Product {
     @PrimaryKeyJoinColumn
     private WineImage image;
     private String description;
+
 
     @Override
     public boolean equals(Object o) {
