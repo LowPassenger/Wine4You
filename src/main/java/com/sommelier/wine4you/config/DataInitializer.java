@@ -84,11 +84,11 @@ public class DataInitializer {
                                 true,
                                 "Cabernet Sauvignon",
                                 WineType.RED,
-                                styleRepository.findById(6L).get(),
-                                tasteRepository.findById(5L).get(),
-                                eventRepository.findById(1L).get(),
+                                styleRepository.findById(5L).get(),
+                                tasteRepository.findById(6L).get(),
+                                eventRepository.findById(2L).get(),
                                 0.75,
-                                wineImageRepository.findById(0L).get(),
+                                wineImageRepository.findById(1L).get(),
                                 "jJames Suckling-Mendoza, Argentina - " +
                                         "\"Savory sweet tobacco, blackcurrants and some thyme"
                                         + " and white pepper on the nose. The chunk of powdery"
@@ -101,11 +101,11 @@ public class DataInitializer {
                                 true,
                                 "Sangiovese Toscana IGT",
                                 WineType.RED,
-                                styleRepository.findById(5L).get(),
-                                tasteRepository.findById(22L).get(),
-                                eventRepository.findById(0L).get(),
+                                styleRepository.findById(6L).get(),
+                                tasteRepository.findById(23L).get(),
+                                eventRepository.findById(1L).get(),
                                 0.75,
-                                wineImageRepository.findById(1L).get(),
+                                wineImageRepository.findById(2L).get(),
                                 "James Suckling-Italy - Tuscany - Toscana -"
                                         + " \"This has aromas of raspberries, redcurrants, "
                                         + "lavender and dried herbs. Some cinnamon and anise,"
@@ -118,11 +118,11 @@ public class DataInitializer {
                                 true,
                                 "Toro La Enfermera Tempranillo",
                                 WineType.RED,
-                                styleRepository.findById(6L).get(),
-                                tasteRepository.findById(16L).get(),
-                                eventRepository.findById(3L).get(),
+                                styleRepository.findById(7L).get(),
+                                tasteRepository.findById(17L).get(),
+                                eventRepository.findById(4L).get(),
                                 0.75,
-                                wineImageRepository.findById(2L).get(),
+                                wineImageRepository.findById(3L).get(),
                                 "James Suckling-Toro, Spain - \"Aromas of smoke,"
                                         + " berry and cracked pepper. Medium to full body, "
                                         + "round and juicy tannins and a delicious, fruity finish."
@@ -135,11 +135,11 @@ public class DataInitializer {
                                 false,
                                 "Borgaio Rosso di Toscana",
                                 WineType.RED,
-                                styleRepository.findById(5L).get(),
-                                tasteRepository.findById(22L).get(),
-                                eventRepository.findById(0L).get(),
+                                styleRepository.findById(6L).get(),
+                                tasteRepository.findById(23L).get(),
+                                eventRepository.findById(1L).get(),
                                 0.75,
-                                wineImageRepository.findById(3L).get(),
+                                wineImageRepository.findById(4L).get(),
                                 "James Suckling-Toscana IGT, Tuscany, Italy -"
                                         + " \"A fruity red with plenty of dried-berry, walnut"
                                         + " and wet-earth character. Medium body, ripe tannins"
@@ -152,11 +152,11 @@ public class DataInitializer {
                                 true,
                                 "Malbec Mendoza",
                                 WineType.RED,
-                                styleRepository.findById(6L).get(),
-                                tasteRepository.findById(14L).get(),
-                                eventRepository.findById(1L).get(),
+                                styleRepository.findById(7L).get(),
+                                tasteRepository.findById(15L).get(),
+                                eventRepository.findById(2L).get(),
                                 0.75,
-                                wineImageRepository.findById(4L).get(),
+                                wineImageRepository.findById(5L).get(),
                                 "James Suckling-Italy - Tuscany - Toscana -"
                                         + " \"This has aromas of raspberries, redcurrants, "
                                         + "lavender and dried herbs. Some cinnamon and anise,"
@@ -169,11 +169,11 @@ public class DataInitializer {
                                 true,
                                 "Moscato d'Asti",
                                 WineType.CHAMPAGNE_SPARKLING,
-                                styleRepository.findById(4L).get(),
-                                tasteRepository.findById(27L).get(),
-                                eventRepository.findById(0L).get(),
+                                styleRepository.findById(5L).get(),
+                                tasteRepository.findById(28L).get(),
+                                eventRepository.findById(1L).get(),
                                 0.75,
-                                wineImageRepository.findById(5L).get(),
+                                wineImageRepository.findById(6L).get(),
                                 "Asti, Piedmont, Italy - A fruit-driven people pleaser."
                                         + " Hints of peach blossoms and fresh citrus make it a natural"
                                         + " to pair with a fruit plate. Or sip on the porch after dinner."),
@@ -184,11 +184,11 @@ public class DataInitializer {
                                 true,
                                 "Perle de Vigne",
                                 WineType.CHAMPAGNE_SPARKLING,
-                                styleRepository.findById(6L).get(),
-                                tasteRepository.findById(30L).get(),
-                                eventRepository.findById(0L).get(),
+                                styleRepository.findById(7L).get(),
+                                tasteRepository.findById(31L).get(),
+                                eventRepository.findById(1L).get(),
                                 0.375,
-                                wineImageRepository.findById(6L).get(),
+                                wineImageRepository.findById(7L).get(),
                                 "Wine & Spirits-Burgundy, France - This is a blend"
                                         + " of Chardonnay, Pinot Noir, Aligote and Gamay, aged 12"
                                         + " months on lees in bottle. It's fragrant with notes of"
@@ -202,11 +202,11 @@ public class DataInitializer {
                                 true,
                                 "Brut",
                                 WineType.CHAMPAGNE_SPARKLING,
-                                styleRepository.findById(2L).get(),
-                                tasteRepository.findById(30L).get(),
-                                eventRepository.findById(3L).get(),
+                                styleRepository.findById(3L).get(),
+                                tasteRepository.findById(31L).get(),
+                                eventRepository.findById(4L).get(),
                                 0.75,
-                                wineImageRepository.findById(7L).get(),
+                                wineImageRepository.findById(8L).get(),
                                 "Asti, Piedmont, Italy - A fruit-driven people pleaser."
                                         + " Hints of peach blossoms and fresh citrus make it a natural"
                                         + " to pair with a fruit plate. Or sip on the porch after dinner."),
@@ -217,11 +217,11 @@ public class DataInitializer {
                                 true,
                                 "Prosecco",
                                 WineType.CHAMPAGNE_SPARKLING,
-                                styleRepository.findById(6L).get(),
-                                tasteRepository.findById(25L).get(),
-                                eventRepository.findById(1L).get(),
+                                styleRepository.findById(7L).get(),
+                                tasteRepository.findById(26L).get(),
+                                eventRepository.findById(2L).get(),
                                 0.75,
-                                wineImageRepository.findById(8L).get(),
+                                wineImageRepository.findById(9L).get(),
                                 "Asti, Piedmont, Italy - A fruit-driven people pleaser."
                                         + " Hints of peach blossoms and fresh citrus make it a natural"
                                         + " to pair with a fruit plate. Or sip on the porch after dinner."),
@@ -232,11 +232,11 @@ public class DataInitializer {
                                 true,
                                 "Prosecco Rose",
                                 WineType.CHAMPAGNE_SPARKLING,
-                                styleRepository.findById(10L).get(),
-                                tasteRepository.findById(7L).get(),
-                                eventRepository.findById(2L).get(),
+                                styleRepository.findById(11L).get(),
+                                tasteRepository.findById(8L).get(),
+                                eventRepository.findById(3L).get(),
                                 0.75,
-                                wineImageRepository.findById(9L).get(),
+                                wineImageRepository.findById(10L).get(),
                                 "Beverage Dynamics-Italy - \"Slight cherry"
                                         + " and strawberry notes on the nose and palate drive"
                                         + " this plush sparkler. Sweet, ripe peach flavor and a"
