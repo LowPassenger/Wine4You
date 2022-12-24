@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface WineTasteRepository extends JpaRepository<WineTaste, Long> {
-    Optional<WineTaste> findByNameTasty(String nameTasty);
+    Optional<WineTaste> findByNameTaste(String nameTaste);
 }

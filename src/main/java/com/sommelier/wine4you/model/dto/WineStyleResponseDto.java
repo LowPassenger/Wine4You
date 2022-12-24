@@ -3,7 +3,7 @@ package com.sommelier.wine4you.model.dto;
 import lombok.Data;
 
 @Data
-public class FilterResponseDto {
+public class WineStyleResponseDto {
     private Long id;
-    private String name;
+    private String nameStyle;
 }
