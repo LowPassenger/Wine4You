@@ -1,6 +1,5 @@
 package com.sommelier.wine4you.controller;
 
-import com.sommelier.wine4you.model.Image;
 import com.sommelier.wine4you.model.WineResponse;
 import com.sommelier.wine4you.model.dto.WineRequestDto;
 import com.sommelier.wine4you.model.dto.WineResponseDto;
@@ -16,7 +15,6 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +29,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.server.ResponseStatusException;
 
 @Api(value = "Rest APIs for Wines resources")
 @RestController
@@ -54,7 +51,8 @@ public class WineController {
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<WineResponseDto> create(WineRequestDto wineRequestDto) {
-        return new ResponseEntity<>(wineMapper.toDto(wineService.create(wineMapper.toModel(wineRequestDto))), HttpStatus.CREATED);
+        return new ResponseEntity<>(wineMapper.toDto(
+                wineService.create(wineMapper.toModel(wineRequestDto))), HttpStatus.CREATED);
     }
 
     @ApiOperation(value = "Get All Wines REST API")
@@ -87,9 +85,11 @@ public class WineController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
-    public ResponseEntity<WineResponseDto> update(@PathVariable("id") Long id,
-                                                  @Valid @RequestBody WineRequestDto wineRequestDto) {
-        return ResponseEntity.ok(wineMapper.toDto(wineService.update(id, wineMapper.toModel(wineRequestDto))));
+    public ResponseEntity<WineResponseDto> update(
+            @PathVariable("id") Long id,
+            @Valid @RequestBody WineRequestDto wineRequestDto) {
+        return ResponseEntity.ok(wineMapper.toDto(
+                wineService.update(id, wineMapper.toModel(wineRequestDto))));
     }
 
     @ApiOperation(value = "Delete Wine by 'Id' REST API")
@@ -148,7 +148,7 @@ public class WineController {
     public ResponseEntity<List<WineResponseDto>> getAllWinesByEvent(
             @RequestParam(value = "event") String event) {
         List<WineResponseDto> wineResponseDtos
-                = wineService.getByCountry(event).stream()
+                = wineService.getByEvent(event).stream()
                 .map(wine -> wineMapper.toDto(wine))
                 .collect(Collectors.toList());
         return ResponseEntity.ok(wineResponseDtos);
@@ -159,7 +159,7 @@ public class WineController {
     public ResponseEntity<List<WineResponseDto>> getAllWinesByType(
             @RequestParam(value = "type") String type) {
         List<WineResponseDto> wineResponseDtos
-                = wineService.getByCountry(type).stream()
+                = wineService.getByWineType(type).stream()
                 .map(wine -> wineMapper.toDto(wine))
                 .collect(Collectors.toList());
         return ResponseEntity.ok(wineResponseDtos);
@@ -170,19 +170,32 @@ public class WineController {
     public ResponseEntity<List<WineResponseDto>> getAllWinesByTaste(
             @RequestParam(value = "taste") String taste) {
         List<WineResponseDto> wineResponseDtos
-                = wineService.getByCountry(taste).stream()
+                = wineService.getByWineTaste(taste).stream()
                 .map(wine -> wineMapper.toDto(wine))
                 .collect(Collectors.toList());
         return ResponseEntity.ok(wineResponseDtos);
     }
 
-    @PostMapping("images")
-    Long uploadImage(@RequestParam MultipartFile multipartImage) throws Exception {
-        return imageService.create(multipartImage);
+    @ApiOperation(value = "Get wine by 'Taste' REST API")
+    @GetMapping("/style")
+    public ResponseEntity<List<WineResponseDto>> getAllWinesByStyle(
+            @RequestParam(value = "style") String style) {
+        List<WineResponseDto> wineResponseDtos
+                = wineService.getByWineStyle(style).stream()
+                .map(wine -> wineMapper.toDto(wine))
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(wineResponseDtos);
+    }
+
+    @PostMapping("{wineId}/images")
+    public ResponseEntity<?> uploadImage(@PathVariable Long wineId,
+                                         @RequestParam("image") MultipartFile multipartImage) {
+        return new ResponseEntity<>(imageService
+                .create(wineId, multipartImage), HttpStatus.CREATED);
     }
 
     @GetMapping(value = "{wineId}/images/{imageId}", produces = MediaType.IMAGE_JPEG_VALUE)
-    Resource downloadImage(@PathVariable Long wineId, @PathVariable Long imageId) {
-        return new ByteArrayResource(imageService.getById(wineId, imageId));
+    public ResponseEntity<?> downloadImage(@PathVariable Long wineId, @PathVariable Long imageId) {
+        return ResponseEntity.ok(new ByteArrayResource(imageService.getById(wineId, imageId)));
     }
 }

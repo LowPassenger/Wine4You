@@ -1,9 +1,10 @@
 package com.sommelier.wine4you.service;
 
+import com.sommelier.wine4you.model.Image;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface ImageService {
-    Long create(MultipartFile multipartImage);
+    Image create(Long wineId, MultipartFile multipartImage);
 
     byte[] getById(Long wineId, Long imageId);
 

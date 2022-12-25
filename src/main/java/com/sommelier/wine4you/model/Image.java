@@ -2,14 +2,15 @@ package com.sommelier.wine4you.model;
 
 import java.util.Arrays;
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,13 +23,17 @@ public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "name")
     private String name;
 
+    @Column(name = "type")
+    private String type;
+
     @Lob
-    byte[] content;
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "wine_id")
+    @Column(name = "image")
+    private byte[] content;
+    @ManyToOne(targetEntity = Wine.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "wine_id", nullable = false)
     private Wine wine;
 
     @Override

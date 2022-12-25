@@ -116,8 +116,9 @@ public class WineServiceImpl implements WineService {
     @Override
     public List<Wine> getWinesByPriceBetween(BigDecimal priceMin, BigDecimal priceMax) {
         return wineRepository.findByPriceBetween(priceMin, priceMax).orElseThrow(
-                () -> new ResourceNotFoundException("Wine", "Price", "range(" + priceMin + ","
-                        + " " + priceMax)
+                () -> new ResourceNotFoundException(
+                        "Wine", "Price", "range(" + priceMin + ", " + priceMax
+                )
         );
     }
 

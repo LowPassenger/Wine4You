@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.server.ResponseStatusException;
 
 @Log4j2
 @Service
@@ -28,12 +27,17 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public Long create(MultipartFile multipartImage) {
+    public Image create(Long wineId, MultipartFile multipartImage) {
         try {
+            Wine wine = wineRepository.findById(wineId).orElseThrow(
+                    () -> new ResourceNotFoundException("Wine", "id", String.valueOf(wineId))
+            );
             Image dbImage = new Image();
+            dbImage.setWine(wine);
             dbImage.setName(multipartImage.getName());
+            dbImage.setType(multipartImage.getContentType());
             dbImage.setContent(multipartImage.getBytes());
-            return imageDbRepository.save(dbImage).getId();
+            return imageDbRepository.save(dbImage);
         } catch (IOException e) {
             throw new RuntimeException("Can`t save image to database", e);
         }
@@ -50,14 +54,21 @@ public class ImageServiceImpl implements ImageService {
         if (!image.getWine().getId().equals(wine.getId())) {
             throw new WineApiException(HttpStatus.BAD_REQUEST, "Image does not belong to wine ");
         }
-
         return image.getContent();
     }
 
     @Override
     public void deleteById(Long wineId, Long imageId) {
-
-        imageDbRepository.deleteById(imageId);
+        Wine wine = wineRepository.findById(wineId).orElseThrow(
+                () -> new ResourceNotFoundException("Wine", "id", String.valueOf(wineId))
+        );
+        Image image = imageDbRepository.findById(imageId).orElseThrow(
+                () -> new ResourceNotFoundException("Image", "id", String.valueOf(imageId))
+        );
+        if (!image.getWine().getId().equals(wine.getId())) {
+            throw new WineApiException(HttpStatus.BAD_REQUEST, "Image does not belong to wine ");
+        }
+        imageDbRepository.delete(image);
         log.info("Successfully, delete image for wine by id {}", imageId);
     }
 }
