@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface WineImageRepository extends JpaRepository<Image, Long> {
+public interface ImageDbRepository extends JpaRepository<Image, Long> {
 }

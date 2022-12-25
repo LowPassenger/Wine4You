@@ -7,7 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -43,7 +42,7 @@ public class Wine extends Product {
     private double capacity;
     @OneToOne(mappedBy = "wine", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
-    private WineImage image;
+    private Image image;
     private String description;
 
 

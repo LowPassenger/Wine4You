@@ -1,11 +1,10 @@
 package com.sommelier.wine4you.config;
 
-import com.sommelier.wine4you.exception.ResourceNotFoundException;
 import com.sommelier.wine4you.model.Event;
 import com.sommelier.wine4you.model.Role;
 import com.sommelier.wine4you.model.User;
 import com.sommelier.wine4you.model.Wine;
-import com.sommelier.wine4you.model.WineImage;
+import com.sommelier.wine4you.model.Image;
 import com.sommelier.wine4you.model.WineStyle;
 import com.sommelier.wine4you.model.WineTaste;
 import com.sommelier.wine4you.model.enums.WineType;
@@ -65,16 +64,10 @@ public class DataInitializer {
         createEvent();
         createWineStyle();
         createWineTaste();
-        WineStyle wineStyleFind = styleRepository.findById(1L).orElseThrow(
-                () -> new ResourceNotFoundException("WineStyle","id","1")
-        );
-        WineTaste wineTasteFind = tasteRepository.findById(1L).orElseThrow(
-                () -> new ResourceNotFoundException("WineTaste","id","1")
-        );
-        Event eventFind = eventRepository.findById(1L).orElseThrow(
-                () -> new ResourceNotFoundException("Event","id","1")
-        );
+        createWine();
+    }
 
+    private void createWine() {
         wineRepository.saveAll(
                 List.of(
                         getWine("Ed Edmundo",
@@ -88,7 +81,7 @@ public class DataInitializer {
                                 tasteRepository.findById(5L).get(),
                                 eventRepository.findById(1L).get(),
                                 0.75,
-                                wineImageRepository.findById(0L).get(),
+                                wineImageRepository.findById(1L).get(),///0
                                 "jJames Suckling-Mendoza, Argentina - " +
                                         "\"Savory sweet tobacco, blackcurrants and some thyme"
                                         + " and white pepper on the nose. The chunk of powdery"
@@ -103,7 +96,7 @@ public class DataInitializer {
                                 WineType.RED,
                                 styleRepository.findById(5L).get(),
                                 tasteRepository.findById(22L).get(),
-                                eventRepository.findById(0L).get(),
+                                eventRepository.findById(1L).get(),//0
                                 0.75,
                                 wineImageRepository.findById(1L).get(),
                                 "James Suckling-Italy - Tuscany - Toscana -"
@@ -137,7 +130,7 @@ public class DataInitializer {
                                 WineType.RED,
                                 styleRepository.findById(5L).get(),
                                 tasteRepository.findById(22L).get(),
-                                eventRepository.findById(0L).get(),
+                                eventRepository.findById(1L).get(),
                                 0.75,
                                 wineImageRepository.findById(3L).get(),
                                 "James Suckling-Toscana IGT, Tuscany, Italy -"
@@ -171,7 +164,7 @@ public class DataInitializer {
                                 WineType.CHAMPAGNE_SPARKLING,
                                 styleRepository.findById(4L).get(),
                                 tasteRepository.findById(27L).get(),
-                                eventRepository.findById(0L).get(),
+                                eventRepository.findById(1L).get(),
                                 0.75,
                                 wineImageRepository.findById(5L).get(),
                                 "Asti, Piedmont, Italy - A fruit-driven people pleaser."
@@ -186,7 +179,7 @@ public class DataInitializer {
                                 WineType.CHAMPAGNE_SPARKLING,
                                 styleRepository.findById(6L).get(),
                                 tasteRepository.findById(30L).get(),
-                                eventRepository.findById(0L).get(),
+                                eventRepository.findById(1L).get(),
                                 0.375,
                                 wineImageRepository.findById(6L).get(),
                                 "Wine & Spirits-Burgundy, France - This is a blend"
@@ -288,7 +281,7 @@ public class DataInitializer {
                          WineTaste wineTaste,
                          Event event,
                          double capacity,
-                         WineImage image,
+                         Image image,
                          String description) {
         Wine wine = new Wine();
         wine.setBrand(brand);
@@ -389,29 +382,29 @@ public class DataInitializer {
         ));
     }
 
-    private void createImage() {
-        wineImageRepository.saveAll(List.of(
-                new WineImage("redwine/1/min.jpg", "redwine/1/max.jpg",
-                        "redwine/1/maximax.jpg"),
-                new WineImage("redwine/2/min.jpg", "redwine/2/max.jpg",
-                        "redwine/2/maximax.jpg"),
-                new WineImage("redwine/3/min.jpg", "redwine/3/max.jpg",
-                        "redwine/3/maximax.jpg"),
-                new WineImage("redwine/4/min.jpg", "redwine/4/max.jpg",
-                        "redwine/4/maximax.jpg"),
-                new WineImage("redwine/5/min.jpg", "redwine/5/max.jpg",
-                "redwine/5/maximax.jpg"),
-                new WineImage("champagne/1/min.jpg", "champagne/1/max.jpg",
-                        "champagne/1/maximax.jpg"),
-                new WineImage("champagne/2/min.jpg", "champagne/2/max.jpg",
-                        "champagne/2/maximax.jpg"),
-                new WineImage("champagne/3/min.jpg", "champagne/3/max.jpg",
-                        "champagne/3/maximax.jpg"),
-                new WineImage("champagne/4/min.jpg", "champagne/4/max.jpg",
-                        "champagne/4/maximax.jpg"),
-                new WineImage("champagne/5/min.jpg", "redwine/5/max.jpg",
-                        "redwine/5/maximax.jpg")));
-    }
+//    private void createImage() {
+//        wineImageRepository.saveAll(List.of(
+//                new WineImage("redwine/1/min.jpg", "redwine/1/max.jpg",
+//                        "redwine/1/maximax.jpg"),
+//                new WineImage("redwine/2/min.jpg", "redwine/2/max.jpg",
+//                        "redwine/2/maximax.jpg"),
+//                new WineImage("redwine/3/min.jpg", "redwine/3/max.jpg",
+//                        "redwine/3/maximax.jpg"),
+//                new WineImage("redwine/4/min.jpg", "redwine/4/max.jpg",
+//                        "redwine/4/maximax.jpg"),
+//                new WineImage("redwine/5/min.jpg", "redwine/5/max.jpg",
+//                        "redwine/5/maximax.jpg"),
+//                new WineImage("champagne/1/min.jpg", "champagne/1/max.jpg",
+//                        "champagne/1/maximax.jpg"),
+//                new WineImage("champagne/2/min.jpg", "champagne/2/max.jpg",
+//                        "champagne/2/maximax.jpg"),
+//                new WineImage("champagne/3/min.jpg", "champagne/3/max.jpg",
+//                        "champagne/3/maximax.jpg"),
+//                new WineImage("champagne/4/min.jpg", "champagne/4/max.jpg",
+//                        "champagne/4/maximax.jpg"),
+//                new WineImage("champagne/5/min.jpg", "redwine/5/max.jpg",
+//                        "redwine/5/maximax.jpg")));
+//    }
 
     private User getUser(String firstName, String lastName, String email,
                          String password, LocalDate birthday,

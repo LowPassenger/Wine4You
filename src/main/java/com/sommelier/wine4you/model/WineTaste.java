@@ -23,10 +23,10 @@ public class WineTaste {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "name_taste")
-    private String nameTasty;
+    private String nameTaste;
 
-    public WineTaste(String nameTasty) {
-        this.nameTasty = nameTasty;
+    public WineTaste(String nameTaste) {
+        this.nameTaste = nameTaste;
     }
 
     @Override
@@ -37,13 +37,13 @@ public class WineTaste {
         WineTaste wineTaste = (WineTaste) o;
 
         if (!Objects.equals(id, wineTaste.id)) return false;
-        return Objects.equals(nameTasty, wineTaste.nameTasty);
+        return Objects.equals(nameTaste, wineTaste.nameTaste);
     }
 
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (nameTasty != null ? nameTasty.hashCode() : 0);
+        result = 31 * result + (nameTaste != null ? nameTaste.hashCode() : 0);
         return result;
     }
 }
