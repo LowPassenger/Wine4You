@@ -151,7 +151,7 @@ public class DataInitializer {
                                 eventRepository.findByNameEvent("Birthday".toUpperCase()).get(),
                                 0.75,
                                 "Asti, Piedmont, Italy - A fruit-driven people pleaser."
-                                        + " to pair with a fruit plate. Or sip on the porch after dinner."),
+                                + " to pair with a fruit plate. Or sip on the porch after dinner."),
                         getWine("Louis Bouillot",
                                 "France",
                                 "Louis Bouillot Perle de Vigne Brut",
@@ -164,8 +164,8 @@ public class DataInitializer {
                                 eventRepository.findByNameEvent("Birthday".toUpperCase()).get(),
                                 0.375,
                                 "Wine & Spirits-Burgundy, France - This is a blend"
-                                        + " focused and clean. The bubbles are ready to take on any"
-                                        + " raw shellfish."),
+                                + " focused and clean. The bubbles are ready to take on any"
+                                + " raw shellfish."),
                         getWine("Cruse",
                                 "France",
                                 "Cruse Brut",
@@ -178,7 +178,7 @@ public class DataInitializer {
                                 eventRepository.findByNameEvent("Birthday".toUpperCase()).get(),
                                 0.75,
                                 "Asti, Piedmont, Italy - A fruit-driven people pleaser."
-                                        + " to pair with a fruit plate. Or sip on the porch after dinner."),
+                                + " to pair with a fruit plate. Or sip on the porch after dinner."),
                         getWine("Albino Armani",
                                 "Italy",
                                 "Armani Prosecco",
@@ -191,7 +191,7 @@ public class DataInitializer {
                                 eventRepository.findByNameEvent("Birthday".toUpperCase()).get(),
                                 0.75,
                                 "Asti, Piedmont, Italy - A fruit-driven people pleaser."
-                                        + " to pair with a fruit plate. Or sip on the porch after dinner."),
+                                + " to pair with a fruit plate. Or sip on the porch after dinner."),
                         getWine("La Vostra",
                                 "Italy",
                                 "La Vostra Prosecco Rose",
