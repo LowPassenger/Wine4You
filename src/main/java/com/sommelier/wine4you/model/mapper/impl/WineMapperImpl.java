@@ -11,6 +11,7 @@ public class WineMapperImpl implements GenericMapper<WineResponseDto, Wine, Wine
     @Override
     public WineResponseDto toDto(Wine wine) {
         WineResponseDto wineResponseDto = new WineResponseDto();
+        wineResponseDto.setId(wine.getId());
         wineResponseDto.setBrand(wine.getBrand());
         wineResponseDto.setCountry(wine.getCountry());
         wineResponseDto.setPrice(wine.getPrice());
