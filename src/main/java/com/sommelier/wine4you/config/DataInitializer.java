@@ -1,17 +1,17 @@
 package com.sommelier.wine4you.config;
 
 import com.sommelier.wine4you.model.Event;
+import com.sommelier.wine4you.model.Image;
 import com.sommelier.wine4you.model.Role;
 import com.sommelier.wine4you.model.User;
 import com.sommelier.wine4you.model.Wine;
-import com.sommelier.wine4you.model.Image;
 import com.sommelier.wine4you.model.WineStyle;
 import com.sommelier.wine4you.model.WineTaste;
 import com.sommelier.wine4you.model.enums.WineType;
 import com.sommelier.wine4you.repository.EventRepository;
+import com.sommelier.wine4you.repository.ImageDbRepository;
 import com.sommelier.wine4you.repository.RoleRepository;
 import com.sommelier.wine4you.repository.UserRepository;
-import com.sommelier.wine4you.repository.WineImageRepository;
 import com.sommelier.wine4you.repository.WineRepository;
 import com.sommelier.wine4you.repository.WineStyleRepository;
 import com.sommelier.wine4you.repository.WineTasteRepository;
@@ -38,7 +38,7 @@ public class DataInitializer {
     private final EventRepository eventRepository;
     private final WineStyleRepository styleRepository;
     private final WineTasteRepository tasteRepository;
-    private final WineImageRepository wineImageRepository;
+    private final ImageDbRepository imageRepository;
 
     @Autowired
     public DataInitializer(UserRepository userRepository,
@@ -47,7 +47,7 @@ public class DataInitializer {
                            PasswordEncoder passwordEncoder,
                            EventRepository eventRepository,
                            WineStyleRepository styleRepository,
-                           WineTasteRepository tasteRepository, WineImageRepository wineImageRepository) {
+                           WineTasteRepository tasteRepository, ImageDbRepository imageRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.wineRepository = wineRepository;
@@ -55,7 +55,7 @@ public class DataInitializer {
         this.eventRepository = eventRepository;
         this.styleRepository = styleRepository;
         this.tasteRepository = tasteRepository;
-        this.wineImageRepository = wineImageRepository;
+        this.imageRepository = imageRepository;
     }
 
     @PostConstruct
@@ -81,11 +81,11 @@ public class DataInitializer {
                                 tasteRepository.findById(5L).get(),
                                 eventRepository.findById(1L).get(),
                                 0.75,
-                                wineImageRepository.findById(1L).get(),///0
+//                                null, ///0
                                 "jJames Suckling-Mendoza, Argentina - " +
                                         "\"Savory sweet tobacco, blackcurrants and some thyme"
-                                        + " and white pepper on the nose. The chunk of powdery"
-                                        + " tannins really grabs your palate, wrapping the fruit"
+//                                        + " and white pepper on the nose. The chunk of powdery"
+//                                        + " tannins really grabs your palate, wrapping the fruit"
                                         + " tightly before a long, savory finish.\""),
                         getWine("Pietramerana",
                                 "Italy",
@@ -98,10 +98,10 @@ public class DataInitializer {
                                 tasteRepository.findById(22L).get(),
                                 eventRepository.findById(1L).get(),//0
                                 0.75,
-                                wineImageRepository.findById(1L).get(),
+//                                imageRepository.findById(1L).get(),
                                 "James Suckling-Italy - Tuscany - Toscana -"
-                                        + " \"This has aromas of raspberries, redcurrants, "
-                                        + "lavender and dried herbs. Some cinnamon and anise,"
+//                                        + " \"This has aromas of raspberries, redcurrants, "
+//                                        + "lavender and dried herbs. Some cinnamon and anise,"
                                         + " too. Medium-bodied with fine, firm tannins. Fragrant"
                                         + " and spicy finish. \""),
                         getWine("URO",
@@ -115,10 +115,10 @@ public class DataInitializer {
                                 tasteRepository.findById(16L).get(),
                                 eventRepository.findById(3L).get(),
                                 0.75,
-                                wineImageRepository.findById(2L).get(),
+//                                imageRepository.findById(2L).get(),
                                 "James Suckling-Toro, Spain - \"Aromas of smoke,"
-                                        + " berry and cracked pepper. Medium to full body, "
-                                        + "round and juicy tannins and a delicious, fruity finish."
+//                                        + " berry and cracked pepper. Medium to full body, "
+//                                        + "round and juicy tannins and a delicious, fruity finish."
                                         + " It's a bigger wine, but the tannins show focus and"
                                         + " softness. 100% tinta de toro.\""),
                         getWine("Meleto",
@@ -132,11 +132,11 @@ public class DataInitializer {
                                 tasteRepository.findById(22L).get(),
                                 eventRepository.findById(1L).get(),
                                 0.75,
-                                wineImageRepository.findById(3L).get(),
+//                                imageRepository.findById(3L).get(),
                                 "James Suckling-Toscana IGT, Tuscany, Italy -"
                                         + " \"A fruity red with plenty of dried-berry, walnut"
-                                        + " and wet-earth character. Medium body, ripe tannins"
-                                        + " and a flavorful finish.\" Perfect to accompany first"
+//                                        + " and wet-earth character. Medium body, ripe tannins"
+//                                        + " and a flavorful finish.\" Perfect to accompany first"
                                         + " courses and grilled red meats and cheeses."),
                         getWine("Altaland",
                                 "Argentina",
@@ -149,10 +149,10 @@ public class DataInitializer {
                                 tasteRepository.findById(14L).get(),
                                 eventRepository.findById(1L).get(),
                                 0.75,
-                                wineImageRepository.findById(4L).get(),
+//                                imageRepository.findById(4L).get(),
                                 "James Suckling-Italy - Tuscany - Toscana -"
-                                        + " \"This has aromas of raspberries, redcurrants, "
-                                        + "lavender and dried herbs. Some cinnamon and anise,"
+//                                        + " \"This has aromas of raspberries, redcurrants, "
+//                                        + "lavender and dried herbs. Some cinnamon and anise,"
                                         + " too. Medium-bodied with fine, firm tannins. Fragrant"
                                         + " and spicy finish. \""),
                         getWine("Marchese dell'Elsa",
@@ -166,9 +166,9 @@ public class DataInitializer {
                                 tasteRepository.findById(27L).get(),
                                 eventRepository.findById(1L).get(),
                                 0.75,
-                                wineImageRepository.findById(5L).get(),
+//                                imageRepository.findById(5L).get(),
                                 "Asti, Piedmont, Italy - A fruit-driven people pleaser."
-                                        + " Hints of peach blossoms and fresh citrus make it a natural"
+//                                        + " Hints of peach blossoms and fresh citrus make it a natural"
                                         + " to pair with a fruit plate. Or sip on the porch after dinner."),
                         getWine("Louis Bouillot",
                                 "France",
@@ -181,11 +181,11 @@ public class DataInitializer {
                                 tasteRepository.findById(30L).get(),
                                 eventRepository.findById(1L).get(),
                                 0.375,
-                                wineImageRepository.findById(6L).get(),
+//                                imageRepository.findById(6L).get(),
                                 "Wine & Spirits-Burgundy, France - This is a blend"
-                                        + " of Chardonnay, Pinot Noir, Aligote and Gamay, aged 12"
-                                        + " months on lees in bottle. It's fragrant with notes of"
-                                        + " toasty lees and chalk, a simple sparkler that feels"
+//                                        + " of Chardonnay, Pinot Noir, Aligote and Gamay, aged 12"
+//                                        + " months on lees in bottle. It's fragrant with notes of"
+//                                        + " toasty lees and chalk, a simple sparkler that feels"
                                         + " focused and clean. The bubbles are ready to take on any"
                                         + " raw shellfish."),
                         getWine("Cruse",
@@ -199,9 +199,9 @@ public class DataInitializer {
                                 tasteRepository.findById(30L).get(),
                                 eventRepository.findById(3L).get(),
                                 0.75,
-                                wineImageRepository.findById(7L).get(),
+//                                imageRepository.findById(7L).get(),
                                 "Asti, Piedmont, Italy - A fruit-driven people pleaser."
-                                        + " Hints of peach blossoms and fresh citrus make it a natural"
+//                                        + " Hints of peach blossoms and fresh citrus make it a natural"
                                         + " to pair with a fruit plate. Or sip on the porch after dinner."),
                         getWine("Albino Armani",
                                 "Italy",
@@ -214,9 +214,9 @@ public class DataInitializer {
                                 tasteRepository.findById(25L).get(),
                                 eventRepository.findById(1L).get(),
                                 0.75,
-                                wineImageRepository.findById(8L).get(),
+//                                imageRepository.findById(8L).get(),
                                 "Asti, Piedmont, Italy - A fruit-driven people pleaser."
-                                        + " Hints of peach blossoms and fresh citrus make it a natural"
+//                                        + " Hints of peach blossoms and fresh citrus make it a natural"
                                         + " to pair with a fruit plate. Or sip on the porch after dinner."),
                         getWine("La Vostra",
                                 "Italy",
@@ -229,10 +229,10 @@ public class DataInitializer {
                                 tasteRepository.findById(7L).get(),
                                 eventRepository.findById(2L).get(),
                                 0.75,
-                                wineImageRepository.findById(9L).get(),
+//                                imageRepository.findById(9L).get(),
                                 "Beverage Dynamics-Italy - \"Slight cherry"
-                                        + " and strawberry notes on the nose and palate drive"
-                                        + " this plush sparkler. Sweet, ripe peach flavor and a"
+//                                        + " and strawberry notes on the nose and palate drive"
+//                                        + " this plush sparkler. Sweet, ripe peach flavor and a"
                                         + " zesty character give this wine structure and fun.\"")
 
                 )
@@ -281,7 +281,7 @@ public class DataInitializer {
                          WineTaste wineTaste,
                          Event event,
                          double capacity,
-                         Image image,
+//                         Image image,
                          String description) {
         Wine wine = new Wine();
         wine.setBrand(brand);
@@ -295,7 +295,7 @@ public class DataInitializer {
         wine.setWineTaste(wineTaste);
         wine.setEvent(event);
         wine.setCapacity(capacity);
-        wine.setImage(image);
+//        wine.setImages(Set.of(image));
         wine.setDescription(description);
         return wine;
     }

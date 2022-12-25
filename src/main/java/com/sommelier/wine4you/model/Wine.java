@@ -1,16 +1,17 @@
 package com.sommelier.wine4you.model;
 
 import com.sommelier.wine4you.model.enums.WineType;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -40,9 +41,8 @@ public class Wine extends Product {
 
     @Column(name = "capacity")
     private double capacity;
-    @OneToOne(mappedBy = "wine", cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
-    private Image image;
+    @OneToMany(mappedBy = "wine", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Image> images = new HashSet<>();
     private String description;
 
 
@@ -75,7 +75,7 @@ public class Wine extends Product {
         if (event != wine.event) {
             return false;
         }
-        if (!Objects.equals(image, wine.image)) {
+        if (!Objects.equals(images, wine.images)) {
             return false;
         }
         return Objects.equals(description, wine.description);
@@ -92,7 +92,7 @@ public class Wine extends Product {
         temp = Double.doubleToLongBits(capacity);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (event != null ? event.hashCode() : 0);
-        result = 31 * result + (image != null ? image.hashCode() : 0);
+        result = 31 * result + (images != null ? images.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         return result;
     }
@@ -106,7 +106,7 @@ public class Wine extends Product {
                 + ", wineTaste=" + wineTaste
                 + ", capacity=" + capacity
                 + ", event=" + event
-                + ", image=" + image
+                + ", image=" + images
                 + ", description='" + description + '\''
                 + '}';
     }
