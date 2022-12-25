@@ -6,7 +6,9 @@ import com.sommelier.wine4you.repository.EventRepository;
 import com.sommelier.wine4you.service.EventService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class EventServiceImpl implements EventService {
     private final EventRepository eventRepository;
 
@@ -21,7 +23,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Event findById(Long id) {
+    public Event getById(Long id) {
         return eventRepository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("Event", "id", String.valueOf(id)));
     }

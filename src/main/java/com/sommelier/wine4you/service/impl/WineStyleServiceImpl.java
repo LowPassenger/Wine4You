@@ -6,7 +6,9 @@ import com.sommelier.wine4you.repository.WineStyleRepository;
 import com.sommelier.wine4you.service.WineStyleService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class WineStyleServiceImpl implements WineStyleService {
     private final WineStyleRepository wineStyleRepository;
 
@@ -21,7 +23,7 @@ public class WineStyleServiceImpl implements WineStyleService {
     }
 
     @Override
-    public WineStyle findById(Long id) {
+    public WineStyle getById(Long id) {
         return wineStyleRepository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("WineStyle", "id", String.valueOf(id)));
     }

@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.server.ResponseStatusException;
 
 @Log4j2
 @Service
@@ -35,7 +34,7 @@ public class ImageServiceImpl implements ImageService {
             );
             Image dbImage = new Image();
             dbImage.setWine(wine);
-            dbImage.setName(multipartImage.getName());
+            dbImage.setName(multipartImage.getOriginalFilename());
             dbImage.setType(multipartImage.getContentType());
             dbImage.setContent(multipartImage.getBytes());
             return imageDbRepository.save(dbImage);

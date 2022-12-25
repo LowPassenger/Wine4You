@@ -6,10 +6,9 @@ import com.sommelier.wine4you.model.dto.UserSignUpDto;
 import com.sommelier.wine4you.repository.UserRepository;
 import com.sommelier.wine4you.security.jwt.JwtAuthResponse;
 import com.sommelier.wine4you.service.AuthenticationService;
-import javax.validation.Valid;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
@@ -46,10 +45,10 @@ public class AuthController {
     @PostMapping("sign-up")
     public ResponseEntity<String> registerUser(@Valid @RequestBody UserSignUpDto signUpDto) {
         if (userRepository.existsByPhone(signUpDto.getPhone())) {
-            return new ResponseEntity<>("Phone is ready taken!", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Phone is already taken!", HttpStatus.BAD_REQUEST);
         }
         if (userRepository.existsByEmail(signUpDto.getEmail())) {
-            return new ResponseEntity<>("Email is ready taken!", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Email is already taken!", HttpStatus.BAD_REQUEST);
         }
 
         authenticationService.registerUser(signUpDto);
