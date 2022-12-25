@@ -76,9 +76,9 @@ public class DataInitializer {
                                 true,
                                 "Cabernet Sauvignon",
                                 WineType.RED,
-                                styleRepository.findById(6L).get(),
-                                tasteRepository.findById(5L).get(),
-                                eventRepository.findById(1L).get(),
+                                styleRepository.findByNameStyle("Elegant".toUpperCase()).get(),
+                                tasteRepository.findByNameTaste("Cherry".toUpperCase()).get(),
+                                eventRepository.findByNameEvent("Birthday".toUpperCase()).get(),
                                 0.75,
                                 "jJames Suckling-Mendoza, Argentina - "
                                         + "\"Savory sweet tobacco, blackcurrants and some thyme"
@@ -90,9 +90,9 @@ public class DataInitializer {
                                 true,
                                 "Sangiovese Toscana IGT",
                                 WineType.RED,
-                                styleRepository.findById(5L).get(),
-                                tasteRepository.findById(22L).get(),
-                                eventRepository.findById(1L).get(),//0
+                                styleRepository.findByNameStyle("Elegant".toUpperCase()).get(),
+                                tasteRepository.findByNameTaste("Cherry".toUpperCase()).get(),
+                                eventRepository.findByNameEvent("Birthday".toUpperCase()).get(),
                                 0.75,
                                 "James Suckling-Italy - Tuscany - Toscana -"
                                         + " too. Medium-bodied with fine, firm tannins. Fragrant"
@@ -104,9 +104,9 @@ public class DataInitializer {
                                 true,
                                 "Toro La Enfermera Tempranillo",
                                 WineType.RED,
-                                styleRepository.findById(6L).get(),
-                                tasteRepository.findById(16L).get(),
-                                eventRepository.findById(3L).get(),
+                                styleRepository.findByNameStyle("Elegant".toUpperCase()).get(),
+                                tasteRepository.findByNameTaste("Cherry".toUpperCase()).get(),
+                                eventRepository.findByNameEvent("Birthday".toUpperCase()).get(),
                                 0.75,
                                 "James Suckling-Toro, Spain - \"Aromas of smoke,"
                                         + " It's a bigger wine, but the tannins show focus and"
@@ -118,9 +118,9 @@ public class DataInitializer {
                                 false,
                                 "Borgaio Rosso di Toscana",
                                 WineType.RED,
-                                styleRepository.findById(5L).get(),
-                                tasteRepository.findById(22L).get(),
-                                eventRepository.findById(1L).get(),
+                                styleRepository.findByNameStyle("Elegant".toUpperCase()).get(),
+                                tasteRepository.findByNameTaste("Cherry".toUpperCase()).get(),
+                                eventRepository.findByNameEvent("Birthday".toUpperCase()).get(),
                                 0.75,
                                 "James Suckling-Toscana IGT, Tuscany, Italy -"
                                         + " \"A fruity red with plenty of dried-berry, walnut"
@@ -132,9 +132,9 @@ public class DataInitializer {
                                 true,
                                 "Malbec Mendoza",
                                 WineType.RED,
-                                styleRepository.findById(6L).get(),
-                                tasteRepository.findById(14L).get(),
-                                eventRepository.findById(1L).get(),
+                                styleRepository.findByNameStyle("Elegant".toUpperCase()).get(),
+                                tasteRepository.findByNameTaste("Cherry".toUpperCase()).get(),
+                                eventRepository.findByNameEvent("Birthday".toUpperCase()).get(),
                                 0.75,
                                 "James Suckling-Italy - Tuscany - Toscana -"
                                         + " too. Medium-bodied with fine, firm tannins. Fragrant"
@@ -146,12 +146,12 @@ public class DataInitializer {
                                 true,
                                 "Moscato d'Asti",
                                 WineType.CHAMPAGNE_SPARKLING,
-                                styleRepository.findById(4L).get(),
-                                tasteRepository.findById(27L).get(),
-                                eventRepository.findById(1L).get(),
+                                styleRepository.findByNameStyle("Elegant".toUpperCase()).get(),
+                                tasteRepository.findByNameTaste("Cherry".toUpperCase()).get(),
+                                eventRepository.findByNameEvent("Birthday".toUpperCase()).get(),
                                 0.75,
                                 "Asti, Piedmont, Italy - A fruit-driven people pleaser."
-                                + " to pair with a fruit plate. Or sip on the porch after dinner."),
+                                        + " to pair with a fruit plate. Or sip on the porch after dinner."),
                         getWine("Louis Bouillot",
                                 "France",
                                 "Louis Bouillot Perle de Vigne Brut",
@@ -159,13 +159,13 @@ public class DataInitializer {
                                 true,
                                 "Perle de Vigne",
                                 WineType.CHAMPAGNE_SPARKLING,
-                                styleRepository.findById(6L).get(),
-                                tasteRepository.findById(30L).get(),
-                                eventRepository.findById(1L).get(),
+                                styleRepository.findByNameStyle("Elegant".toUpperCase()).get(),
+                                tasteRepository.findByNameTaste("Cherry".toUpperCase()).get(),
+                                eventRepository.findByNameEvent("Birthday".toUpperCase()).get(),
                                 0.375,
                                 "Wine & Spirits-Burgundy, France - This is a blend"
-                                + " focused and clean. The bubbles are ready to take on any"
-                                + " raw shellfish."),
+                                        + " focused and clean. The bubbles are ready to take on any"
+                                        + " raw shellfish."),
                         getWine("Cruse",
                                 "France",
                                 "Cruse Brut",
@@ -173,12 +173,12 @@ public class DataInitializer {
                                 true,
                                 "Brut",
                                 WineType.CHAMPAGNE_SPARKLING,
-                                styleRepository.findById(2L).get(),
-                                tasteRepository.findById(30L).get(),
-                                eventRepository.findById(3L).get(),
+                                styleRepository.findByNameStyle("Elegant".toUpperCase()).get(),
+                                tasteRepository.findByNameTaste("Cherry".toUpperCase()).get(),
+                                eventRepository.findByNameEvent("Birthday".toUpperCase()).get(),
                                 0.75,
                                 "Asti, Piedmont, Italy - A fruit-driven people pleaser."
-                                + " to pair with a fruit plate. Or sip on the porch after dinner."),
+                                        + " to pair with a fruit plate. Or sip on the porch after dinner."),
                         getWine("Albino Armani",
                                 "Italy",
                                 "Armani Prosecco",
@@ -186,12 +186,12 @@ public class DataInitializer {
                                 true,
                                 "Prosecco",
                                 WineType.CHAMPAGNE_SPARKLING,
-                                styleRepository.findById(6L).get(),
-                                tasteRepository.findById(25L).get(),
-                                eventRepository.findById(1L).get(),
+                                styleRepository.findByNameStyle("Elegant".toUpperCase()).get(),
+                                tasteRepository.findByNameTaste("Cherry".toUpperCase()).get(),
+                                eventRepository.findByNameEvent("Birthday".toUpperCase()).get(),
                                 0.75,
                                 "Asti, Piedmont, Italy - A fruit-driven people pleaser."
-                                + " to pair with a fruit plate. Or sip on the porch after dinner."),
+                                        + " to pair with a fruit plate. Or sip on the porch after dinner."),
                         getWine("La Vostra",
                                 "Italy",
                                 "La Vostra Prosecco Rose",
@@ -199,9 +199,9 @@ public class DataInitializer {
                                 true,
                                 "Prosecco Rose",
                                 WineType.CHAMPAGNE_SPARKLING,
-                                styleRepository.findById(10L).get(),
-                                tasteRepository.findById(7L).get(),
-                                eventRepository.findById(2L).get(),
+                                styleRepository.findByNameStyle("Elegant".toUpperCase()).get(),
+                                tasteRepository.findByNameTaste("Cherry".toUpperCase()).get(),
+                                eventRepository.findByNameEvent("Birthday".toUpperCase()).get(),
                                 0.75,
                                 "Beverage Dynamics-Italy - \"Slight cherry"
                                         + " zesty character give this wine structure and fun.\"")
@@ -254,12 +254,12 @@ public class DataInitializer {
                          double capacity,
                          String description) {
         Wine wine = new Wine();
-        wine.setBrand(brand);
-        wine.setCountry(country);
+        wine.setBrand(brand.toUpperCase());
+        wine.setCountry(country.toUpperCase());
         wine.setTitle(title);
         wine.setPrice(price);
         wine.setInStock(inStock);
-        wine.setName(name);
+        wine.setName(name.toUpperCase());
         wine.setWineType(wineType);
         wine.setWineStyle(wineStyle);
         wine.setWineTaste(wineTaste);
@@ -271,84 +271,102 @@ public class DataInitializer {
 
     private void createEvent() {
         eventRepository.saveAll(List.of(
-                new Event("New year"),
-                new Event("Party"),
-                new Event("Birthday"),
-                new Event("Corporate event")));
+                getEvent("New year"),
+                getEvent("Party"),
+                getEvent("Birthday"),
+                getEvent("Corporate event")));
+    }
+
+    private Event getEvent(String name) {
+        Event event = new Event();
+        event.setNameEvent(name.toUpperCase());
+        return event;
     }
 
     private void createWineStyle() {
         styleRepository.saveAll(List.of(
-                new WineStyle("Oak"),
-                new WineStyle("Brut"),
-                new WineStyle("Dry"),
-                new WineStyle("Semi sweet"),
-                new WineStyle("Sweet"),
-                new WineStyle("Concentrated"),
-                new WineStyle("Elegant"),
-                new WineStyle("Intense"),
-                new WineStyle("Crisp"),
-                new WineStyle("Off-dry"),
-                new WineStyle("Fresh"),
-                new WineStyle("Fruity")
+                getStyle("Oak"),
+                getStyle("Brut"),
+                getStyle("Dry"),
+                getStyle("Semi sweet"),
+                getStyle("Sweet"),
+                getStyle("Concentrated"),
+                getStyle("Elegant"),
+                getStyle("Intense"),
+                getStyle("Crisp"),
+                getStyle("Off-dry"),
+                getStyle("Fresh"),
+                getStyle("Fruity")
         ));
+    }
+
+    private WineStyle getStyle(String name) {
+        WineStyle style = new WineStyle();
+        style.setNameStyle(name.toUpperCase());
+        return style;
     }
 
     private void createWineTaste() {
         tasteRepository.saveAll(List.of(
-                new WineTaste("Tropical"),
-                new WineTaste("Blackberry"),
-                new WineTaste("Chocolate"),
-                new WineTaste("Vanilla"),
-                new WineTaste("Dried Cherry"),
-                new WineTaste("Black Currant"),
-                new WineTaste("Cherry"),
-                new WineTaste("Strawberry"),
-                new WineTaste("Black Fruit"),
-                new WineTaste("Spice"),
-                new WineTaste("Red Berry"),
-                new WineTaste("Cranberry"),
-                new WineTaste("Currant"),
-                new WineTaste("Dark Berry"),
-                new WineTaste("Red Fruit"),
-                new WineTaste("Violet"),
-                new WineTaste("Plum"),
-                new WineTaste("Licorice"),
-                new WineTaste("Black Cherry"),
-                new WineTaste("Sage"),
-                new WineTaste("Herb"),
-                new WineTaste("Butter"),
-                new WineTaste("Pear"),
-                new WineTaste("Passionfruit"),
-                new WineTaste("Gooseberry"),
-                new WineTaste("Citrus"),
-                new WineTaste("Apricot"),
-                new WineTaste("Stone Fruit"),
-                new WineTaste("Peach"),
-                new WineTaste("Melon"),
-                new WineTaste("Almond"),
-                new WineTaste("Apple"),
-                new WineTaste("Mango"),
-                new WineTaste("Lime"),
-                new WineTaste("Floral"),
-                new WineTaste("Mineral"),
-                new WineTaste("White Peach"),
-                new WineTaste("Fig"),
-                new WineTaste("White Fruit"),
-                new WineTaste("Toast"),
-                new WineTaste("Green Apple"),
-                new WineTaste("Red Cherry"),
-                new WineTaste("Berry"),
-                new WineTaste("Fruity"),
-                new WineTaste("Raspberry"),
-                new WineTaste("Cassis"),
-                new WineTaste("Earth"),
-                new WineTaste("Coconut"),
-                new WineTaste("Cinnamon"),
-                new WineTaste("Pepper"),
-                new WineTaste("Mulberry"),
-                new WineTaste("Tobacco")
+                getTaste("Tropical"),
+                getTaste("Blackberry"),
+                getTaste("Chocolate"),
+                getTaste("Vanilla"),
+                getTaste("Dried Cherry"),
+                getTaste("Black Currant"),
+                getTaste("Cherry"),
+                getTaste("Strawberry"),
+                getTaste("Black Fruit"),
+                getTaste("Spice"),
+                getTaste("Red Berry"),
+                getTaste("Cranberry"),
+                getTaste("Currant"),
+                getTaste("Dark Berry"),
+                getTaste("Red Fruit"),
+                getTaste("Violet"),
+                getTaste("Plum"),
+                getTaste("Licorice"),
+                getTaste("Black Cherry"),
+                getTaste("Sage"),
+                getTaste("Herb"),
+                getTaste("Butter"),
+                getTaste("Pear"),
+                getTaste("Passionfruit"),
+                getTaste("Gooseberry"),
+                getTaste("Citrus"),
+                getTaste("Apricot"),
+                getTaste("Stone Fruit"),
+                getTaste("Peach"),
+                getTaste("Melon"),
+                getTaste("Almond"),
+                getTaste("Apple"),
+                getTaste("Mango"),
+                getTaste("Lime"),
+                getTaste("Floral"),
+                getTaste("Mineral"),
+                getTaste("White Peach"),
+                getTaste("Fig"),
+                getTaste("White Fruit"),
+                getTaste("Toast"),
+                getTaste("Green Apple"),
+                getTaste("Red Cherry"),
+                getTaste("Berry"),
+                getTaste("Fruity"),
+                getTaste("Raspberry"),
+                getTaste("Cassis"),
+                getTaste("Earth"),
+                getTaste("Coconut"),
+                getTaste("Cinnamon"),
+                getTaste("Pepper"),
+                getTaste("Mulberry"),
+                getTaste("Tobacco")
         ));
+    }
+
+    private WineTaste getTaste(String name) {
+        WineTaste taste = new WineTaste();
+        taste.setNameTaste(name.toUpperCase());
+        return taste;
     }
 
     private User getUser(String firstName, String lastName, String email,

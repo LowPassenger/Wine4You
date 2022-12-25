@@ -34,7 +34,7 @@ public class ImageServiceImpl implements ImageService {
             );
             Image dbImage = new Image();
             dbImage.setWine(wine);
-            dbImage.setName(multipartImage.getName());
+            dbImage.setName(multipartImage.getOriginalFilename());
             dbImage.setType(multipartImage.getContentType());
             dbImage.setContent(multipartImage.getBytes());
             return imageDbRepository.save(dbImage);

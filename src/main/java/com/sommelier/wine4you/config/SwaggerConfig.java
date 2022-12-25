@@ -31,8 +31,8 @@ public class SwaggerConfig {
                 "1",
                 "Terms of service",
                 new Contact("Denys.Shl", "https://www.linkedin.com/in/denys-shlemko/", "denys.shl@gmail.com"),
-                "License of API @2022",
-                "API license URL http://",
+                "License @2022",
+                "",//API license URL http://",
                 Collections.emptyList()
         );
     }

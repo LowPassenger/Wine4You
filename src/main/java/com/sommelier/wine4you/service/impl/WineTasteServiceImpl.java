@@ -6,7 +6,9 @@ import com.sommelier.wine4you.repository.WineTasteRepository;
 import com.sommelier.wine4you.service.WineTasteService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class WineTasteServiceImpl implements WineTasteService {
     private final WineTasteRepository wineTasteRepository;
 

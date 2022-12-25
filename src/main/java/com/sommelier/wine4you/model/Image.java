@@ -30,7 +30,7 @@ public class Image {
     private String type;
 
     @Lob
-    @Column(name = "image")
+    @Column(name = "image", unique = false, nullable = false, length = 100000)
     private byte[] content;
     @ManyToOne(targetEntity = Wine.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "wine_id", nullable = false)
