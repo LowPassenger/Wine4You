@@ -1,9 +1,11 @@
 package com.sommelier.wine4you.controller;
 
+import com.sommelier.wine4you.model.Image;
 import com.sommelier.wine4you.model.WineResponse;
 import com.sommelier.wine4you.model.dto.WineRequestDto;
 import com.sommelier.wine4you.model.dto.WineResponseDto;
 import com.sommelier.wine4you.model.mapper.impl.WineMapperImpl;
+import com.sommelier.wine4you.service.ImageService;
 import com.sommelier.wine4you.service.WineService;
 import com.sommelier.wine4you.utils.AppConstants;
 import io.swagger.annotations.Api;
@@ -13,7 +15,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,6 +30,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 
 @Api(value = "Rest APIs for Wines resources")
 @RestController
@@ -32,19 +39,22 @@ import org.springframework.web.bind.annotation.RestController;
 public class WineController {
     private final WineService wineService;
     private final WineMapperImpl wineMapper;
+    private final ImageService imageService;
 
     @Autowired
-    public WineController(WineService wineService, WineMapperImpl wineMapper) {
+    public WineController(WineService wineService,
+                          WineMapperImpl wineMapper,
+                          ImageService imageService) {
         this.wineService = wineService;
         this.wineMapper = wineMapper;
+        this.imageService = imageService;
     }
 
     @ApiOperation(value = "Create Wine REST API")
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<WineResponseDto> create(WineRequestDto wineRequestDto) {
-        return new ResponseEntity<>(wineMapper.toDto(wineService
-                .create(wineMapper.toModel(wineRequestDto))), HttpStatus.CREATED);
+        return new ResponseEntity<>(wineMapper.toDto(wineService.create(wineMapper.toModel(wineRequestDto))), HttpStatus.CREATED);
     }
 
     @ApiOperation(value = "Get All Wines REST API")
@@ -78,10 +88,8 @@ public class WineController {
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<WineResponseDto> update(@PathVariable("id") Long id,
-                                                  @Valid @RequestBody
-                                                  WineRequestDto wineRequestDto) {
-        return ResponseEntity.ok(wineMapper.toDto(wineService.update(id,
-                wineMapper.toModel(wineRequestDto))));
+                                                  @Valid @RequestBody WineRequestDto wineRequestDto) {
+        return ResponseEntity.ok(wineMapper.toDto(wineService.update(id, wineMapper.toModel(wineRequestDto))));
     }
 
     @ApiOperation(value = "Delete Wine by 'Id' REST API")
@@ -166,5 +174,15 @@ public class WineController {
                 .map(wine -> wineMapper.toDto(wine))
                 .collect(Collectors.toList());
         return ResponseEntity.ok(wineResponseDtos);
+    }
+
+    @PostMapping("images")
+    Long uploadImage(@RequestParam MultipartFile multipartImage) throws Exception {
+        return imageService.create(multipartImage);
+    }
+
+    @GetMapping(value = "{wineId}/images/{imageId}", produces = MediaType.IMAGE_JPEG_VALUE)
+    Resource downloadImage(@PathVariable Long wineId, @PathVariable Long imageId) {
+        return new ByteArrayResource(imageService.getById(wineId, imageId));
     }
 }

@@ -1,7 +1,7 @@
 package com.sommelier.wine4you.model.dto;
 
 import com.sommelier.wine4you.model.Event;
-import com.sommelier.wine4you.model.WineImage;
+import com.sommelier.wine4you.model.Image;
 import com.sommelier.wine4you.model.WineStyle;
 import com.sommelier.wine4you.model.WineTaste;
 import com.sommelier.wine4you.model.enums.WineType;
@@ -22,6 +22,6 @@ public class WineResponseDto {
     private WineTaste wineTaste;
     private Event event;
     private double capacity;
-    private WineImage image;
+    private Image image;
     private String description;
 }

@@ -41,7 +41,7 @@ public class Wine extends Product {
     private double capacity;
     @OneToOne(mappedBy = "wine", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
-    private WineImage image;
+    private Image image;
     private String description;
 
     @Override
