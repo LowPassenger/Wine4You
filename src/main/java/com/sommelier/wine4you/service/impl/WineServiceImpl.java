@@ -83,11 +83,20 @@ public class WineServiceImpl implements WineService {
         Page<Wine> wines = wineRepository.findAll(pageable);
         List<Wine> wineList = wines.getContent();
 
-        List<WineResponseDto> content = wineList.stream()
+        List<WineResponseDto> content = wineList
+                .stream()
                 .map(wineMapper::toDto)
                 .collect(Collectors.toList());
 
         return getWineResponse(wines, content);
+    }
+
+    @Override
+    public List<WineResponseDto> getAll() {
+        return wineRepository.findAll()
+                .stream()
+                .map(wineMapper::toDto)
+                .collect(Collectors.toList());
     }
 
     private static WineResponse getWineResponse(Page<Wine> wines, List<WineResponseDto> content) {
@@ -162,6 +171,16 @@ public class WineServiceImpl implements WineService {
         );
         return wineRepository.findByWineTaste(wineTaste).orElseThrow(
                 () -> new ResourceNotFoundException("Wine", "Taste", taste)
+        );
+    }
+
+    @Override
+    public List<Wine> getByWinesAllFilters(WineType wineType, WineStyle wineStyle,
+                                           Event event, String brand, String country,
+                                           BigDecimal min, BigDecimal max) {
+        return wineRepository.findByWineTypeAndWineStyleAndEventAndBrandAndCountryAndPriceBetween(
+                wineType, wineStyle, event, brand, country, min, max).orElseThrow(
+                    () -> new ResourceNotFoundException("Wine", "AllFilters", "AllFilters")
         );
     }
 }

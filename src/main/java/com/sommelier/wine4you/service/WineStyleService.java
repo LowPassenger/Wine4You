@@ -14,5 +14,5 @@ public interface WineStyleService {
 
     void deleteById(Long id);
 
-    WineStyle findByTasteName(String name);
+    WineStyle getdByStyleName(String name);
 }

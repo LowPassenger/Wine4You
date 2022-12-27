@@ -28,4 +28,8 @@ public interface WineRepository extends JpaRepository<Wine, Long> {
     Optional<List<Wine>> findByWineType(WineType wineType);
 
     Optional<List<Wine>> findByWineTaste(WineTaste wineTaste);
+
+    Optional<List<Wine>> findByWineTypeAndWineStyleAndEventAndBrandAndCountryAndPriceBetween(
+            WineType wineType, WineStyle wineStyle, Event event, String brand, String country,
+            BigDecimal min, BigDecimal max);
 }

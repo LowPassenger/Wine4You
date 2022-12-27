@@ -56,7 +56,13 @@ public class WineController {
     }
 
     @ApiOperation(value = "Get All Wines REST API")
-    @GetMapping
+    @GetMapping()
+    public ResponseEntity<List<WineResponseDto>> getWines() {
+        return ResponseEntity.ok(wineService.getAll());
+    }
+
+    @ApiOperation(value = "Get All Wines REST API")
+    @GetMapping("/sorted-pages")
     public ResponseEntity<WineResponse> getAll(
             @RequestParam(
                     value = "pageNo",
@@ -188,7 +194,6 @@ public class WineController {
     }
 
     @PostMapping("{wineId}/images")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> uploadImage(@PathVariable Long wineId,
                                               @RequestParam("image") MultipartFile multipartImage) {
         imageService.create(wineId, multipartImage);
