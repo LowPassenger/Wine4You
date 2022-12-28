@@ -14,9 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,7 +26,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 @Api(value = "Rest APIs for Wines resources")
 @RestController
@@ -56,7 +53,13 @@ public class WineController {
     }
 
     @ApiOperation(value = "Get All Wines REST API")
-    @GetMapping
+    @GetMapping()
+    public ResponseEntity<List<WineResponseDto>> getWines() {
+        return ResponseEntity.ok(wineService.getAll());
+    }
+
+    @ApiOperation(value = "Get All Wines REST API")
+    @GetMapping("/sorted-pages")
     public ResponseEntity<WineResponse> getAll(
             @RequestParam(
                     value = "pageNo",
@@ -185,20 +188,5 @@ public class WineController {
                 .map(wine -> wineMapper.toDto(wine))
                 .collect(Collectors.toList());
         return ResponseEntity.ok(wineResponseDtos);
-    }
-
-    @PostMapping("{wineId}/images")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<String> uploadImage(@PathVariable Long wineId,
-                                              @RequestParam("image") MultipartFile multipartImage) {
-        imageService.create(wineId, multipartImage);
-        return ResponseEntity.ok("Image uploaded successfully: "
-                + multipartImage.getOriginalFilename());
-    }
-
-    @GetMapping(value = "{wineId}/images/{imageId}", produces = MediaType.IMAGE_JPEG_VALUE)
-    public byte[] downloadImage(@PathVariable Long wineId,
-                                @PathVariable Long imageId) {
-        return new ByteArrayResource(imageService.getById(wineId, imageId)).getByteArray();
     }
 }

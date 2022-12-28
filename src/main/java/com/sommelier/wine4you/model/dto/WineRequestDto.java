@@ -6,7 +6,7 @@ import com.sommelier.wine4you.model.WineStyle;
 import com.sommelier.wine4you.model.WineTaste;
 import com.sommelier.wine4you.model.enums.WineType;
 import java.math.BigDecimal;
-import java.util.Set;
+import java.util.List;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -30,6 +30,6 @@ public class WineRequestDto {
     private Event event;
     private WineType wineType;
     private double capacity;
-    private Set<Image> images;
+    private List<Image> images;
     private String description;
 }

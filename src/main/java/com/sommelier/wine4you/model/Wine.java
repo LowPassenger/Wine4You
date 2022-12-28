@@ -1,14 +1,15 @@
 package com.sommelier.wine4you.model;
 
 import com.sommelier.wine4you.model.enums.WineType;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -41,8 +42,11 @@ public class Wine extends Product {
 
     @Column(name = "capacity")
     private double capacity;
-    @OneToMany(mappedBy = "wine", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Image> images = new HashSet<>();
+    @OneToMany(mappedBy = "wine",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY)
+    private List<Image> images = new ArrayList<>();
     private String description;
 
     @Override

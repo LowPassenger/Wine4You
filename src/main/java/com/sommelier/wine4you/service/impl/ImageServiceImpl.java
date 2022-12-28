@@ -8,6 +8,7 @@ import com.sommelier.wine4you.repository.ImageDbRepository;
 import com.sommelier.wine4you.repository.WineRepository;
 import com.sommelier.wine4you.service.ImageService;
 import java.io.IOException;
+import java.util.List;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,6 +38,8 @@ public class ImageServiceImpl implements ImageService {
             dbImage.setName(multipartImage.getOriginalFilename());
             dbImage.setType(multipartImage.getContentType());
             dbImage.setContent(multipartImage.getBytes());
+            dbImage.setUrlPath("api/v1/wines/" + wineId
+                    + "/images/" + multipartImage.getOriginalFilename());
             return imageDbRepository.save(dbImage);
         } catch (IOException e) {
             throw new RuntimeException("Can`t save image to database", e);
@@ -70,5 +73,10 @@ public class ImageServiceImpl implements ImageService {
         }
         imageDbRepository.delete(image);
         log.info("Successfully, delete image for wine by id {}", imageId);
+    }
+
+    @Override
+    public List<Image> getAllByWineId(Long wineId) {
+        return imageDbRepository.findAllByWineId(wineId);
     }
 }

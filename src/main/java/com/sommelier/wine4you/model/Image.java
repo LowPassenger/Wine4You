@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.Getter;
@@ -29,7 +28,9 @@ public class Image {
     @Column(name = "type")
     private String type;
 
-    @Lob
+    @Column(name = "url_path")
+    private String urlPath;
+
     @Column(name = "image", unique = false, nullable = false, length = 100000)
     private byte[] content;
     @ManyToOne(targetEntity = Wine.class, fetch = FetchType.LAZY)

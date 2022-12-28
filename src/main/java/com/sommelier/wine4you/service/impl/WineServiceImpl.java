@@ -10,6 +10,7 @@ import com.sommelier.wine4you.model.dto.WineResponseDto;
 import com.sommelier.wine4you.model.enums.WineType;
 import com.sommelier.wine4you.model.mapper.impl.WineMapperImpl;
 import com.sommelier.wine4you.repository.EventRepository;
+import com.sommelier.wine4you.repository.ImageDbRepository;
 import com.sommelier.wine4you.repository.WineRepository;
 import com.sommelier.wine4you.repository.WineStyleRepository;
 import com.sommelier.wine4you.repository.WineTasteRepository;
@@ -32,17 +33,21 @@ public class WineServiceImpl implements WineService {
     private final EventRepository eventRepository;
     private final WineStyleRepository styleRepository;
     private final WineTasteRepository tasteRepository;
+    private final ImageDbRepository imageDbRepository;
     private final WineMapperImpl wineMapper;
 
     @Autowired
     public WineServiceImpl(WineRepository wineRepository,
                            EventRepository eventRepository,
                            WineStyleRepository styleRepository,
-                           WineTasteRepository tasteRepository, WineMapperImpl wineMapper) {
+                           WineTasteRepository tasteRepository,
+                           ImageDbRepository imageDbRepository,
+                           WineMapperImpl wineMapper) {
         this.wineRepository = wineRepository;
         this.styleRepository = styleRepository;
         this.eventRepository = eventRepository;
         this.tasteRepository = tasteRepository;
+        this.imageDbRepository = imageDbRepository;
         this.wineMapper = wineMapper;
     }
 
@@ -65,15 +70,6 @@ public class WineServiceImpl implements WineService {
     }
 
     @Override
-    public void deleteById(Long id) {
-        Wine wine = wineRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("Wine", "id", String.valueOf(id))
-        );
-        wineRepository.delete(wine);
-        log.info("Successfully, delete wine by id {}", id);
-    }
-
-    @Override
     public WineResponse getAll(int pageNo, int pageSize, String sortBy, String sortDir) {
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name())
                 ? Sort.by(sortBy).ascending()
@@ -90,6 +86,23 @@ public class WineServiceImpl implements WineService {
         return getWineResponse(wines, content);
     }
 
+    @Override
+    public List<WineResponseDto> getAll() {
+        return wineRepository.findAll()
+                .stream()
+                .map(wineMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        Wine wine = wineRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Wine", "id", String.valueOf(id))
+        );
+        wineRepository.delete(wine);
+        log.info("Successfully, delete wine by id {}", id);
+    }
+
     private static WineResponse getWineResponse(Page<Wine> wines, List<WineResponseDto> content) {
         WineResponse wineResponse = new WineResponse();
         wineResponse.setContent(content);
@@ -103,13 +116,13 @@ public class WineServiceImpl implements WineService {
 
     @Override
     public List<Wine> getAllByBrand(String brand) {
-        return wineRepository.findByBrand(brand).orElseThrow(
+        return wineRepository.findByBrand(brand.toUpperCase()).orElseThrow(
                 () -> new ResourceNotFoundException("Wine", "Brand", brand));
     }
 
     @Override
     public List<Wine> getAllByName(String name) {
-        return wineRepository.findByName(name).orElseThrow(
+        return wineRepository.findByName(name.toUpperCase()).orElseThrow(
                 () -> new ResourceNotFoundException("Wine", "Name", name));
     }
 
@@ -124,14 +137,14 @@ public class WineServiceImpl implements WineService {
 
     @Override
     public List<Wine> getByCountry(String country) {
-        return wineRepository.findByCountry(country).orElseThrow(
+        return wineRepository.findByCountry(country.toUpperCase()).orElseThrow(
                 () -> new ResourceNotFoundException("Wine", "Country", country)
         );
     }
 
     @Override
     public List<Wine> getByEvent(String event) {
-        Event findEvent = eventRepository.findByNameEvent(event).orElseThrow(
+        Event findEvent = eventRepository.findByNameEvent(event.toUpperCase()).orElseThrow(
                 () -> new ResourceNotFoundException("Event", "EventName", event)
         );
         return wineRepository.findByEvent(findEvent).orElseThrow(
@@ -140,7 +153,7 @@ public class WineServiceImpl implements WineService {
 
     @Override
     public List<Wine> getByWineStyle(String style) {
-        WineStyle wineStyle = styleRepository.findByNameStyle(style).orElseThrow(
+        WineStyle wineStyle = styleRepository.findByNameStyle(style.toUpperCase()).orElseThrow(
                 () -> new ResourceNotFoundException("Wine", "Style", style)
         );
         return wineRepository.findByWineStyle(wineStyle).orElseThrow(
@@ -157,7 +170,7 @@ public class WineServiceImpl implements WineService {
 
     @Override
     public List<Wine> getByWineTaste(String taste) {
-        WineTaste wineTaste = tasteRepository.findByNameTaste(taste).orElseThrow(
+        WineTaste wineTaste = tasteRepository.findByNameTaste(taste.toUpperCase()).orElseThrow(
                 () -> new ResourceNotFoundException("Wine", "Taste", taste)
         );
         return wineRepository.findByWineTaste(wineTaste).orElseThrow(

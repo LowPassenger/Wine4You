@@ -3,11 +3,14 @@ package com.sommelier.wine4you.model.mapper.impl;
 import com.sommelier.wine4you.model.Wine;
 import com.sommelier.wine4you.model.dto.WineRequestDto;
 import com.sommelier.wine4you.model.dto.WineResponseDto;
-import com.sommelier.wine4you.model.mapper.GenericMapper;
+import com.sommelier.wine4you.model.mapper.MapperToDto;
+import com.sommelier.wine4you.model.mapper.MapperToModel;
+import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 
 @Component
-public class WineMapperImpl implements GenericMapper<WineResponseDto, Wine, WineRequestDto> {
+public class WineMapperImpl implements MapperToDto<WineResponseDto, Wine>,
+        MapperToModel<Wine, WineRequestDto> {
     @Override
     public WineResponseDto toDto(Wine wine) {
         WineResponseDto wineResponseDto = new WineResponseDto();
@@ -23,7 +26,10 @@ public class WineMapperImpl implements GenericMapper<WineResponseDto, Wine, Wine
         wineResponseDto.setWineTaste(wine.getWineTaste());
         wineResponseDto.setCapacity(wine.getCapacity());
         wineResponseDto.setEvent(wine.getEvent());
-        wineResponseDto.setImages(wine.getImages());
+        wineResponseDto.setImageIds(wine.getImages()
+                .stream()
+                .map(image -> image.getId())
+                .collect(Collectors.toList()));
         wineResponseDto.setDescription(wine.getDescription());
         return wineResponseDto;
     }
