@@ -61,6 +61,13 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
+    public Image getById(Long id) {
+        return imageDbRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Image", "id", String.valueOf(id))
+        );
+    }
+
+    @Override
     public void deleteById(Long wineId, Long imageId) {
         Wine wine = wineRepository.findById(wineId).orElseThrow(
                 () -> new ResourceNotFoundException("Wine", "id", String.valueOf(wineId))
@@ -78,12 +85,5 @@ public class ImageServiceImpl implements ImageService {
     @Override
     public List<Image> getAllByWineId(Long wineId) {
         return imageDbRepository.findAllByWineId(wineId);
-    }
-
-    @Override
-    public Image getById(Long id) {
-        return imageDbRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("Image", "id", String.valueOf(id))
-        );
     }
 }

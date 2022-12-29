@@ -9,8 +9,9 @@ public interface ImageService {
 
     byte[] getById(Long wineId, Long imageId);
 
+    Image getById(Long id);
+
     void deleteById(Long wineId, Long imageId);
 
     List<Image> getAllByWineId(Long wineId);
-    Image getById(Long id);
 }
