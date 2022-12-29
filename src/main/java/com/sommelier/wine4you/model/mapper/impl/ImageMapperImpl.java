@@ -14,7 +14,9 @@ public class ImageMapperImpl implements MapperToDto<ImageWineResponseDto, Image>
         imageWineResponseDto.setId(image.getId());
         imageWineResponseDto.setName(image.getName());
         imageWineResponseDto.setType(image.getType());
-        imageWineResponseDto.setUrlPath(image.getUrlPath());
+        imageWineResponseDto.setUrlPath("/api/wines/"
+                + image.getWine().getId() + "/images/"
+                + imageWineResponseDto.getId());
         return imageWineResponseDto;
     }
 }

@@ -4,7 +4,6 @@ import com.sommelier.wine4you.model.WineResponse;
 import com.sommelier.wine4you.model.dto.WineRequestDto;
 import com.sommelier.wine4you.model.dto.WineResponseDto;
 import com.sommelier.wine4you.model.mapper.impl.WineMapperImpl;
-import com.sommelier.wine4you.service.ImageService;
 import com.sommelier.wine4you.service.WineService;
 import com.sommelier.wine4you.utils.AppConstants;
 import io.swagger.annotations.Api;
@@ -33,15 +32,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class WineController {
     private final WineService wineService;
     private final WineMapperImpl wineMapper;
-    private final ImageService imageService;
 
     @Autowired
     public WineController(WineService wineService,
-                          WineMapperImpl wineMapper,
-                          ImageService imageService) {
+                          WineMapperImpl wineMapper) {
         this.wineService = wineService;
         this.wineMapper = wineMapper;
-        this.imageService = imageService;
     }
 
     @ApiOperation(value = "Create Wine REST API")
@@ -87,6 +83,7 @@ public class WineController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
+    @ApiOperation(value = "Update Wine By 'Id' REST API")
     @PutMapping("/{id}")
     public ResponseEntity<WineResponseDto> update(
             @PathVariable("id") Long id,
