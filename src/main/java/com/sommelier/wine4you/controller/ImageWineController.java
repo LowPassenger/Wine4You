@@ -1,5 +1,6 @@
 package com.sommelier.wine4you.controller;
 
+import com.sommelier.wine4you.model.Image;
 import com.sommelier.wine4you.model.dto.ImageWineResponseDto;
 import com.sommelier.wine4you.model.mapper.impl.ImageMapperImpl;
 import com.sommelier.wine4you.service.ImageService;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -57,5 +59,15 @@ public class ImageWineController {
                 .map(image -> imageMapper.toDto(image))
                 .collect(Collectors.toList());
         return ResponseEntity.ok(images);
+    }
+
+    @ApiOperation(value = "Delete Wine image By 'Id' REST API")
+    @DeleteMapping(value = "{wineId}/images/{imageId}", produces = MediaType.IMAGE_JPEG_VALUE)
+    public ResponseEntity<?> deleteloadImage(@PathVariable Long wineId,
+                                           @PathVariable Long imageId) {
+        Image image = imageService.getById(imageId);
+        imageService.deleteById(wineId,imageId);
+        return ResponseEntity.ok("Image deleted successfully: "
+                + image.getName());
     }
 }

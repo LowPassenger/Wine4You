@@ -79,4 +79,11 @@ public class ImageServiceImpl implements ImageService {
     public List<Image> getAllByWineId(Long wineId) {
         return imageDbRepository.findAllByWineId(wineId);
     }
+
+    @Override
+    public Image getById(Long id) {
+        return imageDbRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Image", "id", String.valueOf(id))
+        );
+    }
 }
