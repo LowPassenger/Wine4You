@@ -5,12 +5,29 @@ import com.sommelier.wine4you.model.dto.WineRequestDto;
 import com.sommelier.wine4you.model.dto.WineResponseDto;
 import com.sommelier.wine4you.model.mapper.MapperToDto;
 import com.sommelier.wine4you.model.mapper.MapperToModel;
+import com.sommelier.wine4you.service.EventService;
+import com.sommelier.wine4you.service.WineStyleService;
+import com.sommelier.wine4you.service.WineTasteService;
 import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class WineMapperImpl implements MapperToDto<WineResponseDto, Wine>,
         MapperToModel<Wine, WineRequestDto> {
+    private final WineStyleService wineStyleService;
+    private final WineTasteService wineTasteService;
+    private final EventService eventService;
+
+    @Autowired
+    public WineMapperImpl(WineStyleService wineStyleService,
+                          WineTasteService wineTasteService,
+                          EventService eventService) {
+        this.wineStyleService = wineStyleService;
+        this.wineTasteService = wineTasteService;
+        this.eventService = eventService;
+    }
+
     @Override
     public WineResponseDto toDto(Wine wine) {
         WineResponseDto wineResponseDto = new WineResponseDto();
@@ -43,12 +60,11 @@ public class WineMapperImpl implements MapperToDto<WineResponseDto, Wine>,
         wine.setTitle(wineRequestDto.getTitle());
         wine.setInStock(wineRequestDto.getInStock());
         wine.setName(wineRequestDto.getName());
-        wine.setWineStyle(wineRequestDto.getWineStyle());
+        wine.setWineStyle(wineStyleService.getById(wineRequestDto.getWineStyleId()));
         wine.setWineType(wineRequestDto.getWineType());
-        wine.setWineTaste(wineRequestDto.getWineTaste());
+        wine.setWineTaste(wineTasteService.getById(wineRequestDto.getWineTasteId()));
         wine.setCapacity(wineRequestDto.getCapacity());
-        wine.setEvent(wineRequestDto.getEvent());
-        wine.setImages(wineRequestDto.getImages());
+        wine.setEvent(eventService.getById(wineRequestDto.getEventId()));
         wine.setDescription(wineRequestDto.getDescription());
         return wine;
     }
