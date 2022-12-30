@@ -13,10 +13,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ApplicationConfig {
     @Value("${server.port.http:8080}")
-    int httpPort;
+    private int httpPort;
 
     @Value("${server.port:8443}")
-    int httpsPort;
+    private int httpsPort;
 
     @Bean
     public ServletWebServerFactory servletContainer() {
