@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -38,8 +39,8 @@ public class ImageWineController {
     public ResponseEntity<?> uploadImage(@PathVariable Long wineId,
                                          @RequestParam("image") MultipartFile multipartImage) {
         imageService.create(wineId, multipartImage);
-        return ResponseEntity.ok("Image uploaded successfully: "
-                + multipartImage.getOriginalFilename());
+        return new ResponseEntity<>("Image uploaded successfully: "
+                + multipartImage.getOriginalFilename(), HttpStatus.CREATED);
     }
 
     @ApiOperation(value = "Download Wine image By 'Id' REST API")
