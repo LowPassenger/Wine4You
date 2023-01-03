@@ -83,6 +83,6 @@ public class TasteController {
     public ResponseEntity<WineTasteResponseDto> getByName(
             @RequestParam(defaultValue = "Tropical", value = "name") String tasteName) {
         return ResponseEntity.ok(
-                tasteMapper.toDto(tasteService.findByTasteName(tasteName)));
+                tasteMapper.toDto(tasteService.findByName(tasteName)));
     }
 }

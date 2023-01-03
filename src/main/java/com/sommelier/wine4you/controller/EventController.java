@@ -82,6 +82,6 @@ public class EventController {
     public ResponseEntity<EventResponseDto> getByName(
             @RequestParam(defaultValue = "Birthday", value = "name") String eventName) {
         return ResponseEntity.ok(
-                eventMapper.toDto(eventService.findByEventName(eventName)));
+                eventMapper.toDto(eventService.findByName(eventName)));
     }
 }

@@ -83,6 +83,6 @@ public class StyleController {
     public ResponseEntity<WineStyleResponseDto> getByName(
             @RequestParam(defaultValue = "Semi Sweet", value = "name") String styleName) {
         return ResponseEntity.ok(
-                styleMapper.toDto(styleService.findByStyleName(styleName)));
+                styleMapper.toDto(styleService.findByName(styleName)));
     }
 }

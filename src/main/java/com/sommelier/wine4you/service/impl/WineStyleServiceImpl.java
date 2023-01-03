@@ -39,7 +39,7 @@ public class WineStyleServiceImpl implements WineStyleService {
     }
 
     @Override
-    public WineStyle findByStyleName(String name) {
+    public WineStyle findByName(String name) {
         return wineStyleRepository.findByNameStyle(name).orElseThrow(() ->
                 new ResourceNotFoundException("WineStyle", "Style", name));
     }

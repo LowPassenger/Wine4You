@@ -33,12 +33,12 @@ public class Wine extends Product {
     private WineType wineType;
     @OneToOne
     private WineStyle wineStyle;
-
     @OneToOne
     private WineTaste wineTaste;
-
     @OneToOne
     private Event event;
+    @OneToOne
+    private Meal meal;
 
     @Column(name = "capacity")
     private double capacity;

@@ -39,9 +39,9 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Event findByEventName(String name) {
-        return eventRepository.findByNameEvent(name).orElseThrow(() ->
-                new ResourceNotFoundException("Event", "Name", name));
+    public Event findByName(String name) {
+        return eventRepository.findByNameEvent(name).orElseThrow(
+                () -> new ResourceNotFoundException("Event", "Name", name));
     }
 
     @Override

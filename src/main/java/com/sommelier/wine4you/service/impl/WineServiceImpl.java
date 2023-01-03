@@ -2,6 +2,7 @@ package com.sommelier.wine4you.service.impl;
 
 import com.sommelier.wine4you.exception.ResourceNotFoundException;
 import com.sommelier.wine4you.model.Event;
+import com.sommelier.wine4you.model.Meal;
 import com.sommelier.wine4you.model.Wine;
 import com.sommelier.wine4you.model.WineStyle;
 import com.sommelier.wine4you.model.WineTaste;
@@ -11,6 +12,7 @@ import com.sommelier.wine4you.model.enums.WineType;
 import com.sommelier.wine4you.model.mapper.impl.WineMapperImpl;
 import com.sommelier.wine4you.repository.EventRepository;
 import com.sommelier.wine4you.repository.ImageDbRepository;
+import com.sommelier.wine4you.repository.MealRepository;
 import com.sommelier.wine4you.repository.WineRepository;
 import com.sommelier.wine4you.repository.WineStyleRepository;
 import com.sommelier.wine4you.repository.WineTasteRepository;
@@ -33,6 +35,7 @@ public class WineServiceImpl implements WineService {
     private final EventRepository eventRepository;
     private final WineStyleRepository styleRepository;
     private final WineTasteRepository tasteRepository;
+    private final MealRepository mealRepository;
     private final ImageDbRepository imageDbRepository;
     private final WineMapperImpl wineMapper;
 
@@ -41,12 +44,13 @@ public class WineServiceImpl implements WineService {
                            EventRepository eventRepository,
                            WineStyleRepository styleRepository,
                            WineTasteRepository tasteRepository,
-                           ImageDbRepository imageDbRepository,
+                           MealRepository mealRepository, ImageDbRepository imageDbRepository,
                            WineMapperImpl wineMapper) {
         this.wineRepository = wineRepository;
         this.styleRepository = styleRepository;
         this.eventRepository = eventRepository;
         this.tasteRepository = tasteRepository;
+        this.mealRepository = mealRepository;
         this.imageDbRepository = imageDbRepository;
         this.wineMapper = wineMapper;
     }
@@ -87,11 +91,8 @@ public class WineServiceImpl implements WineService {
     }
 
     @Override
-    public List<WineResponseDto> getAll() {
-        return wineRepository.findAll()
-                .stream()
-                .map(wineMapper::toDto)
-                .collect(Collectors.toList());
+    public List<Wine> getAll() {
+        return wineRepository.findAll();
     }
 
     @Override
@@ -101,6 +102,11 @@ public class WineServiceImpl implements WineService {
         );
         wineRepository.delete(wine);
         log.info("Successfully, delete wine by id {}", id);
+    }
+
+    @Override
+    public Wine findByName(String name) {
+        return null;
     }
 
     private static WineResponse getWineResponse(Page<Wine> wines, List<WineResponseDto> content) {
@@ -122,7 +128,7 @@ public class WineServiceImpl implements WineService {
 
     @Override
     public List<Wine> getAllByName(String name) {
-        return wineRepository.findByName(name.toUpperCase()).orElseThrow(
+        return wineRepository.findByName(name).orElseThrow(
                 () -> new ResourceNotFoundException("Wine", "Name", name));
     }
 
@@ -137,14 +143,14 @@ public class WineServiceImpl implements WineService {
 
     @Override
     public List<Wine> getByCountry(String country) {
-        return wineRepository.findByCountry(country.toUpperCase()).orElseThrow(
+        return wineRepository.findByCountry(country).orElseThrow(
                 () -> new ResourceNotFoundException("Wine", "Country", country)
         );
     }
 
     @Override
     public List<Wine> getByEvent(String event) {
-        Event findEvent = eventRepository.findByNameEvent(event.toUpperCase()).orElseThrow(
+        Event findEvent = eventRepository.findByNameEvent(event).orElseThrow(
                 () -> new ResourceNotFoundException("Event", "EventName", event)
         );
         return wineRepository.findByEvent(findEvent).orElseThrow(
@@ -153,7 +159,7 @@ public class WineServiceImpl implements WineService {
 
     @Override
     public List<Wine> getByWineStyle(String style) {
-        WineStyle wineStyle = styleRepository.findByNameStyle(style.toUpperCase()).orElseThrow(
+        WineStyle wineStyle = styleRepository.findByNameStyle(style).orElseThrow(
                 () -> new ResourceNotFoundException("Wine", "Style", style)
         );
         return wineRepository.findByWineStyle(wineStyle).orElseThrow(
@@ -170,11 +176,21 @@ public class WineServiceImpl implements WineService {
 
     @Override
     public List<Wine> getByWineTaste(String taste) {
-        WineTaste wineTaste = tasteRepository.findByNameTaste(taste.toUpperCase()).orElseThrow(
+        WineTaste wineTaste = tasteRepository.findByNameTaste(taste).orElseThrow(
                 () -> new ResourceNotFoundException("Wine", "Taste", taste)
         );
         return wineRepository.findByWineTaste(wineTaste).orElseThrow(
                 () -> new ResourceNotFoundException("Wine", "Taste", taste)
+        );
+    }
+
+    @Override
+    public List<Wine> getByMeal(String mealName) {
+        Meal meal = mealRepository.findByName(mealName).orElseThrow(
+                () -> new ResourceNotFoundException("Meal", "mealName", mealName)
+        );
+        return wineRepository.findByMeal(meal).orElseThrow(
+                () -> new ResourceNotFoundException("Wine", "Meal", mealName)
         );
     }
 }

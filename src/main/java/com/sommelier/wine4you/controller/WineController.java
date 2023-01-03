@@ -51,7 +51,10 @@ public class WineController {
     @ApiOperation(value = "Get All Wines REST API")
     @GetMapping()
     public ResponseEntity<List<WineResponseDto>> getWines() {
-        return ResponseEntity.ok(wineService.getAll());
+        return ResponseEntity.ok(wineService.getAll()
+                .stream()
+                .map(wineMapper::toDto)
+                .toList());
     }
 
     @ApiOperation(value = "Get All Wines REST API")
@@ -175,6 +178,16 @@ public class WineController {
     public ResponseEntity<List<WineResponseDto>> getAllWinesByStyle(
             @RequestParam(value = "style") String style) {
         return ResponseEntity.ok(wineService.getByWineStyle(style)
+                .stream()
+                .map(wineMapper::toDto)
+                .toList());
+    }
+
+    @ApiOperation(value = "Get wine by 'Meal' REST API")
+    @GetMapping("/meal")
+    public ResponseEntity<List<WineResponseDto>> getAllWinesByMeal(
+            @RequestParam(value = "meal") String meal) {
+        return ResponseEntity.ok(wineService.getByWineStyle(meal)
                 .stream()
                 .map(wineMapper::toDto)
                 .toList());

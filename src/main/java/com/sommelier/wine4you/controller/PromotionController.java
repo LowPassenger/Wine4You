@@ -2,6 +2,7 @@ package com.sommelier.wine4you.controller;
 
 import com.sommelier.wine4you.model.dto.wine.WineResponseDto;
 import com.sommelier.wine4you.model.enums.WineType;
+import com.sommelier.wine4you.model.mapper.impl.WineMapperImpl;
 import com.sommelier.wine4you.service.WineService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -20,9 +21,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class PromotionController {
     private static final int PROMOTION_PRODUCTS_QUANTITY = 4;
     private final WineService wineService;
+    private final WineMapperImpl wineMapper;
 
-    public PromotionController(WineService wineService) {
+    public PromotionController(WineService wineService,
+                               WineMapperImpl wineMapper) {
         this.wineService = wineService;
+        this.wineMapper = wineMapper;
     }
 
     @ApiOperation(value = "Get wine promotion of the week REST API")
@@ -30,8 +34,7 @@ public class PromotionController {
     public ResponseEntity<Set<WineResponseDto>> getWinePromotion() {
         return ResponseEntity.ok(wineService.getAll()
                 .stream()
-                .filter(wineDtos
-                        -> !(wineService.getById(wineDtos.getId()).getWineType())
+                .filter(wine -> !wine.getWineType()
                         .equals(WineType.CHAMPAGNE_SPARKLING))
                 .collect(Collectors.collectingAndThen(
                         Collectors.toCollection(ArrayList::new),
@@ -41,6 +44,7 @@ public class PromotionController {
                         }))
                 .stream()
                 .limit(PROMOTION_PRODUCTS_QUANTITY)
+                .map(wineMapper::toDto)
                 .collect(Collectors.toSet()));
     }
 
@@ -49,8 +53,7 @@ public class PromotionController {
     public ResponseEntity<Set<WineResponseDto>> getChampagnePromotion() {
         return ResponseEntity.ok(wineService.getAll()
                 .stream()
-                .filter(wineDtos
-                        -> (wineService.getById(wineDtos.getId()).getWineType())
+                .filter(wine -> wine.getWineType()
                         .equals(WineType.CHAMPAGNE_SPARKLING))
                 .collect(Collectors.collectingAndThen(
                         Collectors.toCollection(ArrayList::new),
@@ -60,6 +63,7 @@ public class PromotionController {
                         }))
                 .stream()
                 .limit(PROMOTION_PRODUCTS_QUANTITY)
+                .map(wineMapper::toDto)
                 .collect(Collectors.toSet()));
     }
 }
