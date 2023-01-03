@@ -3,10 +3,10 @@ package com.sommelier.wine4you.service.impl;
 import com.sommelier.wine4you.exception.ResourceNotFoundException;
 import com.sommelier.wine4you.model.Event;
 import com.sommelier.wine4you.model.Wine;
-import com.sommelier.wine4you.model.WineResponse;
 import com.sommelier.wine4you.model.WineStyle;
 import com.sommelier.wine4you.model.WineTaste;
-import com.sommelier.wine4you.model.dto.WineResponseDto;
+import com.sommelier.wine4you.model.dto.WineResponse;
+import com.sommelier.wine4you.model.dto.wine.WineResponseDto;
 import com.sommelier.wine4you.model.enums.WineType;
 import com.sommelier.wine4you.model.mapper.impl.WineMapperImpl;
 import com.sommelier.wine4you.repository.EventRepository;
@@ -116,7 +116,7 @@ public class WineServiceImpl implements WineService {
 
     @Override
     public List<Wine> getAllByBrand(String brand) {
-        return wineRepository.findByBrand(brand.toUpperCase()).orElseThrow(
+        return wineRepository.findByBrand(brand).orElseThrow(
                 () -> new ResourceNotFoundException("Wine", "Brand", brand));
     }
 

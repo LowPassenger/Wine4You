@@ -1,13 +1,11 @@
 package com.sommelier.wine4you.service;
 
 import com.sommelier.wine4you.model.Wine;
-import com.sommelier.wine4you.model.WineResponse;
-import com.sommelier.wine4you.model.dto.WineResponseDto;
+import com.sommelier.wine4you.model.dto.WineResponse;
+import com.sommelier.wine4you.model.dto.wine.WineResponseDto;
 import java.math.BigDecimal;
 import java.util.List;
-import org.springframework.stereotype.Service;
 
-@Service
 public interface WineService {
     Wine create(Wine wine);
 

@@ -1,5 +1,6 @@
 package com.sommelier.wine4you.service.impl;
 
+import com.sommelier.wine4you.exception.ResourceNotFoundException;
 import com.sommelier.wine4you.model.ShoppingCart;
 import com.sommelier.wine4you.model.User;
 import com.sommelier.wine4you.repository.ShoppingCartRepository;
@@ -18,12 +19,19 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     public ShoppingCart getByUser(User user) {
-        return null;
+        return shoppingCartRepository.findByUser(user).orElseThrow(
+                () -> new ResourceNotFoundException("ShoppingCart", "User", user.getFirstName())
+        );
     }
 
     @Override
-    public void registerNewShoppingCart(User user) {
-
+    public ShoppingCart registerNewShoppingCart(User user) {
+        ShoppingCart shoppingCart = shoppingCartRepository.findByUser(user).orElseThrow(
+                () -> new ResourceNotFoundException(
+                        "ShoppingCart", "UserId", String.valueOf(user.getId()))
+        );
+        shoppingCart.setUser(user);
+        return shoppingCartRepository.save(shoppingCart);
     }
 
     @Override

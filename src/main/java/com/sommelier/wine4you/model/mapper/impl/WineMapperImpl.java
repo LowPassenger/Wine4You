@@ -1,8 +1,8 @@
 package com.sommelier.wine4you.model.mapper.impl;
 
 import com.sommelier.wine4you.model.Wine;
-import com.sommelier.wine4you.model.dto.WineRequestDto;
-import com.sommelier.wine4you.model.dto.WineResponseDto;
+import com.sommelier.wine4you.model.dto.wine.WineRequestDto;
+import com.sommelier.wine4you.model.dto.wine.WineResponseDto;
 import com.sommelier.wine4you.model.mapper.MapperToDto;
 import com.sommelier.wine4you.model.mapper.MapperToModel;
 import com.sommelier.wine4you.service.EventService;
@@ -38,11 +38,11 @@ public class WineMapperImpl implements MapperToDto<WineResponseDto, Wine>,
         wineResponseDto.setTitle(wine.getTitle());
         wineResponseDto.setInStock(wine.getInStock());
         wineResponseDto.setName(wine.getName());
-        wineResponseDto.setWineStyle(wine.getWineStyle());
-        wineResponseDto.setWineType(wine.getWineType());
-        wineResponseDto.setWineTaste(wine.getWineTaste());
+        wineResponseDto.setWineStyleName(wine.getWineStyle().getNameStyle());
+        wineResponseDto.setWineTypeName(wine.getWineType().getType());
+        wineResponseDto.setWineTasteName(wine.getWineTaste().getNameTaste());
         wineResponseDto.setCapacity(wine.getCapacity());
-        wineResponseDto.setEvent(wine.getEvent());
+        wineResponseDto.setEventName(wine.getEvent().getNameEvent());
         wineResponseDto.setImageIds(wine.getImages()
                 .stream()
                 .map(image -> image.getId())

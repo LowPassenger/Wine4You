@@ -2,8 +2,8 @@ package com.sommelier.wine4you.service.impl;
 
 import com.sommelier.wine4you.model.Role;
 import com.sommelier.wine4you.model.User;
-import com.sommelier.wine4you.model.dto.UserLoginDto;
-import com.sommelier.wine4you.model.dto.UserSignUpDto;
+import com.sommelier.wine4you.model.dto.user.UserLoginDto;
+import com.sommelier.wine4you.model.dto.user.UserSignUpDto;
 import com.sommelier.wine4you.repository.RoleRepository;
 import com.sommelier.wine4you.repository.UserRepository;
 import com.sommelier.wine4you.security.jwt.JwtTokenProvider;

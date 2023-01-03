@@ -1,8 +1,8 @@
 package com.sommelier.wine4you.controller;
 
 import com.sommelier.wine4you.config.SecurityConfig;
-import com.sommelier.wine4you.model.dto.UserLoginDto;
-import com.sommelier.wine4you.model.dto.UserSignUpDto;
+import com.sommelier.wine4you.model.dto.user.UserLoginDto;
+import com.sommelier.wine4you.model.dto.user.UserSignUpDto;
 import com.sommelier.wine4you.repository.UserRepository;
 import com.sommelier.wine4you.security.jwt.JwtAuthResponse;
 import com.sommelier.wine4you.service.AuthenticationService;

@@ -1,7 +1,7 @@
 package com.sommelier.wine4you.model.mapper.impl;
 
 import com.sommelier.wine4you.model.Image;
-import com.sommelier.wine4you.model.dto.ImageWineResponseDto;
+import com.sommelier.wine4you.model.dto.image.ImageWineResponseDto;
 import com.sommelier.wine4you.model.mapper.MapperToDto;
 import org.springframework.stereotype.Component;
 

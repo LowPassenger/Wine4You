@@ -1,8 +1,8 @@
 package com.sommelier.wine4you.controller;
 
-import com.sommelier.wine4you.model.WineResponse;
-import com.sommelier.wine4you.model.dto.WineRequestDto;
-import com.sommelier.wine4you.model.dto.WineResponseDto;
+import com.sommelier.wine4you.model.dto.WineResponse;
+import com.sommelier.wine4you.model.dto.wine.WineRequestDto;
+import com.sommelier.wine4you.model.dto.wine.WineResponseDto;
 import com.sommelier.wine4you.model.mapper.impl.WineMapperImpl;
 import com.sommelier.wine4you.service.WineService;
 import com.sommelier.wine4you.utils.AppConstants;
@@ -10,7 +10,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.stream.Collectors;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,7 +42,8 @@ public class WineController {
     @ApiOperation(value = "Create Wine REST API")
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
-    public ResponseEntity<WineResponseDto> create(WineRequestDto wineRequestDto) {
+    public ResponseEntity<WineResponseDto> create(
+            @Valid @RequestBody WineRequestDto wineRequestDto) {
         return new ResponseEntity<>(wineMapper.toDto(
                 wineService.create(wineMapper.toModel(wineRequestDto))), HttpStatus.CREATED);
     }
@@ -104,22 +104,20 @@ public class WineController {
     @GetMapping("/brand")
     public ResponseEntity<List<WineResponseDto>> getAllWinesByBrand(
             @RequestParam(value = "brand") String brand) {
-        List<WineResponseDto> wineResponseDtos
-                = wineService.getAllByBrand(brand).stream()
-                .map(wine -> wineMapper.toDto(wine))
-                .collect(Collectors.toList());
-        return ResponseEntity.ok(wineResponseDtos);
+        return ResponseEntity.ok(wineService.getAllByBrand(brand)
+                .stream()
+                .map(wineMapper::toDto)
+                .toList());
     }
 
     @ApiOperation(value = "Get wine by 'Name wine' REST API")
     @GetMapping("/nameWine")
     public ResponseEntity<List<WineResponseDto>> getAllWinesByNameWine(
             @RequestParam(value = "nameWine") String nameWine) {
-        List<WineResponseDto> wineResponseDtos
-                = wineService.getAllByName(nameWine).stream()
-                .map(wine -> wineMapper.toDto(wine))
-                .collect(Collectors.toList());
-        return ResponseEntity.ok(wineResponseDtos);
+        return ResponseEntity.ok(wineService.getAllByName(nameWine)
+                .stream()
+                .map(wineMapper::toDto)
+                .toList());
     }
 
     @ApiOperation(value = "Get wine by 'Price' REST API")
@@ -127,63 +125,58 @@ public class WineController {
     public ResponseEntity<List<WineResponseDto>> getAllWinesByPrice(
             @RequestParam(value = "min") BigDecimal min,
             @RequestParam(value = "max") BigDecimal max) {
-        return ResponseEntity.ok(wineService.getWinesByPriceBetween(min, max).stream()
-                .map(wine -> wineMapper.toDto(wine))
-                .collect(Collectors.toList()));
+        return ResponseEntity.ok(wineService.getWinesByPriceBetween(min, max)
+                .stream()
+                .map(wineMapper::toDto)
+                .toList());
     }
 
     @ApiOperation(value = "Get wine by 'Country' REST API")
     @GetMapping("/country")
     public ResponseEntity<List<WineResponseDto>> getAllWinesByCountry(
             @RequestParam(value = "country") String country) {
-        List<WineResponseDto> wineResponseDtos
-                = wineService.getByCountry(country).stream()
-                .map(wine -> wineMapper.toDto(wine))
-                .collect(Collectors.toList());
-        return ResponseEntity.ok(wineResponseDtos);
+        return ResponseEntity.ok(wineService.getByCountry(country).stream()
+                .map(wineMapper::toDto)
+                .toList());
     }
 
     @ApiOperation(value = "Get wine by 'Event' REST API")
     @GetMapping("/event")
     public ResponseEntity<List<WineResponseDto>> getAllWinesByEvent(
             @RequestParam(value = "event") String event) {
-        List<WineResponseDto> wineResponseDtos
-                = wineService.getByEvent(event).stream()
-                .map(wine -> wineMapper.toDto(wine))
-                .collect(Collectors.toList());
-        return ResponseEntity.ok(wineResponseDtos);
+        return ResponseEntity.ok(wineService.getByEvent(event)
+                .stream()
+                .map(wineMapper::toDto)
+                .toList());
     }
 
     @ApiOperation(value = "Get wine by 'Type' REST API")
     @GetMapping("/type")
     public ResponseEntity<List<WineResponseDto>> getAllWinesByType(
             @RequestParam(value = "type") String type) {
-        List<WineResponseDto> wineResponseDtos
-                = wineService.getByWineType(type).stream()
-                .map(wine -> wineMapper.toDto(wine))
-                .collect(Collectors.toList());
-        return ResponseEntity.ok(wineResponseDtos);
+        return ResponseEntity.ok(wineService.getByWineType(type)
+                .stream()
+                .map(wineMapper::toDto)
+                .toList());
     }
 
     @ApiOperation(value = "Get wine by 'Taste' REST API")
     @GetMapping("/taste")
     public ResponseEntity<List<WineResponseDto>> getAllWinesByTaste(
             @RequestParam(value = "taste") String taste) {
-        List<WineResponseDto> wineResponseDtos
-                = wineService.getByWineTaste(taste).stream()
-                .map(wine -> wineMapper.toDto(wine))
-                .collect(Collectors.toList());
-        return ResponseEntity.ok(wineResponseDtos);
+        return ResponseEntity.ok(wineService.getByWineTaste(taste)
+                .stream()
+                .map(wineMapper::toDto)
+                .toList());
     }
 
     @ApiOperation(value = "Get wine by 'Taste' REST API")
     @GetMapping("/style")
     public ResponseEntity<List<WineResponseDto>> getAllWinesByStyle(
             @RequestParam(value = "style") String style) {
-        List<WineResponseDto> wineResponseDtos
-                = wineService.getByWineStyle(style).stream()
-                .map(wine -> wineMapper.toDto(wine))
-                .collect(Collectors.toList());
-        return ResponseEntity.ok(wineResponseDtos);
+        return ResponseEntity.ok(wineService.getByWineStyle(style)
+                .stream()
+                .map(wineMapper::toDto)
+                .toList());
     }
 }

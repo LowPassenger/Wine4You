@@ -2,9 +2,7 @@ package com.sommelier.wine4you.service;
 
 import com.sommelier.wine4you.model.WineStyle;
 import java.util.List;
-import org.springframework.stereotype.Service;
 
-@Service
 public interface WineStyleService {
     WineStyle create(WineStyle wineStyle);
 
@@ -14,5 +12,7 @@ public interface WineStyleService {
 
     void deleteById(Long id);
 
-    WineStyle findByTasteName(String name);
+    WineStyle findByStyleName(String name);
+
+    WineStyle update(Long id, WineStyle style);
 }

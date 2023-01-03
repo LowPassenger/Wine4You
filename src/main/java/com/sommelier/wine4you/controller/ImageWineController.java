@@ -1,12 +1,11 @@
 package com.sommelier.wine4you.controller;
 
 import com.sommelier.wine4you.model.Image;
-import com.sommelier.wine4you.model.dto.ImageWineResponseDto;
+import com.sommelier.wine4you.model.dto.image.ImageWineResponseDto;
 import com.sommelier.wine4you.model.mapper.impl.ImageMapperImpl;
 import com.sommelier.wine4you.service.ImageService;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpStatus;
@@ -55,19 +54,18 @@ public class ImageWineController {
     @ApiOperation(value = "Download All images By 'wineId' REST API")
     @GetMapping(value = "{wineId}/images")
     public ResponseEntity<List<ImageWineResponseDto>> downloadImage(@PathVariable Long wineId) {
-        List<ImageWineResponseDto> images = imageService.getAllByWineId(wineId)
+        return ResponseEntity.ok(imageService.getAllByWineId(wineId)
                 .stream()
-                .map(image -> imageMapper.toDto(image))
-                .collect(Collectors.toList());
-        return ResponseEntity.ok(images);
+                .map(imageMapper::toDto)
+                .toList());
     }
 
     @ApiOperation(value = "Delete Wine image By 'Id' REST API")
     @DeleteMapping(value = "{wineId}/images/{imageId}", produces = MediaType.IMAGE_JPEG_VALUE)
     public ResponseEntity<?> deleteloadImage(@PathVariable Long wineId,
-                                           @PathVariable Long imageId) {
+                                             @PathVariable Long imageId) {
         Image image = imageService.getById(imageId);
-        imageService.deleteById(wineId,imageId);
+        imageService.deleteById(wineId, imageId);
         return ResponseEntity.ok("Image deleted successfully: "
                 + image.getName());
     }

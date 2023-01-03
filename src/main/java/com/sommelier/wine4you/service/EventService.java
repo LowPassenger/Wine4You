@@ -2,9 +2,7 @@ package com.sommelier.wine4you.service;
 
 import com.sommelier.wine4you.model.Event;
 import java.util.List;
-import org.springframework.stereotype.Service;
 
-@Service
 public interface EventService {
     Event create(Event event);
 
@@ -15,4 +13,6 @@ public interface EventService {
     void deleteById(Long id);
 
     Event findByEventName(String name);
+
+    Event update(Long id, Event event);
 }

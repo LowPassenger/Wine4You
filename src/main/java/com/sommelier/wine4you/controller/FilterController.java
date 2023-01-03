@@ -1,6 +1,6 @@
 package com.sommelier.wine4you.controller;
 
-import com.sommelier.wine4you.model.dto.EventResponseDto;
+import com.sommelier.wine4you.model.dto.event.EventResponseDto;
 import com.sommelier.wine4you.model.mapper.impl.EventMapperImpl;
 import com.sommelier.wine4you.model.mapper.impl.WineStyleMapperImpl;
 import com.sommelier.wine4you.model.mapper.impl.WineTasteMapperImpl;
