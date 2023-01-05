@@ -5,7 +5,7 @@ import com.sommelier.wine4you.model.ShoppingCart;
 import com.sommelier.wine4you.model.User;
 import java.util.List;
 
-public interface OrderService {
+public interface OrderService extends GenericService<Order> {
     Order completeOrder(ShoppingCart shoppingCart);
 
     List<Order> getOrdersHistory(User user);

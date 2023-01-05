@@ -11,7 +11,5 @@ public interface GenericService<T> {
 
     void deleteById(Long id);
 
-    T findByName(String name);
-
     T update(Long id, T t);
 }

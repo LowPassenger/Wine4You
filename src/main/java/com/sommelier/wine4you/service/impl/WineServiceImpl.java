@@ -104,11 +104,6 @@ public class WineServiceImpl implements WineService {
         log.info("Successfully, delete wine by id {}", id);
     }
 
-    @Override
-    public Wine findByName(String name) {
-        return null;
-    }
-
     private static WineResponse getWineResponse(Page<Wine> wines, List<WineResponseDto> content) {
         WineResponse wineResponse = new WineResponse();
         wineResponse.setContent(content);

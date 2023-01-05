@@ -30,9 +30,9 @@ public class Order {
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "wine_id"))
     private List<Wine> wines;
-    @Column(name = "order_time")
+    @Column(name = "created_date")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss.SSS")
-    private LocalDateTime orderTime;
+    private LocalDateTime createdDate;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -54,7 +54,7 @@ public class Order {
         if (!Objects.equals(wines, order.wines)) {
             return false;
         }
-        if (!Objects.equals(orderTime, order.orderTime)) {
+        if (!Objects.equals(createdDate, order.createdDate)) {
             return false;
         }
         return Objects.equals(user, order.user);
@@ -64,7 +64,7 @@ public class Order {
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (wines != null ? wines.hashCode() : 0);
-        result = 31 * result + (orderTime != null ? orderTime.hashCode() : 0);
+        result = 31 * result + (createdDate != null ? createdDate.hashCode() : 0);
         result = 31 * result + (user != null ? user.hashCode() : 0);
         return result;
     }
@@ -74,7 +74,7 @@ public class Order {
         return "Order{"
                 + "id=" + id
                 + ", wines=" + wines
-                + ", orderTime=" + orderTime
+                + ", orderTime=" + createdDate
                 + ", user=" + user
                 + '}';
     }
