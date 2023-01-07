@@ -35,8 +35,9 @@ public class MealServiceImpl implements MealService {
     }
 
     @Override
-    public void deleteById(Long id) {
+    public boolean deleteById(Long id) {
         mealRepository.deleteById(id);
+        return mealRepository.existsById(id);
     }
 
     @Override

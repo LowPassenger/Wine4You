@@ -96,12 +96,13 @@ public class WineServiceImpl implements WineService {
     }
 
     @Override
-    public void deleteById(Long id) {
+    public boolean deleteById(Long id) {
         Wine wine = wineRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Wine", "id", String.valueOf(id))
         );
         wineRepository.delete(wine);
         log.info("Successfully, delete wine by id {}", id);
+        return wineRepository.existsById(id);
     }
 
     private static WineResponse getWineResponse(Page<Wine> wines, List<WineResponseDto> content) {

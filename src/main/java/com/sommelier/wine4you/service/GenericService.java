@@ -9,7 +9,7 @@ public interface GenericService<T> {
 
     List<T> getAll();
 
-    void deleteById(Long id);
+    boolean deleteById(Long id);
 
     T update(Long id, T t);
 }

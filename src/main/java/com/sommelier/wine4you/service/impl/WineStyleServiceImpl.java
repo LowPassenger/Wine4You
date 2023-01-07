@@ -34,8 +34,9 @@ public class WineStyleServiceImpl implements WineStyleService {
     }
 
     @Override
-    public void deleteById(Long id) {
+    public boolean deleteById(Long id) {
         wineStyleRepository.deleteById(id);
+        return wineStyleRepository.existsById(id);
     }
 
     @Override

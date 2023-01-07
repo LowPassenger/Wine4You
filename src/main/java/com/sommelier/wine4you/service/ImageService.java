@@ -11,7 +11,7 @@ public interface ImageService {
 
     Image getById(Long id);
 
-    void deleteById(Long wineId, Long imageId);
+    boolean deleteById(Long wineId, Long imageId);
 
     List<Image> getAllByWineId(Long wineId);
 }

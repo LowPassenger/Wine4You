@@ -59,8 +59,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void deleteById(Long id) {
+    public boolean deleteById(Long id) {
         orderRepository.deleteById(id);
+        return orderRepository.existsById(id);
     }
 
     @Override

@@ -34,14 +34,20 @@ public class WineTasteServiceImpl implements WineTasteService {
     }
 
     @Override
-    public void deleteById(Long id) {
+    public boolean deleteById(Long id) {
         wineTasteRepository.deleteById(id);
+        return wineTasteRepository.existsById(id);
     }
 
     @Override
     public WineTaste findByName(String name) {
         return wineTasteRepository.findByNameTaste(name).orElseThrow(() ->
                 new ResourceNotFoundException("WineTaste", "Taste", name));
+    }
+
+    @Override
+    public boolean existsById(Long id) {
+        return wineTasteRepository.existsById(id);
     }
 
     @Override

@@ -68,7 +68,7 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public void deleteById(Long wineId, Long imageId) {
+    public boolean deleteById(Long wineId, Long imageId) {
         Wine wine = wineRepository.findById(wineId).orElseThrow(
                 () -> new ResourceNotFoundException("Wine", "id", String.valueOf(wineId))
         );
@@ -80,6 +80,7 @@ public class ImageServiceImpl implements ImageService {
         }
         imageDbRepository.delete(image);
         log.info("Successfully, delete image for wine by id {}", imageId);
+        return imageDbRepository.existsById(imageId);
     }
 
     @Override
