@@ -1,21 +1,24 @@
 package com.sommelier.wine4you.model.mapper.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.sommelier.wine4you.model.Event;
 import com.sommelier.wine4you.model.dto.event.EventRequestDto;
 import com.sommelier.wine4you.model.dto.event.EventResponseDto;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class EventMapperImplTest {
-    private EventMapperImpl eventMapper;
-    private Event event;
-    private EventResponseDto responseDto;
-    private EventRequestDto requestDto;
+    private static EventMapperImpl eventMapper;
+    private static Event event;
+    private static Event eventTest;
+    private static EventResponseDto responseDto;
+    private static EventRequestDto requestDto;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void setUp() {
         eventMapper = new EventMapperImpl();
         event = new Event();
         event.setId(1L);
@@ -26,19 +29,40 @@ class EventMapperImplTest {
         responseDto.setNameEvent("Marriage");
 
         requestDto = new EventRequestDto();
-        requestDto.setNameEvent("Marriage");
+        requestDto.setNameEvent("Party");
+
+        eventTest = new Event();
+        eventTest.setNameEvent("Party");
 
     }
 
     @Test
     void toDto_Ok() {
         EventResponseDto actual = eventMapper.toDto(event);
+        assertNotNull(actual);
         assertEquals(responseDto, actual);
+        assertEquals(responseDto.getId(), actual.getId());
+        assertEquals(responseDto.getNameEvent(), actual.getNameEvent());
     }
 
     @Test
     void toModel_Ok() {
         Event actual = eventMapper.toModel(requestDto);
-        assertEquals(event.getNameEvent(), actual.getNameEvent());
+        assertNotNull(actual);
+        assertEquals(eventTest.getNameEvent(), actual.getNameEvent());
+    }
+
+    @Test
+    void toDto_notOk() {
+        assertThrows(NullPointerException.class, () -> {
+            eventMapper.toDto(null);
+        });
+    }
+
+    @Test
+    void toModel_notOk() {
+        assertThrows(NullPointerException.class, () -> {
+            eventMapper.toModel(null);
+        });
     }
 }
