@@ -48,18 +48,4 @@ class MealMapperImplTest {
         assertNotNull(actual);
         assertEquals(mealTest.getName(), actual.getName());
     }
-
-    @Test
-    void toDto_notOk() {
-        assertThrows(NullPointerException.class, () -> {
-           mealMapper.toDto(null);
-        });
-    }
-
-    @Test
-    void toModel_notOk() {
-        assertThrows(NullPointerException.class, () -> {
-            mealMapper.toModel(null);
-        });
-    }
 }

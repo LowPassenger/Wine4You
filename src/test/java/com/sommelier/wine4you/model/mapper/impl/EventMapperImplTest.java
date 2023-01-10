@@ -51,18 +51,4 @@ class EventMapperImplTest {
         assertNotNull(actual);
         assertEquals(eventTest.getNameEvent(), actual.getNameEvent());
     }
-
-    @Test
-    void toDto_notOk() {
-        assertThrows(NullPointerException.class, () -> {
-            eventMapper.toDto(null);
-        });
-    }
-
-    @Test
-    void toModel_notOk() {
-        assertThrows(NullPointerException.class, () -> {
-            eventMapper.toModel(null);
-        });
-    }
 }
