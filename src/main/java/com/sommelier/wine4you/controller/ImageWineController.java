@@ -11,6 +11,7 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -60,6 +61,7 @@ public class ImageWineController {
                 .toList());
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @ApiOperation(value = "Delete Wine image By 'Id' REST API")
     @DeleteMapping(value = "{wineId}/images/{imageId}", produces = MediaType.IMAGE_JPEG_VALUE)
     public ResponseEntity<?> deleteloadImage(@PathVariable Long wineId,

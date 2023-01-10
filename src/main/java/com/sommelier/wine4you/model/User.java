@@ -49,7 +49,7 @@ public class User {
     @Column(nullable = false)
     private String city;
     @OneToOne(cascade = CascadeType.ALL)
-    private ShoppingCart shoppingCart;
+    private Cart cart;
 
     @ManyToMany(fetch = FetchType.EAGER,
             cascade = {CascadeType.MERGE, CascadeType.REMOVE})
@@ -99,7 +99,7 @@ public class User {
         if (!Objects.equals(city, user.city)) {
             return false;
         }
-        if (!Objects.equals(shoppingCart, user.shoppingCart)) {
+        if (!Objects.equals(cart, user.cart)) {
             return false;
         }
         if (!Objects.equals(registrationDate, user.registrationDate)) {
@@ -119,7 +119,7 @@ public class User {
         result = 31 * result + (phone != null ? phone.hashCode() : 0);
         result = 31 * result + (address != null ? address.hashCode() : 0);
         result = 31 * result + (city != null ? city.hashCode() : 0);
-        result = 31 * result + (shoppingCart != null ? shoppingCart.hashCode() : 0);
+        result = 31 * result + (cart != null ? cart.hashCode() : 0);
         result = 31 * result + (roles != null ? roles.hashCode() : 0);
         result = 31 * result + (registrationDate != null ? registrationDate.hashCode() : 0);
         return result;
@@ -137,7 +137,7 @@ public class User {
                 + ", phone='" + phone + '\''
                 + ", address='" + address + '\''
                 + ", city='" + city + '\''
-                + ", shoppingCart=" + shoppingCart
+                + ", shoppingCart=" + cart
                 + ", roles=" + roles
                 + ", registrationDate=" + registrationDate
                 + '}';

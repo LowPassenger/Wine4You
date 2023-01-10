@@ -8,7 +8,7 @@ import com.sommelier.wine4you.repository.RoleRepository;
 import com.sommelier.wine4you.repository.UserRepository;
 import com.sommelier.wine4you.security.jwt.JwtTokenProvider;
 import com.sommelier.wine4you.service.AuthenticationService;
-import com.sommelier.wine4you.service.ShoppingCartService;
+import com.sommelier.wine4you.service.CartService;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ import org.springframework.stereotype.Service;
 public class AuthenticationServiceImpl implements AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final UserRepository userRepository;
-    private final ShoppingCartService shoppingCartService;
+    private final CartService cartService;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider tokenProvider;
@@ -31,13 +31,13 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Autowired
     public AuthenticationServiceImpl(AuthenticationManager authenticationManager,
                                      UserRepository userRepository,
-                                     ShoppingCartService shoppingCartService,
+                                     CartService cartService,
                                      RoleRepository roleRepository,
                                      PasswordEncoder passwordEncoder,
                                      JwtTokenProvider tokenProvider) {
         this.authenticationManager = authenticationManager;
         this.userRepository = userRepository;
-        this.shoppingCartService = shoppingCartService;
+        this.cartService = cartService;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
         this.tokenProvider = tokenProvider;
@@ -71,7 +71,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         user.setRoles(Collections.singleton(roles));
         user.setRegistrationDate(LocalDateTime.now());
         userRepository.save(user);
-        shoppingCartService.registerNewShoppingCart(user);
+        cartService.registerNewShoppingCart(user);
         return user;
     }
 }

@@ -7,7 +7,9 @@ import com.sommelier.wine4you.model.mapper.MapperToDto;
 import com.sommelier.wine4you.model.mapper.MapperToModel;
 import com.sommelier.wine4you.service.OrderService;
 import com.sommelier.wine4you.service.WineService;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ItemMapperImpl implements MapperToDto<ItemResponseDto, Item>,
         MapperToModel<Item, ItemRequestDto> {
     private final OrderService orderService;
@@ -31,6 +33,9 @@ public class ItemMapperImpl implements MapperToDto<ItemResponseDto, Item>,
 
     @Override
     public Item toModel(ItemRequestDto itemRequestDto) {
-        return null;
+        Item item = new Item();
+        item.setWine(wineService.getById(itemRequestDto.getWineId()));
+        item.setQuantity(itemRequestDto.getWineQuantity());
+        return item;
     }
 }
