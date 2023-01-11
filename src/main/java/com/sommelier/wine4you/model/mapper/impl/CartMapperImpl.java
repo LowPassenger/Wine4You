@@ -3,6 +3,7 @@ package com.sommelier.wine4you.model.mapper.impl;
 import com.sommelier.wine4you.model.Cart;
 import com.sommelier.wine4you.model.dto.shoppingcart.CartRequestDto;
 import com.sommelier.wine4you.model.mapper.MapperToModel;
+import com.sommelier.wine4you.service.AddressService;
 import com.sommelier.wine4you.service.CartService;
 import com.sommelier.wine4you.service.ItemService;
 import com.sommelier.wine4you.service.UserService;
@@ -17,6 +18,8 @@ public class CartMapperImpl implements MapperToModel<Cart, CartRequestDto> {
     private final ItemService itemService;
     private final CartService cartService;
     private final UserService userService;
+    private final AddressService addressService;
+    private final AddressMapperImpl addressMapper;
     private final WineService wineService;
     private final ItemMapperImpl itemMapper;
 
@@ -24,11 +27,15 @@ public class CartMapperImpl implements MapperToModel<Cart, CartRequestDto> {
     public CartMapperImpl(ItemService itemService,
                           CartService cartService,
                           UserService userService,
+                          AddressService addressService,
+                          AddressMapperImpl addressMapper,
                           WineService wineService,
                           ItemMapperImpl itemMapper) {
         this.itemService = itemService;
         this.cartService = cartService;
         this.userService = userService;
+        this.addressService = addressService;
+        this.addressMapper = addressMapper;
         this.wineService = wineService;
         this.itemMapper = itemMapper;
     }
@@ -45,7 +52,13 @@ public class CartMapperImpl implements MapperToModel<Cart, CartRequestDto> {
         cart.setDeliveryPrice(cartRequestDto.getDeliveryPrice());
         cart.setDiscount(cartRequestDto.getDiscount());
         cart.setTotalAmount(cartRequestDto.getTotalAmount());
-        cart.setAddress(cartRequestDto.getAddress());
+        cart.setAddress(
+                addressService.create(
+                        addressMapper.toModel(
+                                cartRequestDto.getAddressRequestDto()
+                        )
+                )
+        );
         cart.setDontCallMeBack(cartRequestDto.getDontCallMeBack());
         cart.setBuyAsGift(cartRequestDto.getBuyAsGift());
         cart.setShipping(cartRequestDto.getShipping());

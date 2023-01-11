@@ -32,7 +32,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public Item create(Item item) {
-        return null;
+        return itemRepository.save(item);
     }
 
     @Override

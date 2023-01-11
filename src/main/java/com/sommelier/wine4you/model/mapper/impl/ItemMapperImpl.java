@@ -34,8 +34,8 @@ public class ItemMapperImpl implements MapperToDto<ItemResponseDto, Item>,
     @Override
     public Item toModel(ItemRequestDto itemRequestDto) {
         Item item = new Item();
-        item.setWine(wineService.getById(itemRequestDto.getWineId()));
-        item.setQuantity(itemRequestDto.getWineQuantity());
+        item.setWine(wineService.getById(itemRequestDto.getId()));
+        item.setQuantity(itemRequestDto.getQuantity());
         return item;
     }
 }

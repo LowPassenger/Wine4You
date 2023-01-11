@@ -1,11 +1,11 @@
-alter table if exists orders
+zalter table if exists orders
     drop constraint if exists FK32ql8ubntj5uh44ph9659tiih;
 
 alter table if exists orders_wines
     drop constraint if exists FKfb3gfhxg6g4ydjr80y2foqrsa;
 
-alter table if exists orders_wines
-    drop constraint if exists FKlkjjmij0q9nurt1a1rrcm9yf5;
+# alter table if exists orders_wines
+#     drop constraint if exists FKlkjjmij0q9nurt1a1rrcm9yf5;
 
 alter table if exists shopping_carts
     drop constraint if exists FKc1fbrvff059ke4p8ce3hu38oa;
@@ -63,10 +63,10 @@ create table orders (
                         primary key (id)
 );
 
-create table orders_wines (
-                              order_id int8 not null,
-                              wine_id int8 not null
-);
+# create table orders_wines (
+#                               order_id int8 not null,
+#                               wine_id int8 not null
+# );
 
 create table roles (
                        id  bigserial not null,
