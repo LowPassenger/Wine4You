@@ -1,6 +1,7 @@
 package com.sommelier.wine4you.model.dto.user;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.sommelier.wine4you.model.Address;
 import com.sommelier.wine4you.utils.Email;
 import com.sommelier.wine4you.utils.Phone;
 import java.time.LocalDate;
@@ -37,7 +38,7 @@ public class UserSignUpDto {
     private String phone;
     @NotBlank(message = "Address is mandatory")
     @Size(max = 40, message = "The address must contain no more than 40 characters")
-    private String address;
+    private Address address;
     @NotBlank(message = "City is mandatory")
     @Size(max = 40, message = "The city must contain no more than 40 characters")
     private String city;

@@ -44,8 +44,8 @@ public class User {
     private LocalDate birthday;
     @Column(nullable = false)
     private String phone;
-    @Column(nullable = false)
-    private String address;
+    @OneToOne
+    private Address userAddress;
     @Column(nullable = false)
     private String city;
     @OneToOne(cascade = CascadeType.ALL)
@@ -93,7 +93,7 @@ public class User {
         if (!Objects.equals(phone, user.phone)) {
             return false;
         }
-        if (!Objects.equals(address, user.address)) {
+        if (!Objects.equals(userAddress, user.userAddress)) {
             return false;
         }
         if (!Objects.equals(city, user.city)) {
@@ -117,7 +117,7 @@ public class User {
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
         result = 31 * result + (phone != null ? phone.hashCode() : 0);
-        result = 31 * result + (address != null ? address.hashCode() : 0);
+        result = 31 * result + (userAddress != null ? userAddress.hashCode() : 0);
         result = 31 * result + (city != null ? city.hashCode() : 0);
         result = 31 * result + (cart != null ? cart.hashCode() : 0);
         result = 31 * result + (roles != null ? roles.hashCode() : 0);
@@ -135,7 +135,7 @@ public class User {
                 + ", password='" + password + '\''
                 + ", birthday=" + birthday
                 + ", phone='" + phone + '\''
-                + ", address='" + address + '\''
+                + ", userAddress='" + userAddress + '\''
                 + ", city='" + city + '\''
                 + ", shoppingCart=" + cart
                 + ", roles=" + roles

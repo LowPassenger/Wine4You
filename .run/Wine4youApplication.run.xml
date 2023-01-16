@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Wine4youApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
     <option name="ACTIVE_PROFILES" />
-    <module name="wine4you" />
+    <module name="Wine4You" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="com.sommelier.wine4you.Wine4youApplication" />
     <method v="2">
       <option name="Make" enabled="true" />

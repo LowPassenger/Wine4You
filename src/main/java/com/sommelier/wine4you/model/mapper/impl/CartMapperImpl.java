@@ -6,6 +6,7 @@ import com.sommelier.wine4you.model.mapper.MapperToModel;
 import com.sommelier.wine4you.service.AddressService;
 import com.sommelier.wine4you.service.CartService;
 import com.sommelier.wine4you.service.ItemService;
+import com.sommelier.wine4you.service.OrderDetailsService;
 import com.sommelier.wine4you.service.UserService;
 import com.sommelier.wine4you.service.WineService;
 import java.time.LocalDateTime;
@@ -22,6 +23,7 @@ public class CartMapperImpl implements MapperToModel<Cart, CartRequestDto> {
     private final AddressMapperImpl addressMapper;
     private final WineService wineService;
     private final ItemMapperImpl itemMapper;
+    private final OrderDetailsService orderDetailsService;
 
     @Autowired
     public CartMapperImpl(ItemService itemService,
@@ -30,7 +32,8 @@ public class CartMapperImpl implements MapperToModel<Cart, CartRequestDto> {
                           AddressService addressService,
                           AddressMapperImpl addressMapper,
                           WineService wineService,
-                          ItemMapperImpl itemMapper) {
+                          ItemMapperImpl itemMapper,
+                          OrderDetailsService orderDetailsService) {
         this.itemService = itemService;
         this.cartService = cartService;
         this.userService = userService;
@@ -38,6 +41,7 @@ public class CartMapperImpl implements MapperToModel<Cart, CartRequestDto> {
         this.addressMapper = addressMapper;
         this.wineService = wineService;
         this.itemMapper = itemMapper;
+        this.orderDetailsService = orderDetailsService;
     }
 
     @Override
@@ -52,17 +56,7 @@ public class CartMapperImpl implements MapperToModel<Cart, CartRequestDto> {
         cart.setDeliveryPrice(cartRequestDto.getDeliveryPrice());
         cart.setDiscount(cartRequestDto.getDiscount());
         cart.setTotalAmount(cartRequestDto.getTotalAmount());
-        cart.setAddress(
-                addressService.create(
-                        addressMapper.toModel(
-                                cartRequestDto.getAddressRequestDto()
-                        )
-                )
-        );
-        cart.setDontCallMeBack(cartRequestDto.getDontCallMeBack());
-        cart.setBuyAsGift(cartRequestDto.getBuyAsGift());
-        cart.setShipping(cartRequestDto.getShipping());
-        cart.setPayment(cartRequestDto.getPayment());
+        cart.setOrderDetails(cartRequestDto.getOrderDetails());
         cart.setUser(userService.getByEmail(cartRequestDto.getEmail()));
         cart.setCreatedDate(LocalDateTime.now());
         return cart;

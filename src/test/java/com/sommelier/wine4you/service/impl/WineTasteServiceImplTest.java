@@ -94,12 +94,17 @@ class WineTasteServiceImplTest {
     }
 
     @Test
-    void findByName_NotFound_NotOk() {
+    void findByNameTaste_NotFound_NotOk() {
         try {
-            wineTasteRepository.findByNameTaste("Fake");
+            wineTasteService.findByName("Fake");
         } catch (ResourceNotFoundException e) {
-            Assertions.assertEquals("WineTaste Name Fake", e.getMessage());
+            Assertions.assertEquals("WineTaste not found with Taste : 'Fake'", e.getMessage());
         }
+    }
+
+    @Test
+    void existById_Ok() {
+        Assertions.assertFalse(wineTasteService.existsById(testId));
     }
 
     @Test

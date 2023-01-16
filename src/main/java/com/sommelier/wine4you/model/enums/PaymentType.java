@@ -2,7 +2,7 @@ package com.sommelier.wine4you.model.enums;
 
 public enum PaymentType {
     ONLINE("On-line 'Visa/MasterCard'"),
-    CASH("Є, $, UAH");
+    CASH("€, $, UAH");
 
     private String value;
 

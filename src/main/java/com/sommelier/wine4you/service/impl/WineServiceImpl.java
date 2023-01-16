@@ -173,7 +173,7 @@ public class WineServiceImpl implements WineService {
     @Override
     public List<Wine> getByWineTaste(String taste) {
         WineTaste wineTaste = tasteRepository.findByNameTaste(taste).orElseThrow(
-                () -> new ResourceNotFoundException("Wine", "Taste", taste)
+                () -> new ResourceNotFoundException("WineTaste", "Taste", taste)
         );
         return wineRepository.findByWineTaste(wineTaste).orElseThrow(
                 () -> new ResourceNotFoundException("Wine", "Taste", taste)

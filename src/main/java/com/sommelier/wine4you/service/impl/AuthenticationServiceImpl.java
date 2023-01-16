@@ -64,7 +64,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         user.setPhone(signUpDto.getPhone());
         user.setPassword(passwordEncoder.encode(signUpDto.getPassword()));
         user.setBirthday(signUpDto.getBirthday());
-        user.setAddress(signUpDto.getAddress());
+        user.setUserAddress(signUpDto.getAddress());
         user.setCity(signUpDto.getCity());
 
         Role roles = roleRepository.findByName("ROLE_USER").get();

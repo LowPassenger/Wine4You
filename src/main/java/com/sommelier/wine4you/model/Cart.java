@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -16,6 +17,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -32,13 +35,13 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToMany
-    @JoinTable(name = "shopping_carts_products",
-            joinColumns = @JoinColumn(name = "shopping_cart_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"))
+   // @JoinTable(name = "shopping_carts_products",
+     //       joinColumns = @JoinColumn(name = "shopping_cart_id", referencedColumnName = "id"),
+       //     inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"))
     private List<Item> items;
     @MapsId
     @OneToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @Column(name = "delivery_price")
@@ -46,18 +49,10 @@ public class Cart {
     private Integer discount;
     @Column(name = "total_amount")
     private BigDecimal totalAmount;
-    @OneToOne
-    @MapsId
-    private Address address;
-    @Column(name = "is_called")
-    private Boolean dontCallMeBack;
-    @Column(name = "buy_as_gift")
-    private Boolean buyAsGift;
-    @Enumerated(value = EnumType.STRING)
-    private ShippingType shipping;
-    @Enumerated(value = EnumType.STRING)
-    private PaymentType payment;
 
+    @ManyToOne
+    //@JoinColumn(name = "id")
+    private OrderDetails orderDetails;
     @Column(name = "created_date")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss.SSS")
     private LocalDateTime createdDate;
@@ -91,19 +86,7 @@ public class Cart {
         if (!Objects.equals(totalAmount, cart.totalAmount)) {
             return false;
         }
-        if (!Objects.equals(address, cart.address)) {
-            return false;
-        }
-        if (!Objects.equals(dontCallMeBack, cart.dontCallMeBack)) {
-            return false;
-        }
-        if (!Objects.equals(buyAsGift, cart.buyAsGift)) {
-            return false;
-        }
-        if (shipping != cart.shipping) {
-            return false;
-        }
-        if (payment != cart.payment) {
+        if (!Objects.equals(orderDetails, cart.orderDetails)) {
             return false;
         }
         return Objects.equals(createdDate, cart.createdDate);
@@ -117,11 +100,7 @@ public class Cart {
         result = 31 * result + (deliveryPrice != null ? deliveryPrice.hashCode() : 0);
         result = 31 * result + (discount != null ? discount.hashCode() : 0);
         result = 31 * result + (totalAmount != null ? totalAmount.hashCode() : 0);
-        result = 31 * result + (address != null ? address.hashCode() : 0);
-        result = 31 * result + (dontCallMeBack != null ? dontCallMeBack.hashCode() : 0);
-        result = 31 * result + (buyAsGift != null ? buyAsGift.hashCode() : 0);
-        result = 31 * result + (shipping != null ? shipping.hashCode() : 0);
-        result = 31 * result + (payment != null ? payment.hashCode() : 0);
+        result = 31 * result + (orderDetails != null ? orderDetails.hashCode() : 0);
         result = 31 * result + (createdDate != null ? createdDate.hashCode() : 0);
         return result;
     }
