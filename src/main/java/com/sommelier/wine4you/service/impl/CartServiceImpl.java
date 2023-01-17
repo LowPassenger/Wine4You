@@ -5,7 +5,6 @@ import com.sommelier.wine4you.model.Cart;
 import com.sommelier.wine4you.model.User;
 import com.sommelier.wine4you.repository.CartRepository;
 import com.sommelier.wine4you.service.CartService;
-import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

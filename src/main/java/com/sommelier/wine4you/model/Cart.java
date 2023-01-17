@@ -16,8 +16,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -33,15 +31,9 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER, targetEntity = Item.class)
-//    @JoinTable(name = "carts_products",
-//            joinColumns = @JoinColumn(name = "cart_id", referencedColumnName = "id"),
-//            inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"))
     private List<Item> items;
     @OneToOne(cascade = CascadeType.MERGE, targetEntity = User.class)
-//    @MapsId
-//    @JoinColumn(name = "maps_user_id")
     private User user;
-
     @Column(name = "delivery_price")
     private Double deliveryPrice;
     private Integer discount;

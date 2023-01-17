@@ -21,6 +21,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CartMapperImpl implements MapperToModel<Cart, CartRequestDto>,
         MapperToDto<CartResponseDto, Cart> {
+    private static final String DELIMITER = ",";
     private final ItemService itemService;
     private final CartService cartService;
     private final UserService userService;
@@ -58,16 +59,23 @@ public class CartMapperImpl implements MapperToModel<Cart, CartRequestDto>,
         cart.setDeliveryPrice(cartRequestDto.getDeliveryPrice());
         cart.setDiscount(cartRequestDto.getDiscount());
         cart.setTotalAmount(cartRequestDto.getTotalAmount());
-        cart.setAddress(addressService.create(
-                addressMapper.toModel(cartRequestDto.getAddressRequestDto())));
+
         cart.setDontCallMeBack(cartRequestDto.getDontCallMeBack());
         cart.setBuyAsGift(cartRequestDto.getBuyAsGift());
-        ShippingType shippingType = ShippingType.valueOf(cartRequestDto.getShipping());
-        cart.setShipping(shippingType
-//                ShippingType.valueOf(cartRequestDto.getShipping().toUpperCase())
-        );
-        cart.setPayment(
-                PaymentType.valueOf(cartRequestDto.getPayment().toUpperCase()));
+        cart.setPayment(PaymentType.valueOf(cartRequestDto.getPayment().toUpperCase()));
+        ShippingType shippingType
+                = ShippingType.valueOf(cartRequestDto.getShipping().toUpperCase());
+        cart.setShipping(shippingType);
+
+        switch (shippingType) {
+            case OFFICES, MARKETPLACE -> cart.setAddress(addressService.create(
+                    getAddress(cartRequestDto
+                            .getPostalOffice()
+                            .replace(" ", "")
+                            .split(DELIMITER))));
+            default -> cart.setAddress(addressService.create(
+                    addressMapper.toModel(cartRequestDto.getAddressRequestDto())));
+        }
         cart.setUser(userService.getByEmail(cartRequestDto.getEmail()));
         cart.setCreatedDate(LocalDateTime.now());
         return cart;
@@ -94,5 +102,13 @@ public class CartMapperImpl implements MapperToModel<Cart, CartRequestDto>,
         responseDto.setPayment(cart.getPayment());
         responseDto.setCreatedDate(cart.getCreatedDate());
         return responseDto;
+    }
+
+    private Address getAddress(String[] strings) {
+        Address address = new Address();
+        address.setCity(strings[0]);
+        address.setStreet(strings[1]);
+        address.setApartment(strings[2]);
+        return address;
     }
 }

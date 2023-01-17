@@ -1,7 +1,5 @@
 package com.sommelier.wine4you.model.dto.shoppingcart;
 
-import com.sommelier.wine4you.model.Address;
-import com.sommelier.wine4you.model.Item;
 import com.sommelier.wine4you.model.User;
 import com.sommelier.wine4you.model.dto.address.AddressResponseDto;
 import com.sommelier.wine4you.model.dto.item.ItemResponseDto;

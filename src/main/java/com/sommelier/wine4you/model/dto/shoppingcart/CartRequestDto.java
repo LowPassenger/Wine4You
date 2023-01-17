@@ -1,13 +1,9 @@
 package com.sommelier.wine4you.model.dto.shoppingcart;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.sommelier.wine4you.model.Address;
 import com.sommelier.wine4you.model.dto.address.AddressRequestDto;
 import com.sommelier.wine4you.model.dto.item.ItemRequestDto;
-import com.sommelier.wine4you.model.enums.PaymentType;
-import com.sommelier.wine4you.model.enums.ShippingType;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.List;
 import lombok.Data;
 
@@ -24,4 +20,6 @@ public class CartRequestDto {
     private Boolean buyAsGift;
     private String shipping;
     private String payment;
+    private String postalOffice;
+    private String wine4youShop;
 }

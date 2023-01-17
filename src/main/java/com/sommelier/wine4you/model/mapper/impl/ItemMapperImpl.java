@@ -25,11 +25,10 @@ public class ItemMapperImpl implements MapperToDto<ItemResponseDto, Item>,
     public ItemResponseDto toDto(Item item) {
         ItemResponseDto responseDto = new ItemResponseDto();
         responseDto.setId(item.getId());
-//        responseDto.setOrderId(item.getOrder().getId());
         responseDto.setWineId(item.getWine().getId());
         responseDto.setWineQuantity(item.getQuantity());
         responseDto.setTotal(BigDecimal.valueOf(
-                item.getWine().getPrice().doubleValue()*item.getQuantity()));
+                item.getWine().getPrice().doubleValue() * item.getQuantity()));
         return responseDto;
     }
 

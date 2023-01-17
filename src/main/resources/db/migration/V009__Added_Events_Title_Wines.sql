@@ -65,9 +65,3 @@ WHERE id = 39;
 UPDATE public.wines
 SET title = 'Dr Heidemanns Bernkastel Badstube Riesling Spatlese, 2019'
 WHERE id = 40;
---
--- ALTER TABLE IF EXISTS public.orders
---     RENAME order_time TO created_date;
-
--- ALTER TABLE public.orders
---     ALTER COLUMN created_date TYPE timestamp with time zone ;
