@@ -5,14 +5,12 @@ import com.sommelier.wine4you.model.Address;
 import com.sommelier.wine4you.repository.AddressRepository;
 import com.sommelier.wine4you.service.AddressService;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AddressServiceImpl implements AddressService {
     private final AddressRepository addressRepository;
 
-    @Autowired
     public AddressServiceImpl(AddressRepository addressRepository) {
         this.addressRepository = addressRepository;
     }
@@ -25,23 +23,24 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public Address getById(Long id) {
         return addressRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("Address", "Id", String.valueOf(id))
+                () -> new ResourceNotFoundException("Address","ID", String.valueOf(id))
         );
     }
 
     @Override
     public List<Address> getAll() {
-        return null;
+        return addressRepository.findAll();
     }
 
     @Override
     public boolean deleteById(Long id) {
-        return false;
+        addressRepository.deleteById(id);
+        return addressRepository.existsById(id);
     }
 
     @Override
     public Address update(Long id, Address address) {
         address.setId(id);
-        return address;
+        return addressRepository.save(address);
     }
 }
