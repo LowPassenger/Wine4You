@@ -2,6 +2,7 @@ package com.sommelier.wine4you.model;
 
 import java.math.BigDecimal;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,8 +18,10 @@ public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Order order;
+    @ManyToOne(cascade = CascadeType.MERGE)
+    private Cart cart;
     @ManyToOne
     private Wine wine;
     private Integer quantity;

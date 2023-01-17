@@ -36,6 +36,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public Cart addItemsToCart(Cart cart) {
+        cart.setTotalAmount(cart.getTotalAmount());
         return cartRepository.save(cart);
     }
 

@@ -7,47 +7,39 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
-@Table(name = "shopping_carts")
 @Getter
 @Setter
+@Entity
+@Table(name = "carts")
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToMany
-    @JoinTable(name = "shopping_carts_products",
-            joinColumns = @JoinColumn(name = "shopping_cart_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"))
+    @OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER, targetEntity = Item.class)
     private List<Item> items;
-    @MapsId
-    @OneToOne
-    @JoinColumn(name = "id")
+    @OneToOne(cascade = CascadeType.MERGE, targetEntity = User.class)
     private User user;
-
     @Column(name = "delivery_price")
     private Double deliveryPrice;
     private Integer discount;
     @Column(name = "total_amount")
     private BigDecimal totalAmount;
-    @OneToOne
-    @MapsId
+    @OneToOne(cascade = CascadeType.MERGE)
     private Address address;
     @Column(name = "is_called")
     private Boolean dontCallMeBack;

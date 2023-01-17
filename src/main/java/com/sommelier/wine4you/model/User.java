@@ -44,15 +44,13 @@ public class User {
     private LocalDate birthday;
     @Column(nullable = false)
     private String phone;
-    @Column(nullable = false)
-    private String address;
-    @Column(nullable = false)
-    private String city;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Address address;
     @OneToOne(cascade = CascadeType.ALL)
     private Cart cart;
 
     @ManyToMany(fetch = FetchType.EAGER,
-            cascade = {CascadeType.MERGE, CascadeType.REMOVE})
+            cascade = {CascadeType.MERGE})
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
@@ -96,9 +94,6 @@ public class User {
         if (!Objects.equals(address, user.address)) {
             return false;
         }
-        if (!Objects.equals(city, user.city)) {
-            return false;
-        }
         if (!Objects.equals(cart, user.cart)) {
             return false;
         }
@@ -118,7 +113,6 @@ public class User {
         result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
         result = 31 * result + (phone != null ? phone.hashCode() : 0);
         result = 31 * result + (address != null ? address.hashCode() : 0);
-        result = 31 * result + (city != null ? city.hashCode() : 0);
         result = 31 * result + (cart != null ? cart.hashCode() : 0);
         result = 31 * result + (roles != null ? roles.hashCode() : 0);
         result = 31 * result + (registrationDate != null ? registrationDate.hashCode() : 0);
@@ -132,11 +126,10 @@ public class User {
                 + ", firstName='" + firstName + '\''
                 + ", lastName='" + lastName + '\''
                 + ", email='" + email + '\''
-                + ", password='" + password + '\''
+                + ", password='" + " OK!" + '\''
                 + ", birthday=" + birthday
                 + ", phone='" + phone + '\''
                 + ", address='" + address + '\''
-                + ", city='" + city + '\''
                 + ", shoppingCart=" + cart
                 + ", roles=" + roles
                 + ", registrationDate=" + registrationDate

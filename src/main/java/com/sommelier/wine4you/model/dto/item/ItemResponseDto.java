@@ -6,7 +6,6 @@ import lombok.Data;
 @Data
 public class ItemResponseDto {
     private Long id;
-    private Long orderId;
     private Long wineId;
     private Integer wineQuantity;
     private BigDecimal total;
