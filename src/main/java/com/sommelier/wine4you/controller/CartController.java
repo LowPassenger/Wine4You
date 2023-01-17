@@ -35,7 +35,8 @@ public class CartController {
     @PostMapping
     public ResponseEntity<String> create(
             @Valid @RequestBody CartRequestDto cartRequestDto) {
-        return new ResponseEntity<>("Cart created, successfully !",
+        cartService.addItemsToCart(cartMapper.toModel(cartRequestDto));
+        return new ResponseEntity<>("Cart created, successfully",
                 HttpStatus.CREATED);
     }
 }

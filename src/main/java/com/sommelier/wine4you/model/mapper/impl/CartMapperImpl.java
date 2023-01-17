@@ -62,8 +62,10 @@ public class CartMapperImpl implements MapperToModel<Cart, CartRequestDto>,
                 addressMapper.toModel(cartRequestDto.getAddressRequestDto())));
         cart.setDontCallMeBack(cartRequestDto.getDontCallMeBack());
         cart.setBuyAsGift(cartRequestDto.getBuyAsGift());
-        cart.setShipping(
-                ShippingType.valueOf(cartRequestDto.getShipping().toUpperCase()));
+        ShippingType shippingType = ShippingType.valueOf(cartRequestDto.getShipping());
+        cart.setShipping(shippingType
+//                ShippingType.valueOf(cartRequestDto.getShipping().toUpperCase())
+        );
         cart.setPayment(
                 PaymentType.valueOf(cartRequestDto.getPayment().toUpperCase()));
         cart.setUser(userService.getByEmail(cartRequestDto.getEmail()));

@@ -37,10 +37,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public Cart addItemsToCart(Cart cart) {
-        cart.setTotalAmount(BigDecimal.valueOf(
-                cart.getTotalAmount().doubleValue()
-                        * cart.getDiscount()
-                        * cart.getDeliveryPrice()));
+        cart.setTotalAmount(cart.getTotalAmount());
         return cartRepository.save(cart);
     }
 
