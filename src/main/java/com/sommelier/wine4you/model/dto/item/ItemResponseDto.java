@@ -9,5 +9,5 @@ public class ItemResponseDto {
 //    private Long orderId;
     private Long wineId;
     private Integer wineQuantity;
-//    private BigDecimal total;
+    private BigDecimal total;
 }

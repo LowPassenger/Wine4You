@@ -7,6 +7,7 @@ import com.sommelier.wine4you.model.mapper.MapperToDto;
 import com.sommelier.wine4you.model.mapper.MapperToModel;
 import com.sommelier.wine4you.service.OrderService;
 import com.sommelier.wine4you.service.WineService;
+import java.math.BigDecimal;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -27,7 +28,8 @@ public class ItemMapperImpl implements MapperToDto<ItemResponseDto, Item>,
 //        responseDto.setOrderId(item.getOrder().getId());
         responseDto.setWineId(item.getWine().getId());
         responseDto.setWineQuantity(item.getQuantity());
-//        responseDto.setTotal(item.getTotal());
+        responseDto.setTotal(BigDecimal.valueOf(
+                item.getWine().getPrice().doubleValue()*item.getQuantity()));
         return responseDto;
     }
 

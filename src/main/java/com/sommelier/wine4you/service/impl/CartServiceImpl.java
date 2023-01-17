@@ -5,7 +5,7 @@ import com.sommelier.wine4you.model.Cart;
 import com.sommelier.wine4you.model.User;
 import com.sommelier.wine4you.repository.CartRepository;
 import com.sommelier.wine4you.service.CartService;
-import javax.transaction.Transactional;
+import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +37,10 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public Cart addItemsToCart(Cart cart) {
+        cart.setTotalAmount(BigDecimal.valueOf(
+                cart.getTotalAmount().doubleValue()
+                        * cart.getDiscount()
+                        * cart.getDeliveryPrice()));
         return cartRepository.save(cart);
     }
 

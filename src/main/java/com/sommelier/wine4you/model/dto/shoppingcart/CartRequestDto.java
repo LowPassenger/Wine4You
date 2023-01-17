@@ -22,6 +22,6 @@ public class CartRequestDto {
     private AddressRequestDto addressRequestDto;
     private Boolean dontCallMeBack;
     private Boolean buyAsGift;
-    private ShippingType shipping;
-    private PaymentType payment;
+    private String shipping;
+    private String payment;
 }

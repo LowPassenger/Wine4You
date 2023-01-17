@@ -4,6 +4,8 @@ import com.sommelier.wine4you.model.Address;
 import com.sommelier.wine4you.model.Cart;
 import com.sommelier.wine4you.model.dto.shoppingcart.CartRequestDto;
 import com.sommelier.wine4you.model.dto.shoppingcart.CartResponseDto;
+import com.sommelier.wine4you.model.enums.PaymentType;
+import com.sommelier.wine4you.model.enums.ShippingType;
 import com.sommelier.wine4you.model.mapper.MapperToDto;
 import com.sommelier.wine4you.model.mapper.MapperToModel;
 import com.sommelier.wine4you.service.AddressService;
@@ -60,8 +62,10 @@ public class CartMapperImpl implements MapperToModel<Cart, CartRequestDto>,
                 addressMapper.toModel(cartRequestDto.getAddressRequestDto())));
         cart.setDontCallMeBack(cartRequestDto.getDontCallMeBack());
         cart.setBuyAsGift(cartRequestDto.getBuyAsGift());
-        cart.setShipping(cartRequestDto.getShipping());
-        cart.setPayment(cartRequestDto.getPayment());
+        cart.setShipping(
+                ShippingType.valueOf(cartRequestDto.getShipping().toUpperCase()));
+        cart.setPayment(
+                PaymentType.valueOf(cartRequestDto.getPayment().toUpperCase()));
         cart.setUser(userService.getByEmail(cartRequestDto.getEmail()));
         cart.setCreatedDate(LocalDateTime.now());
         return cart;

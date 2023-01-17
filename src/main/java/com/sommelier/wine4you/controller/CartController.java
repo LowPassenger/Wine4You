@@ -33,10 +33,9 @@ public class CartController {
 
     @ApiOperation(value = "Create Cart REST API")
     @PostMapping
-    public ResponseEntity<CartResponseDto> create(
+    public ResponseEntity<String> create(
             @Valid @RequestBody CartRequestDto cartRequestDto) {
-        return new ResponseEntity<>(cartMapper.toDto(cartService
-                .addItemsToCart(cartMapper.toModel(cartRequestDto))),
+        return new ResponseEntity<>("Cart created, successfully !",
                 HttpStatus.CREATED);
     }
 }
