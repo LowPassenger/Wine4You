@@ -68,13 +68,18 @@ public class CartMapperImpl implements MapperToModel<Cart, CartRequestDto>,
         cart.setShipping(shippingType);
 
         switch (shippingType) {
-            case OFFICES, MARKETPLACE -> cart.setAddress(addressService.create(
-                    getAddress(cartRequestDto
-                            .getPostalOffice()
-                            .replace(" ", "")
-                            .split(DELIMITER))));
-            default -> cart.setAddress(addressService.create(
-                    addressMapper.toModel(cartRequestDto.getAddressRequestDto())));
+            case OFFICES:
+                cart.setAddress(addressService.create(
+                        getAddress(cartRequestDto.getPostalOffice())));
+                break;
+            case MARKETPLACE:
+                cart.setAddress(addressService.create(
+                        getAddress(cartRequestDto.getWine4youShop())));
+                break;
+
+            default:
+                cart.setAddress(addressService.create(
+                        addressMapper.toModel(cartRequestDto.getAddressRequestDto())));
         }
         cart.setUser(userService.getByEmail(cartRequestDto.getEmail()));
         cart.setCreatedDate(LocalDateTime.now());
@@ -104,7 +109,8 @@ public class CartMapperImpl implements MapperToModel<Cart, CartRequestDto>,
         return responseDto;
     }
 
-    private Address getAddress(String[] strings) {
+    private Address getAddress(String str) {
+        String[] strings = str.replace(" ", "").split(DELIMITER);
         Address address = new Address();
         address.setCity(strings[0]);
         address.setStreet(strings[1]);
