@@ -6,6 +6,7 @@ import com.sommelier.wine4you.model.dto.wine.WineResponseDto;
 import com.sommelier.wine4you.model.mapper.MapperToDto;
 import com.sommelier.wine4you.model.mapper.MapperToModel;
 import com.sommelier.wine4you.service.EventService;
+import com.sommelier.wine4you.service.MealService;
 import com.sommelier.wine4you.service.WineStyleService;
 import com.sommelier.wine4you.service.WineTasteService;
 import java.util.stream.Collectors;
@@ -18,14 +19,17 @@ public class WineMapperImpl implements MapperToDto<WineResponseDto, Wine>,
     private final WineStyleService wineStyleService;
     private final WineTasteService wineTasteService;
     private final EventService eventService;
+    private final MealService mealService;
 
     @Autowired
     public WineMapperImpl(WineStyleService wineStyleService,
                           WineTasteService wineTasteService,
-                          EventService eventService) {
+                          EventService eventService,
+                          MealService mealService) {
         this.wineStyleService = wineStyleService;
         this.wineTasteService = wineTasteService;
         this.eventService = eventService;
+        this.mealService = mealService;
     }
 
     @Override
@@ -43,6 +47,7 @@ public class WineMapperImpl implements MapperToDto<WineResponseDto, Wine>,
         wineResponseDto.setWineTasteName(wine.getWineTaste().getNameTaste());
         wineResponseDto.setCapacity(wine.getCapacity());
         wineResponseDto.setEventName(wine.getEvent().getNameEvent());
+        wineResponseDto.setMeal(wine.getMeal().getName());
         wineResponseDto.setImageIds(wine.getImages()
                 .stream()
                 .map(image -> image.getId())
@@ -64,6 +69,7 @@ public class WineMapperImpl implements MapperToDto<WineResponseDto, Wine>,
         wine.setWineType(wineRequestDto.getWineType());
         wine.setWineTaste(wineTasteService.getById(wineRequestDto.getWineTasteId()));
         wine.setCapacity(wineRequestDto.getCapacity());
+        wine.setMeal(mealService.getById(wineRequestDto.getMealId()));
         wine.setEvent(eventService.getById(wineRequestDto.getEventId()));
         wine.setDescription(wineRequestDto.getDescription());
         return wine;

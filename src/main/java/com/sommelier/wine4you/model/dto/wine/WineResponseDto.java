@@ -17,6 +17,7 @@ public class WineResponseDto {
     private String wineTypeName;
     private String wineTasteName;
     private String eventName;
+    private String meal;
     private double capacity;
     private List<Long> imageIds;
     private String description;

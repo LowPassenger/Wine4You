@@ -27,6 +27,8 @@ public class WineRequestDto {
     @NotEmpty
     private Long eventId;
     @NotEmpty
+    private Long mealId;
+    @NotEmpty
     private WineType wineType;
     @NotEmpty
     private double capacity;
