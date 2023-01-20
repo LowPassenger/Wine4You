@@ -1,5 +1,5 @@
 create table address (
-                         id  bigserial not null,
+                         id serial4 not null,
                          apartment varchar(255),
                          city varchar(255),
                          street varchar(255),
@@ -7,7 +7,7 @@ create table address (
 );
 
 create table carts (
-                       id  bigserial not null,
+                       id serial4 not null,
                        buy_as_gift boolean,
                        created_date timestamp,
                        delivery_price float8,
@@ -27,13 +27,13 @@ create table carts_items (
 );
 
 create table events (
-                        id  bigserial not null,
+                        id serial4 not null,
                         name_event varchar(255),
                         primary key (id)
 );
 
 create table items (
-                       id  bigserial not null,
+                       id serial4 not null,
                        quantity int4,
                        total numeric(19, 2),
                        cart_id int8,
@@ -43,13 +43,13 @@ create table items (
 );
 
 create table meals (
-                       id  bigserial not null,
+                       id serial4 not null,
                        meal_name varchar(255),
                        primary key (id)
 );
 
 create table orders (
-                        id int8 not null,
+                        id serial4 not null,
                         created_date timestamp,
                         delivery_price float8,
                         discount int4,
@@ -58,30 +58,30 @@ create table orders (
 );
 
 create table orders_items (
-                              order_id int8 not null,
-                              item_id int8 not null
+                              order_id serial4 not null,
+                              item_id serial4 not null
 );
 
 create table roles (
-                       id  bigserial not null,
+                       id  serial4 not null,
                        role_name varchar(255),
                        primary key (id)
 );
 
 create table styles (
-                        id  bigserial not null,
+                        id  serial4 not null,
                         name_style varchar(255),
                         primary key (id)
 );
 
 create table tastes (
-                        id  bigserial not null,
+                        id serial4 not null,
                         name_taste varchar(255),
                         primary key (id)
 );
 
 create table users (
-                       id  bigserial not null,
+                       id serial4 not null,
                        birthday date not null,
                        email varchar(255) not null,
                        first_name varchar(255) not null,
@@ -101,7 +101,7 @@ create table users_roles (
 );
 
 create table wine_images (
-                             id  bigserial not null,
+                             id serial4 not null,
                              image bytea not null,
                              name varchar(255),
                              type varchar(255),
@@ -111,7 +111,7 @@ create table wine_images (
 );
 
 create table wines (
-                       id  bigserial not null,
+                       id serial4 not null,
                        brand varchar(255),
                        made_in_country varchar(255),
                        in_stock boolean,
