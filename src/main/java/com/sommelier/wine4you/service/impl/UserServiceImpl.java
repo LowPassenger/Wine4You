@@ -22,4 +22,11 @@ public class UserServiceImpl implements UserService {
                 () -> new ResourceNotFoundException("User", "Email", email)
         );
     }
+
+    @Override
+    public User getByPhoneOrEmail(String phone, String email) {
+        return userRepository.findByPhoneOrEmail(phone, email).orElseThrow(
+                () -> new ResourceNotFoundException("User","Phone or Email", phone + "/" + email)
+        );
+    }
 }
