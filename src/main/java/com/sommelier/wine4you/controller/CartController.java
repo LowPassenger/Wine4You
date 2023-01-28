@@ -1,6 +1,7 @@
 package com.sommelier.wine4you.controller;
 
 import com.sommelier.wine4you.exception.PaymentException;
+import com.sommelier.wine4you.model.Cart;
 import com.sommelier.wine4you.model.User;
 import com.sommelier.wine4you.model.dto.payment.PaymentRequestDto;
 import com.sommelier.wine4you.model.dto.shoppingcart.CartRequestDto;
@@ -52,14 +53,14 @@ public class CartController {
     public ResponseEntity<String> create(
             @Valid @RequestBody CartRequestDto cartRequestDto,
             @Valid @RequestBody PaymentRequestDto paymentRequestDto) {
-        cartService.addItemsToCart(cartMapper.toModel(cartRequestDto));
+        Cart cart = cartMapper.toModel(cartRequestDto);
+        cartService.addItemsToCart(cart);
 
         if (!paymentRequestDto.getPaymentStatus()
                 .equals(PaymentStatus.COMPLETE)) {
             throw new PaymentException("Payment card do not support");
         }
-        orderService.completeOrder(cartMapper.toModel(cartRequestDto),
-                paymentMapper.toModel(paymentRequestDto));
+        orderService.completeOrder(cart, paymentMapper.toModel(paymentRequestDto));
         return new ResponseEntity<>("Order created successfully!",
                 HttpStatus.CREATED);
     }
