@@ -6,8 +6,6 @@ import com.sommelier.wine4you.model.Meal;
 import com.sommelier.wine4you.model.Wine;
 import com.sommelier.wine4you.model.WineStyle;
 import com.sommelier.wine4you.model.WineTaste;
-import com.sommelier.wine4you.model.dto.WineResponse;
-import com.sommelier.wine4you.model.dto.wine.WineResponseDto;
 import com.sommelier.wine4you.model.enums.WineType;
 import com.sommelier.wine4you.model.mapper.impl.WineMapperImpl;
 import com.sommelier.wine4you.repository.EventRepository;
@@ -25,8 +23,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 class WineServiceImplTest {
     private static final Long testId = 9L;

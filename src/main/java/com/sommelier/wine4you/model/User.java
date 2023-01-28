@@ -58,6 +58,8 @@ public class User {
     @Column(name = "registration_date")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss.SSS")
     private LocalDateTime registrationDate;
+    @Column(name = "is_deleted", columnDefinition = "boolean default false")
+    private boolean isDeleted;
 
     @Override
     public boolean equals(Object o) {
