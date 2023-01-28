@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
         User user = getById(id);
         user.setDeleted(true);
         update(id, user);
-        return userRepository.existsByIdAndDeleted(id, true);
+        return userRepository.existsByIdAndDeletedFalse(id);
     }
 
     @Override
