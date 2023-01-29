@@ -13,11 +13,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class ItemMapperImpl implements MapperToDto<ItemResponseDto, Item>,
         MapperToModel<Item, ItemRequestDto> {
-    private final OrderService orderService;
     private final WineService wineService;
 
-    public ItemMapperImpl(OrderService orderService, WineService wineService) {
-        this.orderService = orderService;
+    public ItemMapperImpl(WineService wineService) {
         this.wineService = wineService;
     }
 

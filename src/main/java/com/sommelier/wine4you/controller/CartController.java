@@ -66,7 +66,7 @@ public class CartController {
     }
 
     @ApiOperation(value = "Get 'Cart' by user REST API")
-    @GetMapping("/by-usrEmail")
+    @GetMapping("/by-userEmail")
     public ResponseEntity<CartResponseDto> getByUser(@RequestParam("emailUser") String emailUser) {
         User user = userService.getByEmail(emailUser);
         return ResponseEntity.ok(cartMapper.toDto(cartService.getByUser(user)));

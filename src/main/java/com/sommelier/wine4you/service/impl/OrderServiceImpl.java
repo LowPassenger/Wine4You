@@ -44,8 +44,7 @@ public class OrderServiceImpl implements OrderService {
         order.setPaymentType(cart.getPaymentType());
         order.setOrderStatus("Order inprogress");
         order.setCreatedDate(LocalDateTime.now());
-        order.setPayment(payment);
-        paymentService.create(payment);
+        order.setPayment(paymentService.create(payment));
         orderRepository.save(order);
         cartService.clear(cart);
         return order;
