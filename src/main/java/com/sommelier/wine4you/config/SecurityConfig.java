@@ -54,8 +54,10 @@ public class SecurityConfig {
                 .authorizeRequests(
                         (authorize) -> authorize
                                 .antMatchers("/api/v1/auth/**").permitAll()
+                                .antMatchers( "/api/v1/orders/**").authenticated()
+                                .antMatchers( "/api/v1/carts/**").authenticated()
                                 .antMatchers(HttpMethod.GET, "/api/v1/**").permitAll()
-                                .antMatchers(HttpMethod.POST, "/api/v1/**").permitAll()
+//                                .antMatchers(HttpMethod.POST, "/api/v1/**").permitAll()
                                 .antMatchers("/v2/api-docs/**").permitAll()
                                 .antMatchers("/swagger-ui/**").permitAll()
                                 .antMatchers("/swagger-resources/**").permitAll()

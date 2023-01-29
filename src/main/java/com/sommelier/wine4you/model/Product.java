@@ -2,11 +2,7 @@ package com.sommelier.wine4you.model;
 
 import java.math.BigDecimal;
 import java.util.Objects;
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -30,6 +26,9 @@ public class Product {
 
     @Column(name = "price")
     private BigDecimal price;
+
+    @Column(name = "quantity")
+    private Integer quality;
 
     @Column(name = "in_stock")
     private Boolean inStock;

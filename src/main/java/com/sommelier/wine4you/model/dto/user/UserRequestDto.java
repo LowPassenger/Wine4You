@@ -25,21 +25,4 @@ public class UserRequestDto {
     private Set<Role> roles;
     private LocalDateTime registrationDate;
     private boolean isDeleted;
-
-    @Override
-    public String toString() {
-        return "UserRequestDto{"
-                + "firstName='" + firstName + '\''
-                + ", lastName='" + lastName + '\''
-                + ", email='" + email + '\''
-                + ", password='" + "OK" + '\''
-                + ", birthday=" + birthday
-                + ", phone='" + phone + '\''
-                + ", address=" + address
-                + ", cart=" + cart
-                + ", roles=" + roles
-                + ", registrationDate=" + registrationDate
-                + ", isDeleted=" + isDeleted
-                + '}';
-    }
 }

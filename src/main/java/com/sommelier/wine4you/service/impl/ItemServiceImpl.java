@@ -13,22 +13,22 @@ import org.springframework.stereotype.Service;
 @Service
 public class ItemServiceImpl implements ItemService {
     private final ItemRepository itemRepository;
-    private final OrderRepository orderRepository;
+//    private final OrderRepository orderRepository;
 
     @Autowired
     public ItemServiceImpl(ItemRepository itemRepository,
                            OrderRepository orderRepository) {
         this.itemRepository = itemRepository;
-        this.orderRepository = orderRepository;
+//        this.orderRepository = orderRepository;
     }
 
-    @Override
-    public List<Item> getAllByOrderId(Long id) {
-        Order order = orderRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("Order", "Id", String.valueOf(id))
-        );
-        return itemRepository.findByOrder(order);
-    }
+//    @Override
+//    public List<Item> getAllByOrderId(Long id) {
+//        Order order = orderRepository.findById(id).orElseThrow(
+//                () -> new ResourceNotFoundException("Order", "Id", String.valueOf(id))
+//        );
+//        return itemRepository.findByOrder(order);
+//    }
 
     @Override
     public Item create(Item item) {

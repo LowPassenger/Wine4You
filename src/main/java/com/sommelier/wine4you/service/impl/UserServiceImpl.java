@@ -51,9 +51,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean deleteById(Long id) {
         User user = getById(id);
-        user.setDeleted(true);
+//        user.setDeleted(true);
         update(id, user);
-        return userRepository.existsByIdAndDeletedFalse(id);
+        return userRepository.existsById(id);
+//        return userRepository.existsByIdAndDeletedFalse(id);
     }
 
     @Override

@@ -17,12 +17,4 @@ public class UserLoginDto {
     @Size(min = 8, message = "Password should have at least 8 characters")
     @Size(max = 30, message = "The password must contain no more than 30 characters")
     private String password;
-
-    @Override
-    public String toString() {
-        return "UserLoginDto{"
-                + "phoneOrEmail='" + phoneOrEmail + '\''
-                + ", password='" + "OK" + '\''
-                + '}';
-    }
 }

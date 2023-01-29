@@ -4,5 +4,5 @@ import com.sommelier.wine4you.model.Item;
 import java.util.List;
 
 public interface ItemService extends GenericService<Item> {
-    List<Item> getAllByOrderId(Long id);
+//    List<Item> getAllByOrderId(Long id);
 }

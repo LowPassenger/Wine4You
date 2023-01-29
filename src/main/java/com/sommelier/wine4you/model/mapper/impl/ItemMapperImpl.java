@@ -1,6 +1,7 @@
 package com.sommelier.wine4you.model.mapper.impl;
 
 import com.sommelier.wine4you.model.Item;
+import com.sommelier.wine4you.model.Wine;
 import com.sommelier.wine4you.model.dto.item.ItemRequestDto;
 import com.sommelier.wine4you.model.dto.item.ItemResponseDto;
 import com.sommelier.wine4you.model.mapper.MapperToDto;
@@ -35,8 +36,11 @@ public class ItemMapperImpl implements MapperToDto<ItemResponseDto, Item>,
     @Override
     public Item toModel(ItemRequestDto itemRequestDto) {
         Item item = new Item();
-        item.setWine(wineService.getById(itemRequestDto.getId()));
+        Wine wine = wineService.getById(itemRequestDto.getId());
+        item.setWine(wine);
         item.setQuantity(itemRequestDto.getQuantity());
+        item.setTotal(BigDecimal.valueOf(itemRequestDto.getQuantity()
+                * wine.getPrice().doubleValue()));
         return item;
     }
 }

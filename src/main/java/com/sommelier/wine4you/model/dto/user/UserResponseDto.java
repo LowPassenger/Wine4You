@@ -26,22 +26,4 @@ public class UserResponseDto {
     private Set<Role> roles;
     private LocalDateTime registrationDate;
     private boolean isDeleted;
-
-    @Override
-    public String toString() {
-        return "UserResponseDto{"
-                + "id=" + id
-                + ", firstName='" + firstName + '\''
-                + ", lastName='" + lastName + '\''
-                + ", email='" + email + '\''
-                + ", password='" + "OK" + '\''
-                + ", birthday=" + birthday
-                + ", phone='" + phone + '\''
-                + ", address=" + address
-                + ", cart=" + cart
-                + ", roles=" + roles
-                + ", registrationDate=" + registrationDate
-                + ", isDeleted=" + isDeleted
-                + '}';
-    }
 }

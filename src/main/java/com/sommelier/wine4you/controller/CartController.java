@@ -51,16 +51,16 @@ public class CartController {
     @ApiOperation(value = "Create Cart REST API")
     @PostMapping
     public ResponseEntity<String> create(
-            @Valid @RequestBody CartRequestDto cartRequestDto,
-            @Valid @RequestBody PaymentRequestDto paymentRequestDto) {
+            @Valid @RequestBody CartRequestDto cartRequestDto) {
         Cart cart = cartMapper.toModel(cartRequestDto);
         cartService.addItemsToCart(cart);
 
-        if (!paymentRequestDto.getPaymentStatus()
+        if (!PaymentStatus.valueOf(cartRequestDto.getPaymentRequestDto().getPaymentStatus())
                 .equals(PaymentStatus.COMPLETE)) {
             throw new PaymentException("Payment card do not support");
         }
-        orderService.completeOrder(cart, paymentMapper.toModel(paymentRequestDto));
+        orderService.completeOrder(cart,
+                paymentMapper.toModel(cartRequestDto.getPaymentRequestDto()));
         return new ResponseEntity<>("Order created successfully!",
                 HttpStatus.CREATED);
     }

@@ -41,17 +41,4 @@ public class UserSignUpDto {
     @Phone(message = "The phone must match the mask +XX-XXX-XXX-XXXX")
     private String phone;
     private AddressRequestDto address;
-
-    @Override
-    public String toString() {
-        return "UserSignUpDto{"
-                + "firstName='" + firstName + '\''
-                + ", lastName='" + lastName + '\''
-                + ", email='" + email + '\''
-                + ", password='" + "OK" + '\''
-                + ", birthday=" + birthday
-                + ", phone='" + phone + '\''
-                + ", address=" + address
-                + '}';
-    }
 }
