@@ -7,13 +7,13 @@ create table address (
 );
 
 create table carts (
-                       id serial4 not null,
+                       id  bigserial not null,
                        buy_as_gift boolean,
                        created_date timestamp,
                        delivery_price float8,
                        discount int4,
                        is_called boolean,
-                       payment varchar(255),
+                       payment_type varchar(255),
                        shipping varchar(255),
                        total_amount numeric(19, 2),
                        address_id int8,
@@ -27,39 +27,42 @@ create table carts_items (
 );
 
 create table events (
-                        id serial4 not null,
+                        id  bigserial not null,
                         name_event varchar(255),
                         primary key (id)
 );
 
 create table items (
-                       id serial4 not null,
+                       id  bigserial not null,
                        quantity int4,
                        total numeric(19, 2),
-                       cart_id int8,
-                       order_id int8,
                        wine_id int8,
                        primary key (id)
 );
 
 create table meals (
-                       id serial4 not null,
+                       id  bigserial not null,
                        meal_name varchar(255),
                        primary key (id)
 );
 
 create table orders (
-                        id serial4 not null,
-                        created_date timestamp,
-                        delivery_price float8,
-                        discount int4,
-                        total_amount numeric(19, 2),
+                        id  bigserial not null,
+                        date_created timestamp,
+                        order_status varchar(255),
+                        order_tracking_number varchar(255),
+                        cart_id int8,
+                        payment_id int8,
+                        user_id int8,
                         primary key (id)
 );
 
-create table orders_items (
-                              order_id serial4 not null,
-                              item_id serial4 not null
+create table payments (
+                          id  bigserial not null,
+                          card_name varchar(255),
+                          card_number varchar(255),
+                          payment_status varchar(255),
+                          primary key (id)
 );
 
 create table roles (

@@ -61,6 +61,9 @@ public class User {
     @Column(name = "is_deleted", columnDefinition = "boolean default false")
     private boolean isDeleted;
 
+    @Column(name = "is_deleted")
+    private boolean isDeleted;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

@@ -35,17 +35,12 @@ public class OrderServiceImpl implements OrderService {
     @Transactional
     public Order completeOrder(Cart cart, Payment payment) {
         Order order = new Order();
-        order.setItems(cart.getItems());
-        order.setUser(cart.getUser());
+        order.setCart(cart);
         order.setOrderTackingNumber(UUID.randomUUID().toString());
-        order.setDeliveryPrice(cart.getDeliveryPrice());
-        order.setDiscount(cart.getDiscount());
-        order.setTotalAmount(cart.getTotalAmount());
-        order.setPaymentType(cart.getPaymentType());
+        order.setUser(cart.getUser());
         order.setOrderStatus("Order inprogress");
         order.setCreatedDate(LocalDateTime.now());
-        order.setPayment(payment);
-        paymentService.create(payment);
+        order.setPayment(paymentService.create(payment));
         orderRepository.save(order);
         cartService.clear(cart);
         return order;

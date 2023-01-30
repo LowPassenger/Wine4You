@@ -15,7 +15,7 @@ public class PaymentRequestDto {
     @NotEmpty
     private String cardName;
     @NotEmpty
-    @Size(min = 14, max = 15)
+    @Size(min = 16, max = 16)
     private String cardNumber;
     @NotEmpty
     private int expiryYear;
@@ -25,6 +25,4 @@ public class PaymentRequestDto {
     private int cvc;
     @NotEmpty
     private String paymentStatus;
-    @NotEmpty
-    private Long orderId;
 }
