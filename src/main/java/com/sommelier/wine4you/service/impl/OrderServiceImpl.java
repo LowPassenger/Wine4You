@@ -2,6 +2,7 @@ package com.sommelier.wine4you.service.impl;
 
 import com.sommelier.wine4you.exception.ResourceNotFoundException;
 import com.sommelier.wine4you.model.Cart;
+import com.sommelier.wine4you.model.Item;
 import com.sommelier.wine4you.model.Order;
 import com.sommelier.wine4you.model.Payment;
 import com.sommelier.wine4you.model.User;
@@ -10,6 +11,7 @@ import com.sommelier.wine4you.service.CartService;
 import com.sommelier.wine4you.service.OrderService;
 import com.sommelier.wine4you.service.PaymentService;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +42,8 @@ public class OrderServiceImpl implements OrderService {
         order.setUser(cart.getUser());
         order.setOrderStatus("Order inprogress");
         order.setCreatedDate(LocalDateTime.now());
+        List<Item> currentItems = new ArrayList<>(cart.getItems());
+        order.setItems(currentItems);
         order.setPayment(paymentService.create(payment));
         orderRepository.save(order);
         cartService.clear(cart);

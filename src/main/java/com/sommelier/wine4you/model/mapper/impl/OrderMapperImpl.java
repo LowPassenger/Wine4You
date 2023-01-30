@@ -22,7 +22,7 @@ public class OrderMapperImpl implements MapperToDto<OrderResponseDto, Order> {
     public OrderResponseDto toDto(Order order) {
         OrderResponseDto responseDto = new OrderResponseDto();
         responseDto.setItems(
-                order.getCart().getItems()
+                order.getItems()
                         .stream()
                         .map(itemMapper::toDto)
                         .toList()
