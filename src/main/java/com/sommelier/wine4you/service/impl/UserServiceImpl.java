@@ -53,6 +53,7 @@ public class UserServiceImpl implements UserService {
         User user = getById(id);
         update(id, user);
         return userRepository.existsById(id);
+
     }
 
     @Override
