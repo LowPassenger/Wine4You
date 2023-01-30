@@ -3,7 +3,6 @@ package com.sommelier.wine4you.controller;
 import com.sommelier.wine4you.exception.PaymentException;
 import com.sommelier.wine4you.model.Cart;
 import com.sommelier.wine4you.model.User;
-import com.sommelier.wine4you.model.dto.payment.PaymentRequestDto;
 import com.sommelier.wine4you.model.dto.shoppingcart.CartRequestDto;
 import com.sommelier.wine4you.model.dto.shoppingcart.CartResponseDto;
 import com.sommelier.wine4you.model.enums.PaymentStatus;

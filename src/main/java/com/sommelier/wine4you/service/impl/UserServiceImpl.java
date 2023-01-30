@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getByPhoneOrEmail(String phone, String email) {
         return userRepository.findByPhoneOrEmail(phone, email).orElseThrow(
-                () -> new ResourceNotFoundException("User","Phone or Email", phone + "/" + email)
+                () -> new ResourceNotFoundException("User", "Phone or Email", phone + "/" + email)
         );
     }
 
@@ -51,10 +51,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean deleteById(Long id) {
         User user = getById(id);
-//        user.setDeleted(true);
         update(id, user);
         return userRepository.existsById(id);
-//        return userRepository.existsByIdAndDeletedFalse(id);
     }
 
     @Override

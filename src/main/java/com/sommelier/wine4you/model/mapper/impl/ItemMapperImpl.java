@@ -6,7 +6,6 @@ import com.sommelier.wine4you.model.dto.item.ItemRequestDto;
 import com.sommelier.wine4you.model.dto.item.ItemResponseDto;
 import com.sommelier.wine4you.model.mapper.MapperToDto;
 import com.sommelier.wine4you.model.mapper.MapperToModel;
-import com.sommelier.wine4you.service.OrderService;
 import com.sommelier.wine4you.service.WineService;
 import java.math.BigDecimal;
 import org.springframework.stereotype.Component;

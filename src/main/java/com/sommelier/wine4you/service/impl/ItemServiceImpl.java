@@ -2,7 +2,6 @@ package com.sommelier.wine4you.service.impl;
 
 import com.sommelier.wine4you.exception.ResourceNotFoundException;
 import com.sommelier.wine4you.model.Item;
-import com.sommelier.wine4you.model.Order;
 import com.sommelier.wine4you.repository.ItemRepository;
 import com.sommelier.wine4you.repository.OrderRepository;
 import com.sommelier.wine4you.service.ItemService;
