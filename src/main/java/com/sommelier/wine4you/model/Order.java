@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -29,10 +32,10 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToMany
-//    @JoinTable(name = "orders_items",
-//            joinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id"),
-//            inverseJoinColumns = @JoinColumn(name = "item_id", referencedColumnName = "id"))
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "orders_items",
+            joinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "item_id", referencedColumnName = "id"))
     private List<Item> items;
     @Column(name = "order_tracking_number")
     private String orderTackingNumber;
@@ -46,9 +49,8 @@ public class Order {
     private Payment payment;
     private String orderStatus;
 
-    @MapsId
-    @OneToOne
-    @JoinColumn(name = "id")
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     @Column(name = "date_created")

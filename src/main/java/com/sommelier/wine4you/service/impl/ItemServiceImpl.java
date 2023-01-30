@@ -23,14 +23,6 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public List<Item> getAllByOrderId(Long id) {
-        Order order = orderRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("Order", "Id", String.valueOf(id))
-        );
-        return itemRepository.findByOrder(order);
-    }
-
-    @Override
     public Item create(Item item) {
         return itemRepository.save(item);
     }

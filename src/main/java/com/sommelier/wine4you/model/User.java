@@ -59,6 +59,9 @@ public class User {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss.SSS")
     private LocalDateTime registrationDate;
 
+    @Column(name = "is_deleted")
+    private boolean isDeleted;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -100,6 +103,9 @@ public class User {
         if (!Objects.equals(registrationDate, user.registrationDate)) {
             return false;
         }
+        if (!Objects.equals(isDeleted, user.isDeleted)) {
+            return false;
+        }
         return Objects.equals(roles, user.roles);
     }
 
@@ -116,6 +122,7 @@ public class User {
         result = 31 * result + (cart != null ? cart.hashCode() : 0);
         result = 31 * result + (roles != null ? roles.hashCode() : 0);
         result = 31 * result + (registrationDate != null ? registrationDate.hashCode() : 0);
+        result = 31 * result + (isDeleted ? 1 : 0);
         return result;
     }
 
@@ -133,6 +140,7 @@ public class User {
                 + ", shoppingCart=" + cart
                 + ", roles=" + roles
                 + ", registrationDate=" + registrationDate
+                + ", isDeleted=" + isDeleted
                 + '}';
     }
 }

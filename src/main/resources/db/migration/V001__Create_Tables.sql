@@ -91,6 +91,7 @@ create table users (
                        registration_date timestamp,
                        address_id int8,
                        cart_id int8,
+                       is_deleted boolean,
                        primary key (id)
 );
 

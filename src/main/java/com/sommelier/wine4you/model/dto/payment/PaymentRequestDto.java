@@ -25,6 +25,4 @@ public class PaymentRequestDto {
     private int cvc;
     @NotEmpty
     private String paymentStatus;
-    @NotEmpty
-    private Long orderId;
 }
